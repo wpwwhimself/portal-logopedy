@@ -4,10 +4,10 @@
             <x-logo />
 
             <div class="flex right middle">
-                <x-button phantom>Kontakt</x-button>
-                <x-button phantom>Polityka Prywatności</x-button>
-                <x-button phantom>Regulamin</x-button>
-                <x-button phantom>FAQ</x-button>
+                <x-button class="phantom">Kontakt</x-button>
+                <x-button class="phantom">Polityka Prywatności</x-button>
+                <x-button class="phantom">Regulamin</x-button>
+                <x-button class="phantom">FAQ</x-button>
             </div>
 
             <div class="flex down center">

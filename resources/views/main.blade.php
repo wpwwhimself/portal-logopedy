@@ -1,5 +1,7 @@
 @extends("layouts.main")
 
+@section("title", "Strona główna")
+
 @section("content")
 
 <x-main.line-banner background-class="placeholder">
@@ -19,7 +21,9 @@
 
 <x-main.mid-section />
 
-<x-main.line-banner background-class="accent background secondary">
+<x-main.line-banner background-class="accent background secondary"
+    :action="route('register')"
+>
     <span class="large">
         Oszczędzisz czas i pieniądze!
         Kliknij w baner i dołącz do portalu.

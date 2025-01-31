@@ -1,7 +1,9 @@
 @props(['status'])
 
-<div class="alert {{ $status }} animatable">
-    @svg("mdi-".($status == "success" ? "check-circle" : "alert-circle"))
+<x-tile class="alert shaded accent {{ $status }}">
+    <div class="flex right middle">
+        @svg("mdi-".($status == "success" ? "check-circle" : "alert-circle"))
 
-    {{ session($status) }}
-</div>
+        {{ session($status) }}
+    </div>
+</x-tile>

@@ -4,7 +4,12 @@
     "phantom" => false,
 ])
 
-@if ($action) <a href="{{ $action }}"> @endif
+@if ($action == "submit")
+<button type="submit">
+@elseif ($action)
+<a href="{{ $action }}">
+@endif
+
 <div {{ $attributes->class([
     "button",
     "phantom" => $phantom,
@@ -21,4 +26,5 @@
         {{ $slot }}
     </span>
 </div>
-@if ($action) </a> @endif
+
+@if ($action == "submit") </button> @elseif ($action) </a> @endif

@@ -5,7 +5,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+        <title>
+            @yield("title") |
+            @hasSection ("subtitle") @yield("subtitle") | @endif
+            {{ config('app.name') }}
+        </title>
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
@@ -15,7 +19,7 @@
         <script src="{{ asset('js/core.js') }}" defer></script>
         @yield("extra_head")
     </head>
-    <body>
+    <body class="flex down">
         <!-- Page Heading -->
         @yield("header")
 

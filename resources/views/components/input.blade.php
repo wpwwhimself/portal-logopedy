@@ -6,6 +6,33 @@
     "icon" => null,
 ])
 
-<x-tile class="flex right middle tertiary">
+<div {{ $attributes->class([
+    "input",
+    "grid",
+    "middle",
+    "padded",
+    "rounded",
+    "animatable",
+]) }}>
     @if ($icon) @svg("mdi-$icon") @endif
-</x-tile>
+
+    @if ($type == "checkbox")
+    <span>
+        <label for="{{ $name }}">{{ $label }}</label>
+        <input type="checkbox"
+            id="{{ $name }}"
+            name="{{ $name }}"
+            value="{{ $value }}"
+            {{ $attributes->only(["required", "autofocus", "disabled", "checked"]) }}
+        />
+    </span>
+    @else
+    <input type="{{ $type }}"
+        id="{{ $name }}"
+        name="{{ $name }}"
+        value="{{ $value }}"
+        placeholder="{{ $label }}"
+        {{ $attributes->only(["required", "autofocus", "disabled"]) }}
+    />
+    @endif
+</div>

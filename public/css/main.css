@@ -1,0 +1,8 @@
+.blog-article-preview {
+    border-left: var(--xs) solid var(--tertiary);
+    padding-left: var(--xs);
+
+    & .pre-heading {
+        font-style: italic;
+    }
+}

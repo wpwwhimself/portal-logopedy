@@ -1,8 +1,10 @@
 <x-full-width>
-    <header class="flex right spread middle padded">
-        <x-logo />
+    <header class="flex right but-mobile-down spread middle padded">
+        <div class="flex right middle">
+            <x-logo />
 
-        <x-button icon="menu">Przeglądaj</x-button>
+            <x-button icon="menu">Przeglądaj</x-button>
+        </div>
 
         <x-search-bar />
 

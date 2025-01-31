@@ -111,7 +111,7 @@ h1, h2, h3, h4, h5, h6, p {
 
 .full-width {
     & > .contents {
-        width: 1280px;
+        max-width: 1280px;
         margin: 0 auto;
     }
 }
@@ -284,4 +284,23 @@ search {
 
 .tile {
 
+}
+
+/******************** mobile *******************/
+
+@media screen and (max-width: 850px) {
+    .flex.right, .grid {
+        &.but-mobile-down {
+            flex-direction: column;
+        }
+    }
+
+    .side-content-container {
+        grid-template-columns: auto;
+
+        & > .content:last-child {
+            border-left: none;
+            border-top: var(--xxs) solid var(--bg-light);
+        }
+    }
 }

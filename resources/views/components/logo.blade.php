@@ -1,3 +1,6 @@
 <a href="{{ route('main') }}">
-    <h1>{{ config('app.name') }}</h1>
+    <img src="{{ asset('img/logo.svg') }}"
+        alt="{{ config('app.name') }}"
+        class="logo"
+    >
 </a>

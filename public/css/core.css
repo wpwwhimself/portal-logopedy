@@ -1,19 +1,21 @@
+@import url('https://fonts.cdnfonts.com/css/myriad-pro');
+
 :root {
     color-scheme: light dark;
     --fg: light-dark(black, white);
-    --bg: light-dark(white, black);
+    --bg: light-dark(#aaaaaa, #171717);
     --bg-light: light-dark(rgb(215, 215, 215), #323232);
 
-    --primary: rgb(243, 58, 58);
-    --secondary: rgb(240, 240, 23);
-    --tertiary: rgb(39, 141, 250);
-    --success: rgb(38, 142, 38);
+    --primary: #e30715;
+    --secondary: #e3dd07;
+    --tertiary: #0796e3;
+    --success: #07e33d;
     --danger: rgb(215, 61, 61);
 
     --xxs: 3px;
     --xs: 6px;
     --s: 10px;
-    --m: 14px;
+    --m: 16px;
     --l: 20px;
     --xl: 24px;
     --xxl: 32px;
@@ -169,7 +171,13 @@ body {
     min-height: 100vh;
     flex-wrap: nowrap;
 
-    font-family: Tahoma, sans-serif;
+    font-family: 'Myriad Pro', sans-serif;
+    font-weight: 300;
+    font-size: var(--m);
+
+    & b, & strong {
+        font-weight: 600;
+    }
 }
 
 .button {
@@ -249,6 +257,10 @@ body {
     &.rounded {
         border-radius: var(--xxl);
     }
+}
+
+.logo {
+    height: calc(2 * var(--xxl));
 }
 
 .line-banner {

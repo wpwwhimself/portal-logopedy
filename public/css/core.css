@@ -53,6 +53,16 @@ h1, h2, h3, h4, h5, h6, p {
     margin: var(--s) 0 var(--xs);
 }
 
+/******************** fonts *******************/
+
+* {
+    font-family: 'Myriad Pro', sans-serif;
+    font-weight: 300;
+
+    & b, & strong {
+        font-weight: 600;
+    }
+}
 
 /******************** colors *******************/
 
@@ -171,13 +181,7 @@ body {
     min-height: 100vh;
     flex-wrap: nowrap;
 
-    font-family: 'Myriad Pro', sans-serif;
-    font-weight: 300;
     font-size: var(--m);
-
-    & b, & strong {
-        font-weight: 600;
-    }
 }
 
 .button {

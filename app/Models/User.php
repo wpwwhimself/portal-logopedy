@@ -6,6 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Auth;
 
 class User extends Authenticatable
 {
@@ -48,4 +49,19 @@ class User extends Authenticatable
             'wants_newsletter' => 'boolean',
         ];
     }
+
+    #region relations
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class);
+    }
+    #endregion
+
+    #region helpers
+    public static function hasRole(?string $role): bool
+    {
+        if (empty($role)) return true;
+        return Auth::user()->roles->contains(Role::find($role));
+    }
+    #endregion
 }

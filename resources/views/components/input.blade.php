@@ -4,6 +4,7 @@
     "label",
     "value" => null,
     "icon" => null,
+    "options" => null, "emptyOption" => false,
 ])
 
 <div {{ $attributes->class([
@@ -16,23 +17,53 @@
 ]) }}>
     @if ($icon) @svg("mdi-$icon") @endif
 
-    @if ($type == "checkbox")
-    <span>
-        <label for="{{ $name }}">{{ $label }}</label>
+    <label for="{{ $name }}" class="ghost">{{ $label }}:</label>
+
+    @switch ($type)
+        @case ("checkbox")
         <input type="checkbox"
             id="{{ $name }}"
             name="{{ $name }}"
             value="{{ $value }}"
             {{ $attributes->only(["required", "autofocus", "disabled", "checked"]) }}
         />
-    </span>
-    @else
-    <input type="{{ $type }}"
-        id="{{ $name }}"
-        name="{{ $name }}"
-        value="{{ $value }}"
-        placeholder="{{ $label }}"
-        {{ $attributes->only(["required", "autofocus", "disabled"]) }}
-    />
-    @endif
+        @break
+
+        @case ("select")
+        <select name="{{ $name }}"
+            id="{{ $name }}"
+            {{ $attributes->only(["required", "autofocus", "disabled"]) }}
+        >
+            @if ($emptyOption) <option value="">— brak —</option> @endif
+            @foreach ($options as $opt_val => $opt_label)
+            <option value="{{ $opt_val }}"
+                {{ $opt_val == $value ? "selected" : "" }}
+            >
+                {{ $opt_label }}
+            </option>
+            @endforeach
+        </select>
+        @break
+
+        @case ("TEXT")
+        <textarea name="{{ $name }}"
+            id="{{ $name }}"
+            placeholder="Zacznij pisać..."
+            {{ $attributes->only(["required", "autofocus", "disabled"]) }}
+        >{{ $value }}</textarea>
+        @break
+
+        @case ("HTML")
+        <x-ckeditor :name="$name" :value="$value" />
+        @break
+
+        @default
+        <input type="{{ $type }}"
+            id="{{ $name }}"
+            name="{{ $name }}"
+            value="{{ $value }}"
+            placeholder="— brak —"
+            {{ $attributes->only(["required", "autofocus", "disabled"]) }}
+        />
+    @endswitch
 </div>

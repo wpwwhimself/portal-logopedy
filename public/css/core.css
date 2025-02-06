@@ -248,7 +248,7 @@ body {
 
 .input {
     border: var(--xxs) solid var(--bg-light);
-    grid-template-columns: auto 1fr;
+    grid-template-columns: auto auto 1fr;
 
     &:has(:focus) {
         border-color: var(--primary);
@@ -258,6 +258,17 @@ body {
         accent-color: var(--primary);
         height: var(--m);
         width: var(--m);
+    }
+
+    & textarea {
+        font-family: monospace;
+    }
+
+    & select {
+        & option {
+            font-family: inherit;
+            background-color: var(--bg);
+        }
     }
 }
 

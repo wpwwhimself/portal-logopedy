@@ -5,6 +5,7 @@
     --fg: light-dark(black, white);
     --bg: light-dark(#aaaaaa, #171717);
     --bg-light: light-dark(rgb(215, 215, 215), #323232);
+    --shadow: light-dark(#00000055, #ffffff55);
 
     --primary: #e30715;
     --secondary: #e3dd07;
@@ -131,7 +132,7 @@ h1, h2, h3, h4, h5, h6, p {
 .interactive, [onclick], a, button, .button {
     &:hover {
         cursor: pointer;
-        box-shadow: 0 0 var(--s) #00000077;
+        box-shadow: 0 0 var(--s) var(--shadow);
     }
 }
 
@@ -152,7 +153,7 @@ span.large {
 }
 
 .shaded {
-    box-shadow: 0 0 var(--s) #00000077;
+    box-shadow: 0 0 var(--s) var(--shadow);
 }
 
 /******************** components *******************/

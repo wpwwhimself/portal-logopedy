@@ -8,7 +8,7 @@ Route::controller(FrontController::class)->group(function () {
     Route::get("/", "index")->name("main");
 });
 
-Route::controller(ProfileController::class)->prefix("profil")->group(function () {
+Route::controller(ProfileController::class)->prefix("profile")->group(function () {
     Route::get("/", "myProfile")->name("profile");
 });
 

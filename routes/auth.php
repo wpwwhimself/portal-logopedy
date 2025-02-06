@@ -20,4 +20,7 @@ Route::controller(AuthController::class)->prefix("auth")->group(function () {
 
     Route::get("/register", "register")->name("register");
     Route::post("/register", "processRegister")->name("process-register");
+
+    Route::get("/change-password", "changePassword")->name("change-password");
+    Route::post("/change-password", "changePassword")->name("change-password");
 });

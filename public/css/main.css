@@ -6,3 +6,30 @@
         font-style: italic;
     }
 }
+
+.mid-section-tile {
+    font-size: var(--xl);
+    gap: 0 !important;
+
+    &.accent.background {
+        border: none;
+    }
+
+    &.grid {
+        grid-template-columns: auto 1fr;
+    }
+
+    & b {
+        font-size: var(--xxl);
+    }
+
+    & img {
+        height: calc(2 * var(--xxl));
+        padding: var(--m);
+    }
+
+    & span {
+        display: block;
+        text-align: center;
+    }
+}

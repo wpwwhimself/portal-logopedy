@@ -204,6 +204,9 @@ body {
     &.spread {
         justify-content: space-between;
     }
+    &.nowrap {
+        flex-wrap: nowrap;
+    }
 }
 
 .grid {

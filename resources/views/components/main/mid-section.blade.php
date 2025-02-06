@@ -1,19 +1,26 @@
 <x-full-width class="padded">
     <x-side-content-container>
         <div class="grid big-gap" style="--col-count: 2;">
-            <x-button class="accent background success">
-                <b class="large">DODAJ</b>
-                kurs/szkolenie/..
-            </x-button>
-            <x-button class="accent background secondary">
-                <b class="large">OCEŃ</b>
-                kurs/szkolenie/..
-            </x-button>
+            <x-tile class="accent background success mid-section-tile">
+                <span><b class="large">DODAJ</b></span>
+                <span>kurs/szkolenie/...</span>
+            </x-tile>
+            <x-tile class="accent background secondary mid-section-tile">
+                <span><b class="large">OCEŃ</b></span>
+                <span>kurs/szkolenie/...</span>
+            </x-tile>
 
-            @foreach ([1, 2, 3, 4, 5, 6] as $tile)
-            <x-tile class="flex right middle accent primary">
-                @svg("mdi-folder-outline")
-                <span>Kafelek</span>
+            @foreach ([
+                ["folder", "Baza kursów, szkoleń, konferencji...", null],
+                ["ranking", "Rankingi kursów i szkoleń...", null],
+                ["shaker", "Narzędzia do terapii", null],
+                ["books", "E-booki, książki, pdfy", null],
+                ["people", "Polecani specjaliści", null],
+                ["clapper", "Filmy, podcasty", null],
+            ] as [$icon_name, $label, $link])
+            <x-tile class="grid middle accent primary mid-section-tile">
+                <img src="{{ asset("img/icons/$icon_name.svg") }}" alt="{{ $icon_name }}">
+                <span>{{ $label }}</span>
             </x-tile>
             @endforeach
         </div>

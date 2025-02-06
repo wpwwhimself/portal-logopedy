@@ -4,10 +4,9 @@
             <x-logo />
 
             <div class="flex right but-mobile-down middle">
-                <x-button class="phantom">Kontakt</x-button>
-                <x-button class="phantom">Polityka Prywatności</x-button>
-                <x-button class="phantom">Regulamin</x-button>
-                <x-button class="phantom">FAQ</x-button>
+                @foreach (App\Models\StandardPage::visible()->get() as $page)
+                <x-button :action="route('standard-page', ['slug' => $page->slug])" class="phantom">{{ $page->name }}</x-button>
+                @endforeach
             </div>
 
             <div class="flex down center">

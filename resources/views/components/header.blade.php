@@ -1,12 +1,16 @@
+@props([
+    "hideBrowsing" => false,
+])
+
 <x-full-width>
     <header class="flex right but-mobile-down spread middle padded">
         <div class="flex right middle">
             <x-logo />
 
-            <x-button icon="menu">Przeglądaj</x-button>
+            @unless ($hideBrowsing) <x-button icon="menu">Przeglądaj</x-button> @endunless
         </div>
 
-        <x-search-bar />
+        @unless ($hideBrowsing) <x-search-bar /> @endunless
 
         <div class="flex right center middle">
             @auth

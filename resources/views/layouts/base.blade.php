@@ -11,13 +11,38 @@
             {{ config('app.name') }}
         </title>
 
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-
         <link rel="stylesheet" href="{{ asset('css/core.css') }}">
-        <script src="{{ asset('js/core.js') }}" defer></script>
+        <script src="{{ asset('js/core.js') }}"></script>
         @yield("extra_head")
+
+        @env (["local", "stage"])
+        <style>
+        :root {
+            @env ("local")
+            --test-color: #0f0;
+            @endenv
+            @env ("stage")
+            --test-color: #ff0;
+            @endenv
+        }
+        header {
+            background: repeating-linear-gradient(45deg, var(--test-color), var(--test-color) 25px, #000 25px, #000 50px) !important;
+        }
+        </style>
+        @endenv
+
+        {{-- ckeditor --}}
+        <link rel="stylesheet" href="{{ asset("css/ckeditor.css") }}?{{ time() }}">
+        <link rel="stylesheet" href="https://cdn.ckeditor.com/ckeditor5/43.0.0/ckeditor5.css">
+        <script type="importmap">
+        {
+            "imports": {
+                "ckeditor5": "https://cdn.ckeditor.com/ckeditor5/43.0.0/ckeditor5.js",
+                "ckeditor5/": "https://cdn.ckeditor.com/ckeditor5/43.0.0/"
+            }
+        }
+        </script>
+        <script type="module" src="{{ asset("js/ckeditor.js") }}?{{ time() }}"></script>
     </head>
     <body class="flex down">
         <!-- Page Heading -->

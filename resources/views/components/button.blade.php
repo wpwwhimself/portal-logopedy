@@ -5,12 +5,12 @@
 ])
 
 @if ($action == "submit")
-<button type="submit">
+<button type="submit" {{ $attributes->only(["name", "value"]) }}>
 @elseif ($action)
 <a href="{{ $action }}">
 @endif
 
-<div {{ $attributes->class([
+<div {{ $attributes->except(["name", "value"])->class([
     "button",
     "phantom" => $phantom,
     "padded",

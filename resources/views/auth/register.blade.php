@@ -7,7 +7,7 @@
 <x-full-width>
     <x-side-content-container>
         <x-h icon="account-plus">Rejestracja</x-h>
-        <x-auth.login-form register />
+        <x-auth.login-form mode="register" />
 
         <x-slot:side-content>
             <x-hint title="Co zyskasz z rejestracji?">

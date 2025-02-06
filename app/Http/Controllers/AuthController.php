@@ -62,7 +62,12 @@ class AuthController extends Controller
     #endregion
 
     #region misc
-    public function changePassword(Request $rq)
+    public function changePassword()
+    {
+        return view("auth.change-password");
+    }
+
+    public function processChangePassword(Request $rq)
     {
         $validator = Validator::make($rq->all(), [
             'password' => ['required', 'confirmed'],
@@ -72,7 +77,7 @@ class AuthController extends Controller
         User::findOrFail(Auth::id())->update([
             "password" => Hash::make($rq->password),
         ]);
-        return redirect(route("dashboard"))->with("success", "Hasło zostało zmienione");
+        return redirect(route("profile"))->with("success", "Hasło zostało zmienione");
     }
 
     public function logout(Request $request)

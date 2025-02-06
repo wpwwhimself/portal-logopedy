@@ -16,11 +16,13 @@ Route::controller(AuthController::class)->prefix("auth")->group(function () {
     Route::get("/login", "login")->name("login");
     Route::post("/login", "processLogin")->name("process-login");
 
-    Route::get("/logout", "logout")->name("logout");
-
     Route::get("/register", "register")->name("register");
     Route::post("/register", "processRegister")->name("process-register");
 
-    Route::get("/change-password", "changePassword")->name("change-password");
-    Route::post("/change-password", "changePassword")->name("change-password");
+    Route::middleware("auth")->group(function () {
+        Route::get("/change-password", "changePassword")->name("change-password");
+        Route::post("/change-password", "processChangePassword")->name("process-change-password");
+
+        Route::get("/logout", "logout")->name("logout");
+    });
 });

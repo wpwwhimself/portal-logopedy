@@ -1,32 +1,34 @@
 @props([
-    "register" => false,
+    "mode" => "login",
 ])
 
-<form action="{{ route($register ? 'process-register' : 'process-login') }}"
+<form action="{{ route('process-'.$mode) }}"
     method="post"
     class="flex down"
 >
     @csrf
 
-    @if ($register)
+    @if ($mode == "register")
     <x-input type="text"
         name="name"
         label="Imię i nazwisko"
         icon="card-account-details"
         required
-        :autofocus="$register"
+        autofocus
     />
     @endif
 
+    @if (in_array($mode, ["login", "register"]))
     <x-input type="email"
         name="email"
         label="Adres email"
         icon="email"
         required
-        :autofocus="!$register"
+        :autofocus="$mode == 'login'"
     />
+    @endif
 
-    @if ($register)
+    @if ($mode == "register")
     <x-input type="phone"
         name="phone"
         label="Numer telefonu"
@@ -42,7 +44,7 @@
         required
     />
 
-    @if ($register)
+    @if ($mode == "register" || $mode == "change-password")
     <x-input type="password"
         name="password_confirmation"
         label="Powtórz hasło"
@@ -57,11 +59,15 @@
     />
     @endif
 
-    @if ($register)
-    <x-button action="submit" icon="check">Zarejestruj się</x-button>
-    <x-button :action="route('login')" icon="login" class="phantom">Mam już konto</x-button>
-    @else
-    <x-button action="submit" icon="check">Zaloguj się</x-button>
-    <x-button :action="route('register')" icon="account-plus" class="phantom">Utwórz konto</x-button>
+    @if (in_array($mode, ["login", "register"]))
+        @if ($mode == "register")
+        <x-button action="submit" icon="check">Zarejestruj się</x-button>
+        <x-button :action="route('login')" icon="login" class="phantom">Mam już konto</x-button>
+        @else
+        <x-button action="submit" icon="check">Zaloguj się</x-button>
+        <x-button :action="route('register')" icon="account-plus" class="phantom">Utwórz konto</x-button>
+        @endif
+    @elseif ($mode == "change-password")
+    <x-button action="submit" icon="check">Zmień hasło</x-button>
     @endif
 </form>

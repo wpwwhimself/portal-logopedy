@@ -61,7 +61,7 @@ class User extends Authenticatable
     public static function hasRole(?string $role): bool
     {
         if (empty($role)) return true;
-        return Auth::user()->roles->contains(Role::find($role));
+        return Auth::user()->roles->contains(Role::find($role)) || self::hasRole("super");
     }
     #endregion
 }

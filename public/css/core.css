@@ -2,9 +2,9 @@
 
 :root {
     color-scheme: light dark;
-    --fg: light-dark(black, white);
-    --bg: light-dark(#aaaaaa, #171717);
-    --bg-light: light-dark(rgb(215, 215, 215), #323232);
+    --fg: light-dark(black, #eaeaea);
+    --bg: light-dark(white, #373737);
+    --bg-light: light-dark(#e3e3e3, #5b5b5b);
     --shadow: light-dark(#00000055, #ffffff55);
 
     --primary: #e30715;

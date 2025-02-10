@@ -48,6 +48,7 @@
 
                     @case ("many")
                     @foreach ($model::all() as $item)
+                    @if ($relation == "roles" && $item->name == "super" && !auth()->user()->hasRole("super")) @continue @endif
                     <x-input type="checkbox"
                         name="{{ $relation }}[]"
                         label="{{ $item->name }}"

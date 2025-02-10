@@ -11,7 +11,8 @@
     --secondary: #e3dd07;
     --tertiary: #0796e3;
     --success: #07e33d;
-    --danger: rgb(215, 61, 61);
+    --error: rgb(215, 61, 61);
+    --danger: rgb(227, 147, 36);
 
     --xxs: 3px;
     --xs: 6px;
@@ -91,6 +92,9 @@ h1, h2, h3, h4, h5, h6, p {
         --accent-color: var(--success);
     }
     &.danger {
+        --accent-color: var(--danger);
+    }
+    &.error {
         --accent-color: var(--danger);
     }
 }

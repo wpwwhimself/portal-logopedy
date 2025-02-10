@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -65,6 +66,8 @@ class AdminController extends Controller
 
     public function listModel(string $scope): View
     {
+        if (!User::hasRole(self::SCOPES[$scope]["role"])) abort(403);
+
         $modelName = $this->getModelName($scope);
         $meta = array_merge(self::SCOPES[$scope], $modelName::META);
         $data = $modelName::forAdminList()
@@ -75,6 +78,8 @@ class AdminController extends Controller
 
     public function editModel(string $scope, ?int $id = null): View
     {
+        if (!User::hasRole(self::SCOPES[$scope]["role"])) abort(403);
+
         $modelName = $this->getModelName($scope);
         $meta = array_merge(self::SCOPES[$scope], $modelName::META);
         $data = $modelName::find($id);
@@ -86,6 +91,8 @@ class AdminController extends Controller
 
     public function processEditModel(Request $rq, string $scope): RedirectResponse
     {
+        if (!User::hasRole(self::SCOPES[$scope]["role"])) abort(403);
+
         $modelName = $this->getModelName($scope);
         $fields = $this->getFields($scope);
         $data = $rq->except("_token", "_connections", "method");

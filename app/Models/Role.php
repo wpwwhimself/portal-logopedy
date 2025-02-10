@@ -11,6 +11,11 @@ class Role extends Model
     protected $keyType = "string";
     public $timestamps = false;
 
+    public const META = [
+        "label" => "Role",
+        "icon" => "key-chain",
+    ];
+
     protected $fillable = [
         "name",
         "description",

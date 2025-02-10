@@ -16,10 +16,12 @@
             <x-h lvl="2" :icon="$meta['icon']">{{ $item->name }}</x-h>
 
             <div class="flex down">
+                @isset ($item->visible)
                 <small>
                     @svg("mdi-eye")
                     {{ App\Http\Controllers\AdminController::VISIBILITIES[$item->visible] }}
                 </small>
+                @endisset
             </div>
         </x-tile>
         @empty

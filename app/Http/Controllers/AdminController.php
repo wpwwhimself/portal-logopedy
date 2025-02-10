@@ -12,13 +12,11 @@ class AdminController extends Controller
     #region constants and helpers
     public const SCOPES = [
         "users" => [
-            "label" => "Użytkownicy",
-            "icon" => "account-multiple",
+            "model" => \App\Models\User::class,
             "role" => "technical",
         ],
         "standard-pages" => [
-            "label" => "Strony standardowe",
-            "icon" => "script-text",
+            "model" => \App\Models\StandardPage::class,
             "role" => "technical",
         ],
     ];
@@ -37,30 +35,38 @@ class AdminController extends Controller
     private function getFields(string $scope): array
     {
         $modelName = $this->getModelName($scope);
-        return array_merge([
+        return array_merge(array_filter([
             "name" => [
                 "type" => "text",
                 "label" => "Nazwa",
                 "icon" => "card-text",
             ],
-            "visible" => [
+            "visible" => in_array($scope, ["users"]) ? null : [
                 "type" => "select", "options" => self::VISIBILITIES,
                 "label" => "Widoczny dla",
                 "icon" => "eye",
             ],
-            "order" => [
+            "order" => in_array($scope, ["users"]) ? null : [
                 "type" => "number",
                 "label" => "Wymuś kolejność",
                 "icon" => "order-numeric-ascending",
             ],
-        ], $modelName::FIELDS);
+        ]), $modelName::FIELDS);
+    }
+
+    private function getConnections(string $scope): array
+    {
+        $modelName = $this->getModelName($scope);
+        return array_filter(array_merge(
+            defined($modelName."::CONNECTIONS") ? $modelName::CONNECTIONS : null,
+        ));
     }
     #endregion
 
     public function listModel(string $scope): View
     {
         $modelName = $this->getModelName($scope);
-        $meta = self::SCOPES[$scope];
+        $meta = array_merge(self::SCOPES[$scope], $modelName::META);
         $data = $modelName::forAdminList()
             ->paginate(25);
 
@@ -70,22 +76,35 @@ class AdminController extends Controller
     public function editModel(string $scope, ?int $id = null): View
     {
         $modelName = $this->getModelName($scope);
-        $meta = self::SCOPES[$scope];
+        $meta = array_merge(self::SCOPES[$scope], $modelName::META);
         $data = $modelName::find($id);
         $fields = $this->getFields($scope);
+        $connections = $this->getConnections($scope);
 
-        return view("admin.edit-model", compact("data", "meta", "scope", "fields"));
+        return view("admin.edit-model", compact("data", "meta", "scope", "fields", "connections"));
     }
 
     public function processEditModel(Request $rq, string $scope): RedirectResponse
     {
         $modelName = $this->getModelName($scope);
+        $fields = $this->getFields($scope);
+        $data = $rq->except("_token", "_connections", "method");
+        foreach ($fields as $name => $fdata) {
+            if ($fdata["type"] == "checkbox") $data[$name] ??= false;
+        }
 
         if ($rq->input("method") == "save") {
             $model = $modelName::updateOrCreate(
                 ["id" => $rq->id],
-                $rq->except(["_token", "method"])
+                $data,
             );
+
+            if ($rq->has("_connections")) {
+                foreach ($rq->get("_connections") as $connection) {
+                    $model->{$connection}()->sync($rq->get($connection));
+                }
+            }
+
             return redirect()->route("admin-edit-model", ["model" => $scope, "id" => $model->id])
                 ->with("success", "Zapisano");
         } else if ($rq->input("method") == "delete") {

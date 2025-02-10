@@ -24,9 +24,39 @@
                 :name="$name"
                 :label="$fdata['label']"
                 :icon="$fdata['icon']"
-                :value="$data?->{$name}"
+                :value="$fdata['type'] == 'checkbox' ? 1 : $data?->{$name}"
+                :checked="$fdata['type'] == 'checkbox' && $data?->{$name}"
                 :options="$fdata['options'] ?? null"
             />
+            @endforeach
+
+            @foreach ($connections as $relation => ["model" => $model, "mode" => $mode])
+            <input type="hidden" name="_connections[]" value="{{ $relation }}">
+            <x-h lvl="2" :icon="$model::META['icon']">{{ $model::META['label'] }}</x-h>
+
+            <div class="grid" style="--col-count: 3;">
+                @switch ($mode)
+                    @case ("one")
+                    <x-input type="select"
+                        name="{{ $relation }}"
+                        label="Wybierz"
+                        :value="$data?->{$relation} ? $data?->{$relation}->id : null"
+                        :options="$model::all()->pluck('name', 'id')"
+                        empty-option
+                    @break
+
+                    @case ("many")
+                    @foreach ($model::all() as $item)
+                    <x-input type="checkbox"
+                        name="{{ $relation }}[]"
+                        label="{{ $item->name }}"
+                        value="{{ $item->id ?? $item->name }}"
+                        :checked="$data?->{$relation}->contains($item)"
+                    />
+                    @endforeach
+                    @break
+                @endswitch
+            </div>
             @endforeach
 
             <x-slot:side-content>

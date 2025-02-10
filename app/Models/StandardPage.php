@@ -9,6 +9,11 @@ use Illuminate\Support\Str;
 
 class StandardPage extends Model
 {
+    public const META = [
+        "label" => "Strony standardowe",
+        "icon" => "script-text",
+    ];
+
     protected $fillable = [
         "name", "content",
         "visible", "order",

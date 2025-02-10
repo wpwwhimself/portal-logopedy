@@ -6,9 +6,9 @@
 
 <x-full-width>
     <x-side-content-container>
-        <x-h icon="account">{{ auth()->user()->name }}</x-h>
+        <x-h :icon="auth()->user()::META['icon']">{{ auth()->user()->name }}</x-h>
 
-        <x-tile title="Moje uprawnienia" title-icon="key-chain">
+        <x-tile title="Moje uprawnienia" :title-icon="App\Models\Role::META['icon']">
             <ul>
                 @forelse (auth()->user()->roles as $role)
                 <li><b>{{ $role->name }}</b>: {{ $role->description }}</li>
@@ -21,9 +21,9 @@
         @if (auth()->user()->hasRole("technical"))
         <x-tile title="Strefa administratora" title-icon="wizard-hat">
             <div class="grid" style="--col-count: 3;">
-                @foreach (App\Http\Controllers\AdminController::SCOPES as $scope => ["label" => $label, "icon" => $icon, "role" => $role])
+                @foreach (App\Http\Controllers\AdminController::SCOPES as $scope => ["model" => $model, "role" => $role])
                 @if (auth()->user()->hasRole($role))
-                <x-button :action="route('admin-list-model', ['model' => $scope])" :icon="$icon">{{ $label }}</x-button>
+                <x-button :action="route('admin-list-model', ['model' => $scope])" :icon="$model::META['icon']">{{ $model::META['label'] }}</x-button>
                 @endif
                 @endforeach
             </div>

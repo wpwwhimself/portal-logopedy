@@ -13,6 +13,11 @@ class User extends Authenticatable
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
+    public const META = [
+        "label" => "Użytkownicy",
+        "icon" => "account",
+    ];
+
     /**
      * The attributes that are mass assignable.
      *
@@ -24,6 +29,31 @@ class User extends Authenticatable
         'password',
         'phone',
         'wants_newsletter',
+    ];
+
+    public const FIELDS = [
+        "email" => [
+            "type" => "email",
+            "label" => "Adres email",
+            "icon" => "email",
+        ],
+        "phone" => [
+            "type" => "tel",
+            "label" => "Numer telefonu",
+            "icon" => "phone",
+        ],
+        "wants_newsletter" => [
+            "type" => "checkbox",
+            "label" => "Zapisany do newslettera",
+            "icon" => "email-newsletter",
+        ],
+    ];
+
+    public const CONNECTIONS = [
+        "roles" => [
+            "model" => Role::class,
+            "mode" => "many",
+        ],
     ];
 
     /**
@@ -49,6 +79,13 @@ class User extends Authenticatable
             'wants_newsletter' => 'boolean',
         ];
     }
+
+    #region scopes
+    public function scopeForAdminList($query)
+    {
+        return $query->orderBy("name");
+    }
+    #endregion
 
     #region relations
     public function roles()

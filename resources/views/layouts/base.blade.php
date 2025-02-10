@@ -12,7 +12,8 @@
         </title>
 
         <link rel="stylesheet" href="{{ asset('css/core.css') }}">
-        <script src="{{ asset('js/core.js') }}"></script>
+        <script src="{{ asset('js/earlies.js') }}"></script>
+        <script src="{{ asset('js/core.js') }}" defer></script>
         @yield("extra_head")
 
         @env (["local", "stage"])

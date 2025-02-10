@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 use Illuminate\Support\Str;
 
@@ -64,6 +65,7 @@ class AdminController extends Controller
     }
     #endregion
 
+    #region automatic model editors
     public function listModel(string $scope): View
     {
         if (!User::hasRole(self::SCOPES[$scope]["role"])) abort(403);
@@ -120,4 +122,67 @@ class AdminController extends Controller
                 ->with("success", "Usunieto");
         }
     }
+    #endregion
+
+    #region files
+    public function files()
+    {
+        $path = request("path") ?? "public";
+
+        $directories = Storage::directories($path);
+        $files = collect(Storage::files($path))
+            ->filter(fn ($file) => !Str::contains($file, ".git"))
+            ->sortByDesc(fn ($file) => Storage::lastModified($file));
+
+        return view("admin.files.list", compact(
+            "files",
+            "directories",
+        ));
+    }
+
+    public function filesUpload(Request $rq)
+    {
+        foreach ($rq->file("files") as $file) {
+            $file->storePubliclyAs(
+                $rq->path,
+                $file->getClientOriginalName()
+            );
+        }
+
+        return back()->with("success", "Dodano");
+    }
+
+    public function filesDownload(Request $rq)
+    {
+        return Storage::download($rq->file);
+    }
+
+    public function filesDelete(Request $rq)
+    {
+        Storage::delete($rq->file);
+        return back()->with("success", "Usunięto");
+    }
+
+    public function folderNew()
+    {
+        $path = request("path") ?? "/";
+        return view("admin.files.new-folder", compact(
+            "path",
+        ));
+    }
+
+    public function folderCreate(Request $rq)
+    {
+        $path = request("path") ?? "/";
+        Storage::makeDirectory($path . "/" . $rq->name);
+        return redirect()->route("files-list", ["path" => $path])->with("success", "Folder utworzony");
+    }
+
+    public function folderDelete(Request $rq)
+    {
+        $path = request("path") ?? "/";
+        Storage::deleteDirectory($path);
+        return redirect()->route("files-list", ["path" => Str::beforeLast($path, "/")])->with("success", "Folder usunięty");
+    }
+    #endregion
 }

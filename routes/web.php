@@ -16,6 +16,19 @@ Route::middleware("auth")->group(function () {
     });
 
     Route::controller(AdminController::class)->prefix("admin")->group(function () {
+        Route::prefix("files")->middleware("role:blogger")->group(function () {
+            Route::get("", "files")->name("files-list");
+            Route::post("upload", "filesUpload")->name("files-upload");
+            Route::get("download", "filesDownload")->name("files-download");
+            Route::get("delete", "filesDelete")->name("files-delete");
+
+            Route::prefix("folder")->group(function () {
+                Route::get("new", "folderNew")->name("folder-new");
+                Route::post("create", "folderCreate")->name("folder-create");
+                Route::get("delete", "folderDelete")->name("folder-delete");
+            });
+        });
+
         Route::prefix("{model}")->group(function () {
             Route::get("", "listModel")->name("admin-list-model");
             Route::get("edit/{id?}", "editModel")->name("admin-edit-model");

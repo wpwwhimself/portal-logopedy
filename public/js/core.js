@@ -18,3 +18,8 @@ if (alertElem) {
         alertElem.classList.remove("in");
     }, TOAST_TIMEOUT);
 }
+
+function copyToClipboard(text) {
+    navigator.clipboard.writeText(text)
+    alert("Skopiowano do schowka.")
+}

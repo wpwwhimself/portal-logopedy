@@ -22,9 +22,11 @@
 ]) }}>
     @if ($icon) @svg("mdi-$icon") @endif
 
+    @if ($slot->isNotEmpty())
     <span class="label">
         {{ $slot }}
     </span>
+    @endif
 </div>
 
 @if ($action == "submit") </button> @elseif ($action) </a> @endif

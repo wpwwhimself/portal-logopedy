@@ -21,6 +21,10 @@
         @if (auth()->user()->hasRole("technical"))
         <x-tile title="Strefa administratora" title-icon="wizard-hat">
             <div class="grid" style="--col-count: 3;">
+                @if (auth()->user()->hasRole("blogger"))
+                <x-button :action="route('admin-list-files')" icon="file">Pliki</x-button>
+                @endif
+
                 @foreach (App\Http\Controllers\AdminController::SCOPES as $scope => ["model" => $model, "role" => $role])
                 @if (auth()->user()->hasRole($role))
                 <x-button :action="route('admin-list-model', ['model' => $scope])" :icon="$model::META['icon']">{{ $model::META['label'] }}</x-button>

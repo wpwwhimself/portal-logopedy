@@ -9,11 +9,13 @@
                 @endforeach
             </div>
 
-            <div class="flex down center">
+            <div class="flex down center middle">
                 <span>Zajrzyj na nasze social media:</span>
 
                 <div class="flex right middle">
-
+                    @foreach (App\Models\SocialMedium::visible()->get() as $sm)
+                    {!! $sm->icon !!}
+                    @endforeach
                 </div>
             </div>
         </div>

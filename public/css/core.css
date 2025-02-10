@@ -246,8 +246,12 @@ body {
 }
 
 .icon {
-    height: 1.5em;
+    height: var(--l);
     vertical-align: middle;
+
+    &.large {
+        height: var(--xxl);
+    }
 }
 
 .input {

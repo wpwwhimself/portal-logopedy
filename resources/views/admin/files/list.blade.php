@@ -27,7 +27,7 @@
             @forelse ($files as $file)
             <x-tile :title="Str::afterLast($file, '/')" class="flex down middle">
                 @if (isPicture($file))
-                <img src="{{ Storage::url($file) }}" alt="{{ Str::afterLast($file, '/') }}">
+                <img src="{{ Storage::url($file) }}" alt="{{ Str::afterLast($file, '/') }}" class="thumbnail">
                 @endif
 
                 <div class="flex right middle center">

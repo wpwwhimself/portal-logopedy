@@ -7,5 +7,5 @@ use Illuminate\Support\Str;
  */
 function isPicture(string $path): bool
 {
-    return Str::endsWith(Str::beforeLast($path, "?"), [".jpg", ".jpeg", ".png", ".gif"]);
+    return Str::endsWith(Str::beforeLast($path, "?"), [".jpg", ".jpeg", ".png", ".gif", ".svg"]);
 }

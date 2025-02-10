@@ -21,6 +21,10 @@ class AdminController extends Controller
             "model" => \App\Models\StandardPage::class,
             "role" => "technical",
         ],
+        "social-media" => [
+            "model" => \App\Models\SocialMedium::class,
+            "role" => "blogger",
+        ],
     ];
 
     public const VISIBILITIES = [
@@ -60,7 +64,7 @@ class AdminController extends Controller
     {
         $modelName = $this->getModelName($scope);
         return array_filter(array_merge(
-            defined($modelName."::CONNECTIONS") ? $modelName::CONNECTIONS : null,
+            defined($modelName."::CONNECTIONS") ? $modelName::CONNECTIONS : [],
         ));
     }
     #endregion

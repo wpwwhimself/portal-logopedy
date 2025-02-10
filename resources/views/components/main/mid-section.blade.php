@@ -1,6 +1,6 @@
 <x-full-width class="padded">
     <x-side-content-container>
-        <div class="grid big-gap" style="--col-count: 2;">
+        <div class="grid but-mobile-down big-gap" style="--col-count: 2;">
             <x-tile class="accent background success mid-section-tile">
                 <span><b class="large">DODAJ</b></span>
                 <span>kurs/szkolenie/...</span>

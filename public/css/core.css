@@ -3,9 +3,9 @@
 :root {
     color-scheme: light dark;
     --fg: light-dark(black, #eaeaea);
-    --bg: light-dark(white, #373737);
-    --bg-light: light-dark(#e3e3e3, #5b5b5b);
-    --shadow: light-dark(#00000055, #ffffff55);
+    --bg: light-dark(white, #1c1c1c);
+    --bg-light: light-dark(#e3e3e3, #313131);
+    --shadow: light-dark(#00000055, #f6f6f655);
 
     --primary: #e30715;
     --secondary: #e3dd07;
@@ -322,6 +322,7 @@ search {
 @media screen and (max-width: 850px) {
     .flex.right, .grid {
         &.but-mobile-down {
+            display: flex;
             flex-direction: column;
         }
     }

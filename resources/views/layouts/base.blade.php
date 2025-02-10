@@ -8,13 +8,21 @@
         <title>
             @yield("title") |
             @hasSection ("subtitle") @yield("subtitle") | @endif
-            {{ config('app.name') }}
+            {{ App\Models\Setting::get("app_name", config('app.name')) }}
         </title>
 
         <link rel="stylesheet" href="{{ asset('css/core.css') }}">
         <script src="{{ asset('js/earlies.js') }}"></script>
         <script src="{{ asset('js/core.js') }}" defer></script>
         @yield("extra_head")
+
+        <style>
+        :root {
+            --primary: {{ App\Models\Setting::get("color_primary") }};
+            --secondary: {{ App\Models\Setting::get("color_secondary") }};
+            --tertiary: {{ App\Models\Setting::get("color_tertiary") }};
+        }
+        </style>
 
         @env (["local", "stage"])
         <style>

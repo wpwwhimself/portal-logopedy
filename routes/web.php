@@ -16,6 +16,11 @@ Route::middleware("auth")->group(function () {
     });
 
     Route::controller(AdminController::class)->prefix("admin")->group(function () {
+        Route::prefix("settings")->middleware("role:technical")->group(function () {
+            Route::get("", "settings")->name("admin-settings");
+            Route::post("", "processSettings")->name("admin-process-settings");
+        });
+
         Route::prefix("files")->middleware("role:blogger")->group(function () {
             Route::get("", "files")->name("files-list");
             Route::post("upload", "filesUpload")->name("files-upload");

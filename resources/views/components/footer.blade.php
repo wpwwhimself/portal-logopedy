@@ -21,7 +21,7 @@
         </div>
 
         <div class="flex right but-mobile-down middle">
-            Prawa autorskie {{ config("app.name") }}
+            Prawa autorskie {{ App\Models\Setting::get("app_name", config("app.name")) }}
             &copy; {{ date("Y") }}
         </div>
     </footer>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Setting;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -66,6 +67,26 @@ class AdminController extends Controller
         return array_filter(array_merge(
             defined($modelName."::CONNECTIONS") ? $modelName::CONNECTIONS : [],
         ));
+    }
+    #endregion
+
+    #region general settings
+    public function settings(): View
+    {
+        $setting = Setting::class;
+
+        return view("admin.settings", compact(
+            "setting",
+        ));
+    }
+
+    public function processSettings(Request $rq): RedirectResponse
+    {
+        foreach ($rq->except("_token") as $key => $value) {
+            Setting::find($key)->update(["value" => $value]);
+        }
+
+        return redirect()->route("admin-settings")->with("success", "Zapisano");
     }
     #endregion
 

@@ -25,6 +25,10 @@
                 <x-button :action="route('files-list')" icon="file">Pliki</x-button>
                 @endif
 
+                @if (auth()->user()->hasRole("technical"))
+                <x-button :action="route('admin-settings')" :icon="App\Models\Setting::META['icon']">{{ App\Models\Setting::META['label'] }}</x-button>
+                @endif
+
                 @foreach (App\Http\Controllers\AdminController::SCOPES as $scope => ["model" => $model, "role" => $role])
                 @if (auth()->user()->hasRole($role))
                 <x-button :action="route('admin-list-model', ['model' => $scope])" :icon="$model::META['icon']">{{ $model::META['label'] }}</x-button>

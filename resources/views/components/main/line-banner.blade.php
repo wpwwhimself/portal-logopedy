@@ -1,11 +1,12 @@
 @props([
     "backgroundClass" => null,
+    "backgroundStyle" => null,
     "action" => null,
 ])
 
 @if ($action) <a href="{{ $action }}"> @endif
 
-<x-full-width :class="$backgroundClass">
+<x-full-width :class="$backgroundClass" :style="$backgroundStyle">
     <div {{ $attributes->class([
         "line-banner",
         "padded",

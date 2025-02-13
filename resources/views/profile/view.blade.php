@@ -27,6 +27,7 @@
 
                 @if (auth()->user()->hasRole("technical"))
                 <x-button :action="route('admin-settings')" :icon="App\Models\Setting::META['icon']">{{ App\Models\Setting::META['label'] }}</x-button>
+                <x-button :action="route('admin-advert-settings')" :icon="App\Models\AdvertSetting::META['icon']">{{ App\Models\AdvertSetting::META['label'] }}</x-button>
                 @endif
 
                 @foreach (App\Http\Controllers\AdminController::SCOPES as $scope => ["model" => $model, "role" => $role])

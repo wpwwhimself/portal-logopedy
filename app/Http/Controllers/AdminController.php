@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AdvertSetting;
 use App\Models\Setting;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
@@ -91,6 +92,28 @@ class AdminController extends Controller
         }
 
         return redirect()->route("admin-settings")->with("success", "Zapisano");
+    }
+
+    public function advertSettings(): View
+    {
+        $setting = AdvertSetting::class;
+
+        return view("admin.advert-settings", compact(
+            "setting",
+        ));
+    }
+
+    public function processAdvertSettings(Request $rq): RedirectResponse
+    {
+        foreach (AdvertSetting::all() as $setting) {
+            $namecode = "$setting->ad_type%$setting->name";
+            $value = in_array($setting->name, ["white_text"])
+                ? $rq->has($namecode)
+                : $rq->get($namecode);
+            $setting->update(["value" => $value]);
+        }
+
+        return redirect()->route("admin-advert-settings")->with("success", "Zapisano");
     }
     #endregion
 

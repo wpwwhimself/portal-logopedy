@@ -28,9 +28,11 @@
         <x-slot:side-content>
             <x-blog.highlights />
 
-            <x-tile class="flex right center middle accent ternary">
-                <span class="large">Miejsce na Twoją reklamę</span>
-            </x-tile>
+            @if (App\Models\AdvertSetting::canBeSeen("side"))
+            <a href="{{ App\Models\AdvertSetting::get('side', 'link') }}">
+                <img src="{{ App\Models\AdvertSetting::get('side', 'image_path') }}" alt="Reklama">
+            </a>
+            @endif
         </x-slot:side-content>
     </x-side-content-container>
 </x-full-width>

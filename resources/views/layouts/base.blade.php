@@ -24,7 +24,7 @@
         }
         </style>
 
-        @env (["local", "stage"])
+        {{-- @env (["local", "stage"])
         <style>
         :root {
             @env ("local")
@@ -38,7 +38,7 @@
             background: repeating-linear-gradient(45deg, var(--test-color), var(--test-color) 25px, #000 25px, #000 50px) !important;
         }
         </style>
-        @endenv
+        @endenv --}}
 
         {{-- ckeditor --}}
         <link rel="stylesheet" href="{{ asset("css/ckeditor.css") }}?{{ time() }}">

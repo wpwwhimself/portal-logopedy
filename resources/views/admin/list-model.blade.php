@@ -30,6 +30,7 @@
 
         <x-slot:side-content>
             <x-button :action="route('admin-edit-model', ['model' => $scope])" icon="plus">Dodaj</x-button>
+            <x-button :action="route('profile')" icon="arrow-left" class="phantom">Wróć</x-button>
         </x-slot:side-content>
     </x-side-content-container>
 </x-full-width>

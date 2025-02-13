@@ -18,6 +18,7 @@ class User extends Authenticatable
     public const META = [
         "label" => "Użytkownicy",
         "icon" => "account",
+        "description" => "Lista użytkowników systemu. Każdy z wymienionych może otrzymać role, które nadają mu uprawnienia do korzystania z konkretnych funkcjonalności.",
     ];
 
     /**

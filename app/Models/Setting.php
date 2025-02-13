@@ -17,6 +17,7 @@ class Setting extends Model
     public const META = [
         "label" => "Ustawienia",
         "icon" => "cog",
+        "description" => "Ustawienia pozwalają na zarządzanie podstawowymi parametrami całego systemu. Zmiany tutaj mają wpływ na różne obszary aplikacji.",
     ];
 
     protected $fillable = [

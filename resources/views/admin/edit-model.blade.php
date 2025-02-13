@@ -51,7 +51,7 @@
                     @if ($relation == "roles" && $item->name == "super" && !auth()->user()->hasRole("super")) @continue @endif
                     <x-input type="checkbox"
                         name="{{ $relation }}[]"
-                        label="{{ $item->name }}"
+                        label="{!! $item !!}"
                         value="{{ $item->id ?? $item->name }}"
                         :checked="$data?->{$relation}->contains($item)"
                     />

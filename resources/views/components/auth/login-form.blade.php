@@ -30,7 +30,7 @@
     @endif
 
     @if ($mode == "register")
-    <x-input type="phone"
+    <x-input type="tel"
         name="phone"
         label="Numer telefonu"
         icon="phone"

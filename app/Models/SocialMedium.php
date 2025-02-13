@@ -14,6 +14,7 @@ class SocialMedium extends Model
     public const META = [
         "label" => "Social media",
         "icon" => "at",
+        "description" => "Linki do mediów społecznościowych, jakimi reklamuje się aplikacja. Linki wraz z ikonami są wylistowane w stopce strony.",
     ];
 
     protected $fillable = [
@@ -24,13 +25,13 @@ class SocialMedium extends Model
 
     public const FIELDS = [
         "link" => [
-            "type" => "text",
+            "type" => "url",
             "label" => "Link",
             "icon" => "link",
             "required" => true,
         ],
         "icon_path" => [
-            "type" => "text",
+            "type" => "url",
             "label" => "Ikona",
             "icon" => "image",
         ],

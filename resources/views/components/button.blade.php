@@ -7,10 +7,10 @@
 @if ($action == "submit")
 <button type="submit" {{ $attributes->only(["name", "value"]) }}>
 @elseif ($action)
-<a href="{{ $action }}">
+<a href="{{ $action }}" {{ $attributes->only(["target"]) }}>
 @endif
 
-<div {{ $attributes->except(["name", "value"])->class([
+<div {{ $attributes->except(["name", "value", "target"])->class([
     "button",
     "phantom" => $phantom,
     "padded",

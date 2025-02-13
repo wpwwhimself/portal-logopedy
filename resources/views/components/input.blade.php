@@ -7,6 +7,8 @@
     "options" => null, "emptyOption" => false,
 ])
 
+<div class="flex right middle spread">
+
 <div {{ $attributes->class([
     "input",
     "grid",
@@ -17,7 +19,7 @@
 ]) }}>
     @if ($icon) @svg("mdi-$icon") @endif
 
-    <label for="{{ $name }}" class="ghost">{{ $label }}:</label>
+    <label for="{{ $name }}" class="ghost">{!! $label !!}:</label>
 
     @switch ($type)
         @case ("checkbox")
@@ -66,4 +68,10 @@
             {{ $attributes->only(["required", "autofocus", "disabled", "autocomplete"]) }}
         />
     @endswitch
+</div>
+
+@if ($type == "url" && $value)
+<x-button :action="$value" icon="open-in-new" class="accent background secondary" target="_blank" />
+@endif
+
 </div>

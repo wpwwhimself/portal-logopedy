@@ -155,10 +155,12 @@ span.large {
 
 /******************** animations *******************/
 
-.interactive {
+.animatable, .interactive {
     transition-duration: 0.3s;
     transition-timing-function: ease-out;
+}
 
+.interactive {
     cursor: pointer;
 
     &.highlight:hover {
@@ -169,7 +171,7 @@ span.large {
     }
 }
 @media (prefers-reduced-motion: reduce) {
-    .interactive {
+    .animatable, .interactive {
         transition: none;
     }
 }
@@ -271,6 +273,7 @@ body {
 .input {
     border: var(--xxs) solid var(--bg-light);
     grid-template-columns: auto auto 1fr;
+    flex-grow: 1;
 
     &:has(:focus) {
         border-color: var(--primary);

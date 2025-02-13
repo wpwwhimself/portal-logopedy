@@ -8,6 +8,11 @@
     <x-side-content-container>
         <x-h icon="file">Repozytorium plików</x-h>
 
+        <p class="ghost">
+            Tutaj możesz umieszczać pliki – np. grafiki – które mają pojawić się na podstronach.
+            Po wgraniu ich na serwer możesz je umieścić w treściach strony, korzystając z wygenerowanych linków.
+        </p>
+
         <x-tile>
             <x-h lvl="2" icon="file-tree">{{ request("path", "public") }}</x-h>
 
@@ -72,6 +77,8 @@
                     Usuń folder i jego zawartość
                 </x-button>
             </x-tile>
+
+            <x-button :action="route('profile')" icon="arrow-left" class="phantom">Wróć</x-button>
         </x-slot:side-content>
     </x-side-content-container>
 </x-full-width>

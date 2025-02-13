@@ -15,6 +15,7 @@ class StandardPage extends Model
     public const META = [
         "label" => "Strony standardowe",
         "icon" => "script-text",
+        "description" => "Podstrony aplikacji, stanowiące dodatkową treść portalu. Ich pełna lista wyświetla się w stopce strony.",
     ];
 
     protected $fillable = [

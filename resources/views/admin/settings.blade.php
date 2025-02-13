@@ -9,7 +9,7 @@
     <form action="{{ route('admin-process-settings') }}" method="post">
         @csrf
         <x-side-content-container>
-            <x-h :icon="App\Models\Setting::META['icon']">{{ App\Models\Setting::META['label'] }}</x-h>
+            <x-model-intro :model="$setting" />
 
             <x-tile title="Tożsamość strony" title-icon="card-account-details" class="flex down">
                 <x-input
@@ -18,13 +18,13 @@
                     icon="card-account-details"
                     :value="$setting::get('app_name', config('app.name'))"
                 />
-                <x-input
+                <x-input type="url"
                     name="app_logo_path"
                     label="Logo"
                     icon="image"
                     :value="$setting::get('app_logo_path', asset('img/logo.svg'))"
                 />
-                <x-input
+                <x-input type="url"
                     name="app_favicon_path"
                     label="Ikona"
                     icon="postage-stamp"

@@ -16,6 +16,7 @@ class BlogArticle extends Model
     public const META = [
         "label" => "Artykuły",
         "icon" => "newspaper",
+        "description" => "Wpisy do bloga. Najnowsze artykuły wyświetlane są na stronie głównej, skąd można przejść do ich pełnej listy.",
     ];
 
     protected $fillable = [
@@ -28,7 +29,7 @@ class BlogArticle extends Model
 
     public const FIELDS = [
         "banner_path" => [
-            "type" => "text",
+            "type" => "url",
             "label" => "Baner",
             "icon" => "image",
         ],

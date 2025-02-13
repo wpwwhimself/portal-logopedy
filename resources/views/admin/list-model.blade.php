@@ -7,7 +7,7 @@
 
 <x-full-width>
     <x-side-content-container>
-        <x-h :icon="$meta['icon']">{{ $meta["label"] }}</x-h>
+        <x-model-intro :meta="$meta" />
 
         @forelse ($data as $item)
         <x-tile :action="route('admin-edit-model', ['model' => $scope, 'id' => $item->id])"

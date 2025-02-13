@@ -53,6 +53,15 @@
                 />
             </x-tile>
 
+            <x-tile title="Blog" :title-icon="App\Models\BlogArticle::META['icon']" clas="flex down">
+                <x-input
+                    name="blog_name"
+                    label="Nazwa bloga"
+                    icon="card-account-details"
+                    :value="$setting::get('blog_name')"
+                />
+            </x-tile>
+
             <x-slot:side-content>
                 <x-button action="submit" form="settings" icon="check">Zapisz</x-button>
             </x-slot:side-content>

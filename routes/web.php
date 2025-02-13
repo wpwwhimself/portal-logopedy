@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -8,6 +9,11 @@ use Illuminate\Support\Facades\Route;
 Route::controller(FrontController::class)->group(function () {
     Route::get("/", "index")->name("main");
     Route::get("/pages/{slug}", "standardPage")->name("standard-page");
+});
+
+Route::controller(BlogController::class)->prefix("blog")->group(function () {
+    Route::get("", "list")->name("blog-list");
+    Route::get("{slug}", "view")->name("blog-view");
 });
 
 Route::middleware("auth")->group(function () {

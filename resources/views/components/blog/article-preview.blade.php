@@ -2,11 +2,20 @@
     "article",
 ])
 
-<div class="blog-article-preview">
-    <span class="pre-heading ghost">Testowy pre-nagłówek</span>
+<a href="{{ route("blog-view", ["slug" => $article->slug]) }}" {{ $attributes->class([
+    "blog-article-preview",
+    "interactive", "shift-right",
+    "padded",
+]) }}>
+    @if ($article->banner_path)
+    <div class="banner flex right center middle">
+        <img src="{{ $article->banner_path }}" alt="{{ $article->name }}">
+    </div>
+    @endif
 
-    <h2>Testowy nagłówek</h2>
+    <span class="pre-heading ghost">{{ $article->created_at->diffForHumans() }}</span>
 
-    @php $words = "Treść testowa Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt, laborum corporis, magni perferendis molestias accusantium sapiente enim ducimus totam asperiores quia! Ratione modi nam commodi atque, rerum in facere necessitatibus."; @endphp
-    <p>{{ Str::words($words, 25) }}</p>
-</div>
+    <x-h lvl="3">{{ $article->name }}</x-h>
+
+    <p>{{ Str::words($article->header_paragraph, 25) }}</p>
+</a>

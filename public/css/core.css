@@ -24,6 +24,7 @@
 
 a {
     text-decoration: none;
+    color: inherit;
 
     &:visited, &:hover {
         color: inherit;
@@ -61,6 +62,18 @@ h1, h2, h3, h4, h5, h6, p {
     & b, & strong {
         font-weight: 600;
     }
+}
+
+h1 {
+    font-size: var(--xxl);
+}
+
+h2 {
+    font-size: var(--xl);
+}
+
+h3 {
+    font-size: var(--l);
 }
 
 /******************** colors *******************/
@@ -102,16 +115,6 @@ h1, h2, h3, h4, h5, h6, p {
 
 /******************** attributes *******************/
 
-* {
-    transition-duration: 0.3s;
-    transition-timing-function: ease-out;
-}
-@media (prefers-reduced-motion: reduce) {
-    * {
-        transition: none;
-    }
-}
-
 .bordered {
     border: var(--xxs) solid currentColor;
     box-sizing: border-box;
@@ -127,13 +130,6 @@ h1, h2, h3, h4, h5, h6, p {
     & > .contents {
         max-width: 1280px;
         margin: 0 auto;
-    }
-}
-
-.interactive, [onclick], a, button, .button {
-    &:hover {
-        cursor: pointer;
-        box-shadow: 0 0 var(--s) var(--shadow);
     }
 }
 
@@ -155,6 +151,27 @@ span.large {
 
 .shaded {
     box-shadow: 0 0 var(--s) var(--shadow);
+}
+
+/******************** animations *******************/
+
+.interactive {
+    transition-duration: 0.3s;
+    transition-timing-function: ease-out;
+
+    cursor: pointer;
+
+    &.highlight:hover {
+        box-shadow: 0 0 var(--m) var(--shadow);
+    }
+    &.shift-right:hover {
+        translate: var(--s);
+    }
+}
+@media (prefers-reduced-motion: reduce) {
+    .interactive {
+        transition: none;
+    }
 }
 
 /******************** components *******************/

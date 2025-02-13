@@ -19,6 +19,7 @@
     "right",
     "center",
     "middle",
+    "interactive" => $action, "highlight",
 ]) }}>
     @if ($icon) @svg("mdi-$icon") @endif
 

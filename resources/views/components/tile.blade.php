@@ -11,6 +11,7 @@
     "bordered",
     "rounded",
     "padded",
+    "interactive" => $action, "highlight",
 ]) }}>
     @if ($title)
     <x-h lvl="2" :icon="$titleIcon">{{ $title }}</x-h>

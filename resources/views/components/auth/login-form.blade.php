@@ -25,6 +25,7 @@
         icon="email"
         required
         :autofocus="$mode == 'login'"
+        :autocomplete="$mode == 'login' ? 'off' : null"
     />
     @endif
 

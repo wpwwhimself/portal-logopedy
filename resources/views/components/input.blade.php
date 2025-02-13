@@ -63,7 +63,7 @@
             name="{{ $name }}"
             value="{{ $value }}"
             placeholder="— brak —"
-            {{ $attributes->only(["required", "autofocus", "disabled"]) }}
+            {{ $attributes->only(["required", "autofocus", "disabled", "autocomplete"]) }}
         />
     @endswitch
 </div>

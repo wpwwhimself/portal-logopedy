@@ -9,7 +9,7 @@
     <form action="{{ route('admin-process-settings') }}" method="post">
         @csrf
         <x-side-content-container>
-            <x-h icon="cog">Ustawienia</x-h>
+            <x-h :icon="App\Models\Setting::META['icon']">{{ App\Models\Setting::META['label'] }}</x-h>
 
             <x-tile title="Tożsamość strony" title-icon="card-account-details" class="flex down">
                 <x-input

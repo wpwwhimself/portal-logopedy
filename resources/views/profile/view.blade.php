@@ -6,7 +6,7 @@
 
 <x-full-width>
     <x-side-content-container>
-        <x-h :icon="App\Models\User::META['icon']">{{ auth()->user()->name }}</x-h>
+        <x-h>{!! auth()->user() !!}</x-h>
 
         <x-tile title="Moje uprawnienia" :title-icon="App\Models\Role::META['icon']">
             <ul>

@@ -13,7 +13,7 @@
         <x-tile :action="route('admin-edit-model', ['model' => $scope, 'id' => $item->id])"
             class="flex right spread middle"
         >
-            <x-h lvl="2" :icon="$meta['icon']">{{ $item->name }}</x-h>
+            <x-h lvl="2">{!! $item !!}</x-h>
 
             <div class="flex down">
                 @isset ($item->visible)

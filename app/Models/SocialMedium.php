@@ -2,12 +2,15 @@
 
 namespace App\Models;
 
+use App\CanBeStringified;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 
 class SocialMedium extends Model
 {
+    use CanBeStringified;
+
     public const META = [
         "label" => "Social media",
         "icon" => "at",

@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
+use App\CanBeStringified;
 use Illuminate\Database\Eloquent\Model;
 
 class Role extends Model
 {
+    use CanBeStringified;
+
     public $incrementing = false;
     protected $primaryKey = "name";
     protected $keyType = "string";

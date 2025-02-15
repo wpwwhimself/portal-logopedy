@@ -23,3 +23,13 @@ function copyToClipboard(text) {
     navigator.clipboard.writeText(text)
     alert("Skopiowano do schowka.")
 }
+
+//* theme management *//
+
+if (localStorage.getItem("theme") == "dark") toggleTheme()
+
+function toggleTheme() {
+    const bodyClass = document.body.classList
+    bodyClass.toggle("dark")
+    localStorage.setItem("theme", bodyClass.contains("dark") ? "dark" : "light")
+}

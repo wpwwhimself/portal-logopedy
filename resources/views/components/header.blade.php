@@ -13,6 +13,8 @@
         @unless ($hideBrowsing) <x-search-bar /> @endunless
 
         <div class="flex right center middle">
+            <x-button icon="theme-light-dark" class="phantom interactive" onclick="toggleTheme()" />
+
             @auth
             <x-button icon="login" :action="route('profile')">Moje konto</x-button>
             @endauth

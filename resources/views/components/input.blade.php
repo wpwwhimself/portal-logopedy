@@ -2,6 +2,7 @@
     "type" => "text",
     "name",
     "label",
+    "hint" => null,
     "value" => null,
     "icon" => null,
     "options" => null, "emptyOption" => false,
@@ -19,7 +20,11 @@
 ]) }}>
     @if ($icon) @svg("mdi-$icon") @endif
 
-    <label for="{{ $name }}" class="ghost">{!! $label !!}:</label>
+    <label for="{{ $name }}" class="flex right middle no-gap ghost">
+        {!! $label !!}
+        @if ($hint) <span {{ Popper::pop($hint) }}>@svg("mdi-information")</span> @endif
+        :
+    </label>
 
     @switch ($type)
         @case ("checkbox")

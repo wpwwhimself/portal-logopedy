@@ -35,7 +35,7 @@
             <input type="hidden" name="_connections[]" value="{{ $relation }}">
             <x-h lvl="2" :icon="$model::META['icon']">{{ $model::META['label'] }}</x-h>
 
-            <div class="grid" style="--col-count: 3;">
+            <div class="grid" style="--col-count: 2;">
                 @switch ($mode)
                     @case ("one")
                     <x-input type="select"
@@ -51,7 +51,8 @@
                     @if ($relation == "roles" && $item->name == "super" && !auth()->user()->hasRole("super")) @continue @endif
                     <x-input type="checkbox"
                         name="{{ $relation }}[]"
-                        label="{!! $item !!}"
+                        :label="$item->name"
+                        :hint="$item->description"
                         value="{{ $item->id ?? $item->name }}"
                         :checked="$data?->{$relation}->contains($item)"
                     />

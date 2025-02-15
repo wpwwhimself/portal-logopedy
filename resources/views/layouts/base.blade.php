@@ -70,5 +70,7 @@
         @endforeach
 
         <x-footer />
+
+        @include("popper::assets")
     </body>
 </html>

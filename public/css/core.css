@@ -264,6 +264,9 @@ body {
     &.big-gap {
         gap: var(--l);
     }
+    &.no-gap {
+        gap: 0;
+    }
 
     &.center {
         justify-content: center;

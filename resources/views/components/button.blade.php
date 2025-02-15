@@ -5,12 +5,14 @@
 ])
 
 @if ($action == "submit")
-<button type="submit" {{ $attributes->only(["name", "value"]) }}>
+<button type="submit"
 @elseif ($action)
-<a href="{{ $action }}" {{ $attributes->only(["target"]) }}>
+<a href="{{ $action }}"
+@else
+<div
 @endif
 
-<div {{ $attributes->except(["name", "value", "target"])->class([
+{{ $attributes->except(["name", "value", "target"])->class([
     "button",
     "phantom" => $phantom,
     "padded",
@@ -28,6 +30,5 @@
         {{ $slot }}
     </span>
     @endif
-</div>
 
-@if ($action == "submit") </button> @elseif ($action) </a> @endif
+@if ($action == "submit") </button> @elseif ($action) </a> @else </div> @endif

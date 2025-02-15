@@ -27,10 +27,6 @@
 a {
     text-decoration: none;
     color: inherit;
-
-    &:visited, &:hover {
-        color: inherit;
-    }
 }
 
 button {

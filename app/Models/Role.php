@@ -24,8 +24,17 @@ class Role extends Model
         "description",
     ];
 
+    #region relations
     public function users()
     {
         return $this->belongsToMany(User::class);
     }
+    #endregion
+
+    #region helpers
+    public const ACCOUNT_TYPES = [
+        "reviewer" => "Kursant",
+        "course-manager" => "Twórca",
+    ];
+    #endregion
 }

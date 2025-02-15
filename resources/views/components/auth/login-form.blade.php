@@ -9,6 +9,12 @@
     @csrf
 
     @if ($mode == "register")
+    <x-input type="select"
+        name="role"
+        label="Typ konta"
+        icon="account"
+        :options="App\Models\Role::ACCOUNT_TYPES"
+    />
     <x-input type="text"
         name="name"
         label="Imię i nazwisko"

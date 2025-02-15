@@ -34,7 +34,6 @@ class AuthController extends Controller
     public function register()
     {
         if (Auth::check()) return redirect(route("profile"));
-
         return view("auth.register");
     }
 
@@ -54,6 +53,7 @@ class AuthController extends Controller
             "phone" => $rq->phone,
             "password" => Hash::make($rq->password),
         ]);
+        $user->roles()->attach($rq->role);
 
         Auth::login($user);
 

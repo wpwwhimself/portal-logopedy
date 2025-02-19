@@ -35,6 +35,14 @@ class UserSurveyQuestion extends Model
         ],
     ];
 
+    public const ACTIONS = [
+        [
+            "icon" => "eye",
+            "label" => "Przeglądaj odpowiedzi",
+            "route" => "profile-surveys",
+        ],
+    ];
+
     #region scopes
     public function scopeForAdminList($query)
     {

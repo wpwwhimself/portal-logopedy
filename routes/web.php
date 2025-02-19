@@ -19,8 +19,12 @@ Route::controller(BlogController::class)->prefix("blog")->group(function () {
 Route::middleware("auth")->group(function () {
     Route::controller(ProfileController::class)->prefix("profile")->group(function () {
         Route::get("/", "myProfile")->name("profile");
-        Route::get("survey", "survey")->name("profile-survey");
-        Route::post("survey", "processSurvey")->name("profile-process-survey");
+
+        Route::prefix("survey")->group(function () {
+            Route::get("list", "listSurveys")->middleware("role:blogger")->name("profile-surveys");
+            Route::get("edit", "editSurvey")->name("profile-survey");
+            Route::post("edit", "processSurvey")->name("profile-process-survey");
+        });
     });
 
     Route::controller(AdminController::class)->prefix("admin")->group(function () {

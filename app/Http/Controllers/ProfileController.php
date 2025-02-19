@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\User;
 use App\Models\UserSurveyQuestion;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -72,7 +73,18 @@ class ProfileController extends Controller
     }
 
     #region survey
-    public function survey(): View
+    public function listSurveys(): View
+    {
+        $meta = UserSurveyQuestion::META;
+        $users = User::has("surveyQuestions")->paginate(25);
+
+        return view('admin.surveys.list', compact(
+            "meta",
+            "users",
+        ));
+    }
+
+    public function editSurvey(): View
     {
         $questions = UserSurveyQuestion::visible()->get();
         $meta = UserSurveyQuestion::META;

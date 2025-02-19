@@ -28,8 +28,13 @@
         <div class="ghost">Brak danych do wyświetlenia</div>
         @endforelse
 
+        {{ $data->links() }}
+
         <x-slot:side-content>
             <x-button :action="route('admin-edit-model', ['model' => $scope])" icon="plus">Dodaj</x-button>
+            @foreach ($actions as $action)
+            <x-button :action="route($action['route'])" :icon="$action['icon']" class="phantom">{{ $action['label'] }}</x-button>
+            @endforeach
             <x-button :action="route('profile')" icon="arrow-left" class="phantom">Wróć</x-button>
         </x-slot:side-content>
     </x-side-content-container>

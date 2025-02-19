@@ -14,6 +14,8 @@
         <div class="ghost">Brak artykułów</div>
         @endforelse
 
+        {{ $articles->links() }}
+
         <x-slot:side-content>
 
         </x-slot:side-content>

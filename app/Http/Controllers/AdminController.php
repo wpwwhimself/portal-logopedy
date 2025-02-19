@@ -78,6 +78,14 @@ class AdminController extends Controller
             defined($modelName."::CONNECTIONS") ? $modelName::CONNECTIONS : [],
         ));
     }
+
+    private function getActions(string $scope): array
+    {
+        $modelName = $this->getModelName($scope);
+        return array_filter(array_merge(
+            defined($modelName."::ACTIONS") ? $modelName::ACTIONS : [],
+        ));
+    }
     #endregion
 
     #region general settings
@@ -134,8 +142,9 @@ class AdminController extends Controller
         $meta = array_merge(self::SCOPES[$scope], $modelName::META);
         $data = $modelName::forAdminList()
             ->paginate(25);
+        $actions = $this->getActions($scope);
 
-        return view("admin.list-model", compact("data", "meta", "scope"));
+        return view("admin.list-model", compact("data", "meta", "scope", "actions"));
     }
 
     public function editModel(string $scope, ?int $id = null): View

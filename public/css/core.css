@@ -97,6 +97,10 @@ body {
         background-color: var(--accent-color);
         color: white;
     }
+    &.bordered {
+        border-color: var(--accent-color);
+        color: inherit;
+    }
 
     &.primary {
         --accent-color: var(--primary);
@@ -130,6 +134,8 @@ body {
 .bordered {
     border: var(--xxs) solid currentColor;
     box-sizing: border-box;
+
+
 }
 
 .disabled, :disabled {
@@ -139,6 +145,14 @@ body {
 }
 
 .full-width {
+    &.bordered {
+        border-inline: none;
+
+        &.padded {
+            margin: var(--m) 0;
+        }
+    }
+
     & > .contents {
         max-width: 1280px;
         margin: 0 auto;
@@ -354,7 +368,7 @@ search {
 }
 
 .tile {
-
+    background-color: var(--bg);
 }
 
 /******************** mobile *******************/

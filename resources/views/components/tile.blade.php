@@ -2,13 +2,14 @@
     "action" => null,
     "title" => null,
     "titleIcon" => null,
+    "noBorder" => false,
 ])
 
 @if ($action) <a href="{{ $action }}"> @endif
 
 <div {{ $attributes->class([
     "tile",
-    "bordered",
+    "bordered" => !$noBorder,
     "rounded",
     "padded",
     "interactive" => $action, "highlight",

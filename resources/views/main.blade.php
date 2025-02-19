@@ -21,18 +21,9 @@
 </x-main.line-banner>
 @endif
 
-<x-main.line-banner background-class="accent background primary">
-    <span class="large">
-        <b>Kliknij i zapisz się na newsletter</b>,
-        żeby nie ominęło Cię żadne logopedyczne wydarzenie!
-    </span>
-</x-main.line-banner>
-
 <x-main.mid-section />
 
-<x-main.line-banner background-class="accent background secondary"
-    :action="route('register')"
->
+<x-main.line-banner background-class="padded bordered accent primary" :action="route('register')">
     <span class="large">
         Oszczędzisz czas i pieniądze!
         Kliknij w baner i dołącz do portalu.

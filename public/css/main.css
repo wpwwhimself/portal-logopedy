@@ -26,8 +26,9 @@
     font-size: var(--xl);
     gap: 0 !important;
 
-    &.accent.background {
-        border: none;
+    &.double {
+        justify-content: space-around;
+        grid-column: 1 / span 2;
     }
 
     &.grid {

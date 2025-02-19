@@ -5,6 +5,19 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
+        {{-- metadata --}}
+        <meta name="author" content="{{ App\Models\Setting::get("metadata_author") }}">
+        <meta name="description" content="{{ App\Models\Setting::get("metadata_description") }}">
+        <meta name="keywords" content="{{ App\Models\Setting::get("metadata_keywords") }}">
+
+        <meta property="og:title" content="{{ App\Models\Setting::get("metadata_title") }}">
+        <meta property="og:description" content="{{ App\Models\Setting::get("metadata_description") }}">
+        <meta property="og:image" content="{{ App\Models\Setting::get("metadata_image") }}">
+        <meta property="og:url" content="{{ route("main") }}">
+        <meta property="og:type" content="website">
+
+        {!! App\Models\Setting::get("metadata_google_tag_code") !!}
+
         <title>
             @yield("title") |
             @hasSection ("subtitle") @yield("subtitle") | @endif

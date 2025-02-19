@@ -32,6 +32,50 @@
                 />
             </x-tile>
 
+            <x-tile title="Metadane" title-icon="card-account-details" class="flex down">
+                <p class="ghost">
+                    Te ustawienia sterują tym, jak portal wygląda w sieci.
+                    Uzupełnienie metadanych pomaga w indeksowaniu i wyszukiwaniu strony.
+                </p>
+
+                <x-input type="text"
+                    name="metadata_title"
+                    label="Tytuł (metadane)"
+                    icon="card-account-details"
+                    :value="$setting::get('metadata_title')"
+                />
+                <x-input type="text"
+                    name="metadata_author"
+                    label="Autor strony"
+                    icon="account"
+                    :value="$setting::get('metadata_author')"
+                />
+                <x-input type="TEXT"
+                    name="metadata_description"
+                    label="Opis"
+                    icon="pencil"
+                    :value="$setting::get('metadata_description')"
+                />
+                <x-input type="text"
+                    name="metadata_keywords"
+                    label="Słowa kluczowe"
+                    icon="tag"
+                    :value="$setting::get('metadata_keywords')"
+                />
+                <x-input type="url"
+                    name="metadata_image"
+                    label="Miniatura"
+                    icon="image"
+                    :value="$setting::get('metadata_image')"
+                />
+                <x-input type="TEXT"
+                    name="metadata_google_tag_code"
+                    label="Kod Google Analytics"
+                    icon="map-marker"
+                    :value="$setting::get('metadata_google_tag_code')"
+                />
+            </x-tile>
+
             <x-tile title="Kolory" title-icon="palette" class="flex down">
                 <x-input type="color"
                     name="color_primary"

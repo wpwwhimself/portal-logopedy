@@ -13,9 +13,11 @@
     </div>
     @endif
 
-    <span class="pre-heading ghost">{{ $article->created_at->diffForHumans() }}</span>
+    <div class="content">
+        <span class="pre-heading ghost">{{ $article->created_at->diffForHumans() }}</span>
 
-    <x-h lvl="3">{{ $article->name }}</x-h>
+        <x-h lvl="3">{{ $article->name }}</x-h>
 
-    <p>{{ Str::words($article->header_paragraph, 25) }}</p>
+        <p>{{ Str::words($article->header_paragraph, 25) }}</p>
+    </div>
 </a>

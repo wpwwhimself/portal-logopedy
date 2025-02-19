@@ -11,9 +11,6 @@ class AdvertSetting extends Model
 {
     use Userstamps, CanBeStringified;
 
-    public $incrementing = false;
-    protected $primaryKey = "name";
-    protected $keyType = "string";
     const CREATED_AT = null;
 
     public const META = [

@@ -12,7 +12,7 @@
 <div
 @endif
 
-{{ $attributes->except(["name", "value", "target"])->class([
+{{ $attributes->class([
     "button",
     "phantom" => $phantom,
     "padded",

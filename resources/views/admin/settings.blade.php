@@ -107,7 +107,7 @@
             </x-tile>
 
             <x-slot:side-content>
-                <x-button action="submit" form="settings" icon="check">Zapisz</x-button>
+                <x-button action="submit" icon="check">Zapisz</x-button>
                 <x-button :action="route('profile')" icon="arrow-left" class="phantom">Wróć</x-button>
             </x-slot:side-content>
         </x-side-content-container>

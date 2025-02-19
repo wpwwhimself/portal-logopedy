@@ -87,8 +87,11 @@ class AdminController extends Controller
 
     public function processSettings(Request $rq): RedirectResponse
     {
-        foreach ($rq->except("_token") as $key => $value) {
-            Setting::find($key)->update(["value" => $value]);
+        foreach (Setting::all() as $setting) {
+            $value = in_array($setting->name, [])
+                ? $rq->has($setting->name)
+                : $rq->get($setting->name);
+            $setting->update(["value" => $value]);
         }
 
         return redirect()->route("admin-settings")->with("success", "Zapisano");

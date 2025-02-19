@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\UserSurveyQuestion;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Str;
 use Illuminate\View\View;
 
 class ProfileController extends Controller
@@ -16,7 +18,20 @@ class ProfileController extends Controller
      */
     public function myProfile(): View
     {
-        return view('profile.view');
+        $survey_texts = Auth::user()->answered_all_questions
+            ? [
+                "title" => "Ankieta",
+                "text" => "Ankieta została już wypełniona. Możesz przejrzeć i poprawić Twoje odpowiedzi poniżej.",
+                "button_text" => "Przejrzyj ankietę",
+            ] : [
+                "title" => "Mamy do Ciebie kilka pytań",
+                "text" => "Wypełnij ankietę i daj nam znać, czego potrzebujesz od naszej aplikacji.",
+                "button_text" => "Wypełnij ankietę",
+            ];
+
+        return view('profile.view', compact(
+            "survey_texts",
+        ));
     }
 
     /**
@@ -55,4 +70,28 @@ class ProfileController extends Controller
 
         return Redirect::to('/');
     }
+
+    #region survey
+    public function survey(): View
+    {
+        $questions = UserSurveyQuestion::visible()->get();
+        $meta = UserSurveyQuestion::META;
+
+        return view('profile.survey', compact(
+            "meta",
+            "questions",
+        ));
+    }
+
+    public function processSurvey(Request $rq): RedirectResponse
+    {
+        $user = Auth::user();
+
+        $answers = collect($rq->except("_token"))
+            ->mapWithKeys(fn ($ans, $q) => [Str::afterLast($q, "_") => ["answer" => $ans]]);
+        $user->surveyQuestions()->sync($answers);
+
+        return redirect()->route("profile")->with("success", "Dziękujemy za wypełnienie ankiety");
+    }
+    #endregion
 }

@@ -20,6 +20,10 @@ class AdminController extends Controller
             "model" => \App\Models\User::class,
             "role" => "technical",
         ],
+        "user-survey-questions" => [
+            "model" => \App\Models\UserSurveyQuestion::class,
+            "role" => "blogger",
+        ],
         "standard-pages" => [
             "model" => \App\Models\StandardPage::class,
             "role" => "technical",

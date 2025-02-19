@@ -19,6 +19,8 @@ Route::controller(BlogController::class)->prefix("blog")->group(function () {
 Route::middleware("auth")->group(function () {
     Route::controller(ProfileController::class)->prefix("profile")->group(function () {
         Route::get("/", "myProfile")->name("profile");
+        Route::get("survey", "survey")->name("profile-survey");
+        Route::post("survey", "processSurvey")->name("profile-process-survey");
     });
 
     Route::controller(AdminController::class)->prefix("admin")->group(function () {

@@ -15,9 +15,7 @@
         @endforelse
 
         <x-slot:side-content>
-            <x-hint title="Jestem poradą">
-                Porada, porada...
-            </x-hint>
+
         </x-slot:side-content>
     </x-side-content-container>
 </x-full-width>

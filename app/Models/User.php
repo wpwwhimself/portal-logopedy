@@ -56,6 +56,7 @@ class User extends Authenticatable
         "roles" => [
             "model" => Role::class,
             "mode" => "many",
+            "role" => "technical",
         ],
     ];
 

@@ -31,7 +31,8 @@
             />
             @endforeach
 
-            @foreach ($connections as $relation => ["model" => $model, "mode" => $mode])
+            @foreach ($connections as $relation => ["model" => $model, "mode" => $mode, "role" => $role])
+            @if (!auth()->user()->hasRole($role)) @continue @endif
             <input type="hidden" name="_connections[]" value="{{ $relation }}">
             <x-h lvl="2" :icon="$model::META['icon']">{{ $model::META['label'] }}</x-h>
 
@@ -65,7 +66,14 @@
             <x-slot:side-content>
                 <x-button action="submit" name="method" value="save" icon="check">Zapisz</x-button>
                 @if ($data) <x-button action="submit" name="method" value="delete" icon="delete">Usuń</x-button> @endif
-                <x-button :action="route('admin-list-model', ['model' => $scope])" icon="arrow-left" class="phantom">Wróć</x-button>
+                <x-button :action="auth()->user()->hasRole('technical')
+                    ? route('admin-list-model', ['model' => $scope])
+                    : route('profile')"
+                    icon="arrow-left"
+                    class="phantom"
+                >
+                    Wróć
+                </x-button>
             </x-slot:side-content>
         </x-side-content-container>
     </form>

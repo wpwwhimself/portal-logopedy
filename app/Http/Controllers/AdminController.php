@@ -7,6 +7,7 @@ use App\Models\Setting;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 use Illuminate\Support\Str;
@@ -135,7 +136,10 @@ class AdminController extends Controller
 
     public function editModel(string $scope, ?int $id = null): View
     {
-        if (!User::hasRole(self::SCOPES[$scope]["role"])) abort(403);
+        if (
+            !User::hasRole(self::SCOPES[$scope]["role"])
+            && !($scope == "users" && Auth::id() == $id) // user can edit themself
+        ) abort(403);
 
         $modelName = $this->getModelName($scope);
         $meta = array_merge(self::SCOPES[$scope], $modelName::META);
@@ -150,7 +154,10 @@ class AdminController extends Controller
 
     public function processEditModel(Request $rq, string $scope): RedirectResponse
     {
-        if (!User::hasRole(self::SCOPES[$scope]["role"])) abort(403);
+        if (
+            !User::hasRole(self::SCOPES[$scope]["role"])
+            && !($scope == "users" && Auth::id() == $rq->id) // user can edit themself
+        ) abort(403);
 
         $modelName = $this->getModelName($scope);
         $fields = $this->getFields($scope);

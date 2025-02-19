@@ -40,6 +40,7 @@
         @endif
 
         <x-slot:side-content>
+            <x-button :action="route('admin-edit-model', ['model' => 'users', 'id' => auth()->user()->id])" icon="account-edit" class="phantom">Edytuj konto</x-button>
             <x-button :action="route('change-password')" icon="key-change" class="phantom">Zmień hasło</x-button>
             <x-button :action="route('logout')" icon="logout">Wyloguj się</x-button>
         </x-slot:side-content>

@@ -39,6 +39,8 @@ class AuthController extends Controller
 
     public function processRegister(Request $rq)
     {
+        if ($rq->proof != 4) return back()->with("error", "Nie wierzymy, że nie jesteś robotem");
+
         $validator = Validator::make($rq->all(), [
             'name' => ['required', 'unique:users'],
             'email' => ['required', 'email', 'unique:users'],

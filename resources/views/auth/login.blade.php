@@ -11,7 +11,10 @@
 
         <x-slot:side-content>
             <x-hint>
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Incidunt, laborum alias voluptatum iste sint tempora adipisci quidem. Consequatur quae nemo nulla commodi inventore vel molestiae! Maxime sit possimus animi magnam.</p>
+                <p>
+                    Na swoim koncie możesz zapisać się do naszego newslettera,
+                    dzięki czemu nie przegapisz żadnego ważnego wydarzenia.
+                </p>
             </x-hint>
         </x-slot:side-content>
     </x-side-content-container>

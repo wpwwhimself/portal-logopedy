@@ -66,6 +66,15 @@
     />
     @endif
 
+    @if ($mode == "register")
+    <x-input type="number"
+        name="proof"
+        label="Jesteś robotem? Ile jest sylab w słowie 'logopeda'?"
+        icon="robot-confused"
+        required
+    />
+    @endif
+
     @if (in_array($mode, ["login", "register"]))
         @if ($mode == "register")
         <x-button action="submit" icon="check">Zarejestruj się</x-button>

@@ -328,6 +328,10 @@ body {
     &.large {
         height: 300px;
     }
+
+    & img {
+        max-height: 100%;
+    }
 }
 
 main {

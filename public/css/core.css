@@ -363,7 +363,7 @@ search {
     grid-template-columns: auto 350px;
 
     & > .content:last-child {
-        border-left: var(--xxs) solid var(--bg-light);
+        border-left: var(--xxs) solid #00000033;
     }
 }
 

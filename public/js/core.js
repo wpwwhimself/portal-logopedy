@@ -19,6 +19,19 @@ if (alertElem) {
     }, TOAST_TIMEOUT);
 }
 
+/**
+ * Dangerous actions
+ */
+document.querySelectorAll("button.danger, .button.danger")
+    .forEach(btn => {
+        btn.addEventListener("click", (ev) => {
+            if (!confirm("Ostrożnie! Czy na pewno chcesz to zrobić?")) {
+                ev.preventDefault();
+            }
+        })
+    })
+
+
 function copyToClipboard(text) {
     navigator.clipboard.writeText(text)
     alert("Skopiowano do schowka.")

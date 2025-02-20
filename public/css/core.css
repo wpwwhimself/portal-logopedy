@@ -238,6 +238,11 @@ body {
         background-color: transparent;
         color: var(--fg);
     }
+
+    &.danger {
+        background-color: var(--danger);
+        color: white;
+    }
 }
 
 .flex {

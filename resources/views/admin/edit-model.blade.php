@@ -65,7 +65,7 @@
 
             <x-slot:side-content>
                 <x-button action="submit" name="method" value="save" icon="check">Zapisz</x-button>
-                @if ($data) <x-button action="submit" name="method" value="delete" icon="delete">Usuń</x-button> @endif
+                @if ($data) <x-button action="submit" name="method" value="delete" icon="delete" class="danger">Usuń</x-button> @endif
                 <x-button :action="auth()->user()->hasRole('technical')
                     ? route('admin-list-model', ['model' => $scope])
                     : route('profile')"

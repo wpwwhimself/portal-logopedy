@@ -37,7 +37,7 @@
 
                 <div class="flex right middle center">
                     <x-button :action="route('files-download', ['file' => $file])" target="_blank" icon="download" class="phantom" />
-                    <x-button icon="link" class="phantom" onclick="copyToClipboard('{{ Storage::url($file) }}')" />
+                    <x-button icon="link" class="phantom interactive" onclick="copyToClipboard('{{ Storage::url($file) }}')" />
                     <x-button :action="route('files-delete', ['file' => $file])" icon="delete" class="danger" />
                 </div>
             </x-tile>
@@ -57,7 +57,7 @@
                 </form>
             </x-tile>
 
-            <x-tile title="Zarządzanie folderem" title-icon="folder">
+            <x-tile title="Zarządzanie folderem" title-icon="folder" class="flex down">
                 <form action="{{ route('folder-create') }}" method="POST" class="flex down">
                     @csrf
                     <input type="hidden" name="path" value="{{ request("path", "public") }}">

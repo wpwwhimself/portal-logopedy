@@ -59,7 +59,7 @@
             id="{{ $name }}"
             name="{{ $name }}"
             value="{{ $value }}"
-            placeholder="— brak —"
+            placeholder="{{ $attributes->get("placeholder", "— brak —") }}"
             {{ $attributes->only(["required", "autofocus", "disabled", "autocomplete"]) }}
         />
     @endswitch

@@ -36,6 +36,10 @@ class AdminController extends Controller
             "model" => \App\Models\BlogArticle::class,
             "role" => "blogger",
         ],
+        "courses" => [
+            "model" => \App\Models\Course::class,
+            "role" => "course-master",
+        ],
     ];
 
     public const VISIBILITIES = [

@@ -1,0 +1,115 @@
+<?php
+
+namespace App\Models;
+
+use App\CanBeStringified;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
+use Wildside\Userstamps\Userstamps;
+
+class Course extends Model
+{
+    use Userstamps, CanBeStringified;
+
+    public const META = [
+        "label" => "Kursy",
+        "icon" => "book-open-page-variant",
+        "description" => "Lista dostępnych kursów. Każda pozycja przechowuje informacje o kursie, jego terminy i oceny.",
+    ];
+
+    protected $fillable = [
+        "name", "visible", "order",
+        "category", "subcategory",
+        "description",
+        "thumbnail_path",
+        "link",
+        "trainer_name", "trainer_organization",
+        "location",
+        "cost",
+        "final_document",
+    ];
+
+    public const FIELDS = [
+        "category" => [
+            "type" => "text",
+            "label" => "Kategoria",
+            "icon" => "shape",
+        ],
+        "subcategory" => [
+            "type" => "text",
+            "label" => "Podkategoria",
+            "icon" => "shape-outline",
+        ],
+        "description" => [
+            "type" => "HTML",
+            "label" => "Opis",
+            "icon" => "pencil",
+        ],
+        "thumbnail_path" => [
+            "type" => "url",
+            "label" => "Miniatura",
+            "icon" => "image",
+        ],
+        "link" => [
+            "type" => "url",
+            "label" => "Link",
+            "icon" => "link",
+        ],
+        "trainer_name" => [
+            "type" => "text",
+            "label" => "Nazwisko prowadzącego",
+            "icon" => "badge-account",
+        ],
+        "trainer_organization" => [
+            "type" => "text",
+            "label" => "Organizator",
+            "icon" => "badge-account",
+        ],
+        "location" => [
+            "type" => "text",
+            "label" => "Miejscowość",
+            "icon" => "map-marker",
+            "placeholder" => "online",
+        ],
+        "cost" => [
+            "type" => "text",
+            "label" => "Koszt",
+            "icon" => "currency-usd",
+        ],
+        "final_document" => [
+            "type" => "text",
+            "label" => "Rodzaj dokumentu",
+            "icon" => "certificate",
+        ],
+    ];
+
+    #region scopes
+    public function scopeForAdminList($query)
+    {
+        return $query->orderBy("order")
+            ->orderBy("name");
+    }
+
+    public function scopeVisible($query)
+    {
+        return $query->where("visible", ">", 1 - Auth::check())
+            ->orderBy("order")
+            ->orderBy("name");
+    }
+
+    public function scopeRecent($query, string $except_id = null)
+    {
+        return $query->where("visible", ">", 1 - Auth::check())
+            ->orderByDesc("updated_at")
+            ->where("id", "!=", $except_id)
+            ->limit(3);
+    }
+    #endregion
+
+    #region attributes
+    public function canBeSeen(): bool
+    {
+        return $this->visible > 1 - Auth::check();
+    }
+    #endregion
+}

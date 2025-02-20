@@ -28,6 +28,7 @@
                 :checked="$fdata['type'] == 'checkbox' && $data?->{$name}"
                 :options="$fdata['options'] ?? null"
                 :required="$fdata['required'] ?? false"
+                :placeholder="$fdata['placeholder'] ?? null"
             />
             @endforeach
 

@@ -50,6 +50,13 @@ class BlogArticle extends Model
         ],
     ];
 
+    public const CONNECTIONS = [
+        "industries" => [
+            "model" => Industry::class,
+            "mode" => "many",
+        ],
+    ];
+
     #region scopes
     public function scopeForAdminList($query)
     {
@@ -87,6 +94,13 @@ class BlogArticle extends Model
         return Attribute::make(
             get: fn () => Str::slug($this->name),
         );
+    }
+    #endregion
+
+    #region relations
+    public function industries()
+    {
+        return $this->morphToMany(Industry::class, "industriable");
     }
     #endregion
 }

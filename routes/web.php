@@ -9,6 +9,11 @@ use Illuminate\Support\Facades\Route;
 Route::controller(FrontController::class)->group(function () {
     Route::get("/", "index")->name("main");
     Route::get("/pages/{slug}", "standardPage")->name("standard-page");
+
+    Route::prefix("courses")->group(function () {
+        Route::get("{course}", "viewCourse")->name("course-view");
+        Route::get("", "listCourses")->name("courses-list");
+    });
 });
 
 Route::controller(BlogController::class)->prefix("blog")->group(function () {

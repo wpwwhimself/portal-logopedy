@@ -30,7 +30,7 @@ class ProfileController extends Controller
                 "button_text" => "Wypełnij ankietę",
             ];
 
-        return view('profile.view', compact(
+        return view('pages.profile.view', compact(
             "survey_texts",
         ));
     }
@@ -89,7 +89,7 @@ class ProfileController extends Controller
         $questions = UserSurveyQuestion::visible()->get();
         $meta = UserSurveyQuestion::META;
 
-        return view('profile.survey', compact(
+        return view('pages.profile.survey', compact(
             "meta",
             "questions",
         ));

@@ -12,7 +12,7 @@ class BlogController extends Controller
     {
         $articles = BlogArticle::visible()->paginate(10);
 
-        return view("blog.list", compact(
+        return view("pages.blog.list", compact(
             "articles",
         ));
     }
@@ -22,7 +22,7 @@ class BlogController extends Controller
         $article = BlogArticle::visible()->get()
             ->firstWhere(fn ($art) => $art->slug == $slug);
 
-        return view("blog.view", compact(
+        return view("pages.blog.view", compact(
             "article",
         ));
     }

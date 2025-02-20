@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\CanBeStringified;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Support\Facades\Auth;
@@ -13,7 +14,7 @@ class Course extends Model
     use Userstamps, CanBeStringified;
 
     public const META = [
-        "label" => "Kursy",
+        "label" => "Kursy i szkolenia",
         "icon" => "book-open-page-variant",
         "description" => "Lista dostępnych kursów. Każda pozycja przechowuje informacje o kursie, jego terminy i oceny.",
     ];
@@ -118,6 +119,20 @@ class Course extends Model
     public function canBeSeen(): bool
     {
         return $this->visible > 1 - Auth::check();
+    }
+
+    public function fullCategory(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => implode(" | ", array_filter([$this->category, $this->subcategory])),
+        );
+    }
+
+    public function trainer(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => implode(" | ", array_filter([$this->trainer_name, $this->trainer_organization])),
+        );
     }
     #endregion
 

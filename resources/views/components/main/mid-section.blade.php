@@ -9,21 +9,21 @@
 
                 <span>lub</span>
 
-                <x-tile class="accent background primary mid-section-tile" no-border>
+                <x-tile class="accent background primary mid-section-tile" no-border :action="route('courses-list')">
                     <span><b class="large">OCEŃ</b></span>
                     <span>kurs/szkolenie/...</span>
                 </x-tile>
             </x-tile>
 
             @foreach ([
-                ["folder", "Baza kursów, szkoleń, konferencji...", null],
-                ["ranking", "Rankingi kursów i szkoleń...", null],
+                ["folder", "Baza kursów, szkoleń, konferencji...", route('courses-list')],
+                ["ranking", "Rankingi kursów i szkoleń...", route('courses-list')],
                 ["shaker", "Narzędzia do terapii", null],
                 ["books", "E-booki, książki, pdfy", null],
                 ["people", "Polecani specjaliści", null],
                 ["clapper", "Filmy, podcasty", null],
             ] as [$icon_name, $label, $link])
-            <x-tile class="grid middle accent secondary mid-section-tile" no-border>
+            <x-tile class="grid middle accent secondary mid-section-tile" no-border :action="$link">
                 <img src="{{ asset("img/icons/$icon_name.svg") }}" alt="{{ $icon_name }}">
                 <span>{{ $label }}</span>
             </x-tile>

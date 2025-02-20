@@ -32,24 +32,24 @@
             />
             @endforeach
 
-            @foreach ($connections as $relation => ["model" => $model, "mode" => $mode, "role" => $role])
-            @if (!auth()->user()->hasRole($role)) @continue @endif
+            @foreach ($connections as $relation => $rdata)
+            @if (isset($rdata["role"]) && !auth()->user()->hasRole($rdata["role"])) @continue @endif
             <input type="hidden" name="_connections[]" value="{{ $relation }}">
-            <x-h lvl="2" :icon="$model::META['icon']">{{ $model::META['label'] }}</x-h>
+            <x-h lvl="2" :icon="$rdata['model']::META['icon']">{{ $rdata['model']::META['label'] }}</x-h>
 
             <div class="grid" style="--col-count: 2;">
-                @switch ($mode)
+                @switch ($rdata['mode'])
                     @case ("one")
                     <x-input type="select"
                         name="{{ $relation }}"
                         label="Wybierz"
                         :value="$data?->{$relation} ? $data?->{$relation}->id : null"
-                        :options="$model::all()->pluck('name', 'id')"
+                        :options="$rdata['model']::all()->pluck('name', 'id')"
                         empty-option
                     @break
 
                     @case ("many")
-                    @foreach ($model::all() as $item)
+                    @foreach ($rdata['model']::all() as $item)
                     @if ($relation == "roles" && $item->name == "super" && !auth()->user()->hasRole("super")) @continue @endif
                     <x-input type="checkbox"
                         name="{{ $relation }}[]"

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\CanBeStringified;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Support\Facades\Auth;
 use Wildside\Userstamps\Userstamps;
 
@@ -83,6 +84,13 @@ class Course extends Model
         ],
     ];
 
+    public const CONNECTIONS = [
+        "industries" => [
+            "model" => Industry::class,
+            "mode" => "many",
+        ],
+    ];
+
     #region scopes
     public function scopeForAdminList($query)
     {
@@ -110,6 +118,13 @@ class Course extends Model
     public function canBeSeen(): bool
     {
         return $this->visible > 1 - Auth::check();
+    }
+    #endregion
+
+    #region relations
+    public function industries(): MorphToMany
+    {
+        return $this->morphToMany(Industry::class, "industriable");
     }
     #endregion
 }

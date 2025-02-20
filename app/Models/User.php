@@ -59,6 +59,10 @@ class User extends Authenticatable
             "mode" => "many",
             "role" => "technical",
         ],
+        "industries" => [
+            "model" => Industry::class,
+            "mode" => "many",
+        ],
     ];
 
     /**
@@ -111,6 +115,11 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(UserSurveyQuestion::class)
             ->withPivot("answer");
+    }
+
+    public function industries()
+    {
+        return $this->morphToMany(Industry::class, "industriable");
     }
     #endregion
 

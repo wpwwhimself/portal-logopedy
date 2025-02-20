@@ -40,6 +40,10 @@ class AdminController extends Controller
             "model" => \App\Models\Course::class,
             "role" => "course-master",
         ],
+        "industries" => [
+            "model" => \App\Models\Industry::class,
+            "role" => "course-master",
+        ],
     ];
 
     public const VISIBILITIES = [
@@ -62,12 +66,12 @@ class AdminController extends Controller
                 "label" => "Nazwa",
                 "icon" => "card-text",
             ],
-            "visible" => in_array($scope, ["users"]) ? null : [
+            "visible" => in_array($scope, ["users", "industries"]) ? null : [
                 "type" => "select", "options" => self::VISIBILITIES,
                 "label" => "Widoczny dla",
                 "icon" => "eye",
             ],
-            "order" => in_array($scope, ["users"]) ? null : [
+            "order" => in_array($scope, ["users", "industries"]) ? null : [
                 "type" => "number",
                 "label" => "Wymuś kolejność",
                 "icon" => "order-numeric-ascending",

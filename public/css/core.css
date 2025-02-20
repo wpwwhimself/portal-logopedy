@@ -375,6 +375,10 @@ search {
     }
 }
 
+.thumbnail {
+    max-width: 12em;
+}
+
 .tile {
     background-color: var(--bg);
 }

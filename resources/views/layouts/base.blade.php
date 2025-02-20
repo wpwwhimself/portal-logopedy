@@ -16,6 +16,8 @@
         <meta property="og:url" content="{{ route("main") }}">
         <meta property="og:type" content="website">
 
+        <link rel="icon" href="{{ App\Models\Setting::get("app_favicon_path") }}">
+
         {!! App\Models\Setting::get("metadata_google_tag_code") !!}
 
         <title>

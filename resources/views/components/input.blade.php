@@ -1,13 +1,3 @@
-@props([
-    "type" => "text",
-    "name",
-    "label",
-    "hint" => null,
-    "value" => null,
-    "icon" => null,
-    "options" => null, "emptyOption" => false,
-])
-
 <div class="flex right middle spread">
 
 <div {{ $attributes->class([
@@ -75,8 +65,16 @@
     @endswitch
 </div>
 
-@if ($type == "url" && $value)
-<x-button :action="$value" icon="open-in-new" class="accent background secondary" target="_blank" />
+@if ($extraButtons)
+<div class="flex right middle">
+    @if ($storageFile)
+    <x-button icon="folder-open" class="phantom interactive" onclick="browseFiles('{{ route('files-list', ['select' => $name]) }}')" />
+    @endif
+
+    @if ($value)
+    <x-button :action="$value" icon="open-in-new" class="accent background secondary" target="_blank" />
+    @endif
+</div>
 @endif
 
 </div>

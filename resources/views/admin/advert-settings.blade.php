@@ -64,7 +64,7 @@
                     :options="App\Http\Controllers\AdminController::VISIBILITIES"
                     :value="$setting::get($type, 'visible')"
                 />
-                <x-input type="url"
+                <x-input type="storage_url"
                     name="{{ $type }}%image_path"
                     label="Obraz"
                     icon="image"
@@ -91,7 +91,7 @@
                     :options="App\Http\Controllers\AdminController::VISIBILITIES"
                     :value="$setting::get($type, 'visible')"
                 />
-                <x-input type="url"
+                <x-input type="storage_url"
                     name="{{ $type }}%image_path"
                     label="Obraz"
                     icon="image"

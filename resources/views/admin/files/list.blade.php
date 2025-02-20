@@ -18,17 +18,17 @@
 
             <div class="flex right">
                 @if (!in_array(request("path"), ["public", null]))
-                <x-button :action="route('files-list', ['path' => Str::beforeLast(request('path'), '/')])" icon="arrow-left" class="phantom">..</x-button>
+                <x-button :action="route('files-list', ['path' => Str::beforeLast(request('path'), '/'), 'select' => request('select')])" icon="arrow-left" class="phantom">..</x-button>
                 @endif
 
                 @foreach ($directories as $dir)
-                <x-button :action="route('files-list', ['path' => $dir])" icon="folder" class="phantom">{{ Str::afterLast($dir, '/') }}</x-button>
+                <x-button :action="route('files-list', ['path' => $dir, 'select' => request('select')])" icon="folder" class="phantom">{{ Str::afterLast($dir, '/') }}</x-button>
                 @endforeach
             </div>
         </x-tile>
 
 
-        <div class="grid" style="--col-count: 4;">
+        <div class="flex right">
             @forelse ($files as $file)
             <x-tile :title="Str::afterLast($file, '/')" class="flex down middle">
                 @if (isPicture($file))
@@ -36,9 +36,13 @@
                 @endif
 
                 <div class="flex right middle center">
+                    @if (request()->has("select"))
+                    <x-button icon="check" class="interactive" onclick="selectFile('{{ asset(Storage::url($file)) }}', '{{ request('select') }}')" />
+                    @else
                     <x-button :action="route('files-download', ['file' => $file])" target="_blank" icon="download" class="phantom" />
-                    <x-button icon="link" class="phantom interactive" onclick="copyToClipboard('{{ Storage::url($file) }}')" />
-                    <x-button :action="route('files-delete', ['file' => $file])" icon="delete" class="danger" />
+                    <x-button icon="link" class="phantom interactive" onclick="copyToClipboard('{{ asset(Storage::url($file)) }}')" />
+                    @if (auth()->user()->hasRole("blogger")) <x-button :action="route('files-delete', ['file' => $file])" icon="delete" class="danger" /> @endif
+                    @endif
                 </div>
             </x-tile>
             @empty
@@ -47,6 +51,7 @@
         </div>
 
         <x-slot:side-content>
+            @if (auth()->user()->hasRole("blogger"))
             <x-tile title="Wgrywanie" title-icon="folder">
                 <form action="{{ route('files-upload') }}" method="post" enctype="multipart/form-data" class="flex down">
                     @csrf
@@ -77,6 +82,7 @@
                     Usuń folder i jego zawartość
                 </x-button>
             </x-tile>
+            @endif
 
             <x-button :action="route('profile')" icon="arrow-left" class="phantom">Wróć</x-button>
         </x-slot:side-content>

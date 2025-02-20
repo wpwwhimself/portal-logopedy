@@ -38,11 +38,13 @@ Route::middleware("auth")->group(function () {
             Route::post("", "processAdvertSettings")->name("admin-process-advert-settings");
         });
 
-        Route::prefix("files")->middleware("role:blogger")->group(function () {
+        Route::prefix("files")->group(function () {
             Route::get("", "files")->name("files-list");
-            Route::post("upload", "filesUpload")->name("files-upload");
             Route::get("download", "filesDownload")->name("files-download");
-            Route::get("delete", "filesDelete")->name("files-delete");
+            Route::middleware("role:blogger")->group(function () {
+                Route::post("upload", "filesUpload")->name("files-upload");
+                Route::get("delete", "filesDelete")->name("files-delete");
+            });
 
             Route::prefix("folder")->group(function () {
                 Route::get("new", "folderNew")->name("folder-new");

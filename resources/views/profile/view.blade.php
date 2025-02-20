@@ -26,12 +26,10 @@
             </ul>
         </x-tile>
 
-        @if (auth()->user()->hasRole("technical"))
+        @if (auth()->user()->hasRole("administrator"))
         <x-tile title="Strefa administratora" title-icon="wizard-hat">
             <div class="grid" style="--col-count: 3;">
-                @if (auth()->user()->hasRole("blogger"))
                 <x-button :action="route('files-list')" icon="file">Pliki</x-button>
-                @endif
 
                 @if (auth()->user()->hasRole("technical"))
                 <x-button :action="route('admin-settings')" :icon="App\Models\Setting::META['icon']">{{ App\Models\Setting::META['label'] }}</x-button>

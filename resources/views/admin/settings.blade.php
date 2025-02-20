@@ -4,7 +4,6 @@
 
 @section("content")
 
-
 <x-full-width>
     <form action="{{ route('admin-process-settings') }}" method="post">
         @csrf
@@ -18,13 +17,13 @@
                     icon="card-account-details"
                     :value="$setting::get('app_name', config('app.name'))"
                 />
-                <x-input type="url"
+                <x-input type="storage_url"
                     name="app_logo_path"
                     label="Logo"
                     icon="image"
                     :value="$setting::get('app_logo_path', asset('img/logo.svg'))"
                 />
-                <x-input type="url"
+                <x-input type="storage_url"
                     name="app_favicon_path"
                     label="Ikona"
                     icon="postage-stamp"
@@ -62,7 +61,7 @@
                     icon="tag"
                     :value="$setting::get('metadata_keywords')"
                 />
-                <x-input type="url"
+                <x-input type="storage_url"
                     name="metadata_image"
                     label="Miniatura"
                     icon="image"

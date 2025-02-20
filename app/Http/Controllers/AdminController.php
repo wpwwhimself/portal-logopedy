@@ -160,8 +160,6 @@ class AdminController extends Controller
         $fields = $this->getFields($scope);
         $connections = $this->getConnections($scope);
 
-        if ($scope == "users" && $data->name == "Super" && !User::hasRole("super")) abort(403);
-
         return view("admin.edit-model", compact("data", "meta", "scope", "fields", "connections"));
     }
 

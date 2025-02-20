@@ -29,7 +29,7 @@ class BlogArticle extends Model
 
     public const FIELDS = [
         "banner_path" => [
-            "type" => "url",
+            "type" => "storage_url",
             "label" => "Baner",
             "icon" => "image",
         ],

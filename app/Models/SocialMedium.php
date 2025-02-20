@@ -31,7 +31,7 @@ class SocialMedium extends Model
             "required" => true,
         ],
         "icon_path" => [
-            "type" => "url",
+            "type" => "storage_url",
             "label" => "Ikona",
             "icon" => "image",
         ],

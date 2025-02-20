@@ -46,3 +46,17 @@ function toggleTheme() {
     bodyClass.toggle("dark")
     localStorage.setItem("theme", bodyClass.contains("dark") ? "dark" : "light")
 }
+
+/**
+ * browse files
+ */
+function browseFiles(url) {
+    window.open(url, "_blank")
+}
+
+function selectFile(url, input_id) {
+    if (window.opener) {
+        window.opener.document.getElementById(input_id).value = url
+        window.close()
+    }
+}

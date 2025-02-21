@@ -54,6 +54,70 @@
         <x-ckeditor :name="$name" :value="$value" />
         @break
 
+        @case ("JSON")
+        <input type="hidden" name="{{ $name }}" value="{{ $value ? json_encode($value) : null }}">
+        <table data-name="{{ $name }}" data-columns="{{ count($columnTypes) }}">
+            <thead>
+                <tr>
+                    @foreach (array_keys($columnTypes) as $key)
+                    <th>{{ $key }}</th>
+                    @endforeach
+                    <th></th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach ($value ?? [] as $key => $val)
+                <tr>
+                    @php $i = 0; @endphp
+                    @switch (count($columnTypes))
+                        @case (2)
+                        {{-- key-value array --}}
+                        @foreach ($columnTypes as $t)
+                        <td class="rounded">
+                            <input type="{{ $t }}" value="{{ ($i++ == 0) ? $key : $val }}" onchange="JSONInputUpdate('{{ $name }}')" />
+                        </td>
+                        @endforeach
+                        @break
+
+                        @case (1)
+                        {{-- simple array --}}
+                        <td class="rounded">
+                            <input type="{{ current($columnTypes) }}" value="{{ $val }}" onchange="JSONInputUpdate('{{ $name }}')" />
+                        </td>
+                        @break
+
+                        @default
+                        {{-- array of arrays --}}
+                        @foreach ($columnTypes as $t)
+                        <td class="rounded">
+                            <input type="{{ $t }}" value="{{ $val[$i++] }}" onchange="JSONInputUpdate('{{ $name }}')" />
+                        </td>
+                        @endforeach
+                    @endswitch
+
+                    <td><x-button icon="delete" class="phantom interactive" onclick="JSONInputDeleteRow('{{ $name }}', this)" /></td>
+                </tr>
+                @endforeach
+            </tbody>
+
+            <tfoot>
+                <tr role="new-row">
+                    @foreach ($columnTypes as $t)
+                    <td class="rounded">
+                        <input type="{{ $t }}" />
+                    </td>
+                    @endforeach
+
+                    <td>
+                        <x-button icon="plus" class="accent background secondary interactive" onclick="JSONInputAddRow('{{ $name }}', this)" />
+                        <x-button icon="delete" class="phantom interactive hidden" onclick="JSONInputDeleteRow('{{ $name }}', this)" />
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+        @break
+
         @default
         <input type="{{ $type }}"
             id="{{ $name }}"

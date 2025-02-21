@@ -1,4 +1,4 @@
-@extends("layouts.admin")
+@extends("layouts.stripped")
 
 @section("title", ($data?->name ?: "Tworzenie")." | ".$meta["label"])
 @section("subtitle", "Administracja")
@@ -29,6 +29,8 @@
                 :options="$fdata['options'] ?? null"
                 :required="$fdata['required'] ?? false"
                 :placeholder="$fdata['placeholder'] ?? null"
+                :hint="$fdata['hint'] ?? null"
+                :column-types="$fdata['column-types'] ?? null"
             />
             @endforeach
 

@@ -27,6 +27,7 @@ class Course extends Model
         "link",
         "trainer_name", "trainer_organization",
         "location",
+        "dates",
         "cost",
         "final_document",
     ];
@@ -73,6 +74,14 @@ class Course extends Model
             "icon" => "map-marker",
             "placeholder" => "online",
         ],
+        "dates" => [
+            "type" => "JSON",
+            "column-types" => [
+                "Data i godzina" => "datetime-local",
+            ],
+            "label" => "Terminy",
+            "icon" => "calendar",
+        ],
         "cost" => [
             "type" => "text",
             "label" => "Koszt",
@@ -116,6 +125,13 @@ class Course extends Model
     #endregion
 
     #region attributes
+    protected function casts(): array
+    {
+        return [
+            "dates" => "array",
+        ];
+    }
+
     public function canBeSeen(): bool
     {
         return $this->visible > 1 - Auth::check();

@@ -29,9 +29,14 @@ class UserSurveyQuestion extends Model
             "icon" => "help",
         ],
         "options" => [
-            "type" => "TEXT",
+            "type" => "JSON",
+            "column-types" => [
+                "Etykieta" => "text",
+                "Wartość" => "text",
+            ],
             "label" => "Opcje do wyboru",
             "icon" => "checkbox-marked",
+            "hint" => "Jeśli pytanie ma skończoną liczbę odpowiedzi, wypisz je tutaj. W przeciwnym razie pozostaw to pole puste.",
         ],
     ];
 
@@ -62,7 +67,7 @@ class UserSurveyQuestion extends Model
     protected function casts(): array
     {
         return [
-            "options" => "json",
+            "options" => "array",
         ];
     }
     #endregion

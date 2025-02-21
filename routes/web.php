@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\DocsController;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -64,6 +65,11 @@ Route::middleware("auth")->group(function () {
             Route::post("edit", "processEditModel")->name("admin-process-edit-model");
         });
     });
+});
+
+Route::controller(DocsController::class)->prefix("docs")->group(function () {
+    Route::get("{slug}", "view")->where("slug", "[a-zA-Z0-9-/]+")->name("docs-view");
+    Route::get("", "index")->name("docs-index");
 });
 
 require __DIR__.'/auth.php';

@@ -1,4 +1,4 @@
-@extends("layouts.admin")
+@extends("layouts.stripped")
 
 @section("title", $meta["label"])
 @section("subtitle", "Administracja")

@@ -63,6 +63,24 @@ class AuthController extends Controller
     }
     #endregion
 
+    #region token
+    public function apiToken(Request $rq)
+    {
+        $validator = Validator::make($rq->all(), [
+            "email" => "required|email",
+            "password" => "required",
+        ]);
+
+        $user = User::where("email", $rq->email)->first();
+
+        if ($validator->fails() || !$user || !Hash::check($rq->password, $user->password)) {
+            return response()->json(["error" => "Błędne dane logowania"], 401);
+        }
+
+        return $user->createToken($user->name)->plainTextToken;
+    }
+    #endregion
+
     #region misc
     public function changePassword()
     {

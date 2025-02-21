@@ -158,6 +158,10 @@ body {
     }
 }
 
+.hidden {
+    display: none !important;
+}
+
 span.large {
     font-size: var(--xl);
 }
@@ -372,6 +376,31 @@ search {
 
     & > .content:last-child {
         border-left: var(--xxs) solid #00000033;
+    }
+}
+
+table {
+    & thead, & tfoot {
+        & > tr > * {
+            font-weight: bold;
+            text-align: left;
+        }
+    }
+
+    & td:has(input) {
+        border: 1px solid var(--bg-light);
+
+        &:hover {
+            background-color: var(--bg-light);
+        }
+    }
+
+    & .button {
+        padding: 0;
+    }
+
+    & input:focus {
+        color: var(--primary);
     }
 }
 

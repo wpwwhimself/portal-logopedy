@@ -23,6 +23,7 @@ class Input extends Component
         public ?string $icon = null,
         public ?array $options = null,
         public ?bool $emptyOption = false,
+        public ?array $columnTypes = null,
     ) {
         $this->type = $type ?? "text";
         $this->name = $name;
@@ -32,6 +33,7 @@ class Input extends Component
         $this->icon = $icon;
         $this->options = $options;
         $this->emptyOption = $emptyOption;
+        $this->columnTypes = $columnTypes;
 
         if ($this->type == "storage_url") {
             $this->type = "url";

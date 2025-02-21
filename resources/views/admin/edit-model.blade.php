@@ -29,6 +29,8 @@
                 :options="$fdata['options'] ?? null"
                 :required="$fdata['required'] ?? false"
                 :placeholder="$fdata['placeholder'] ?? null"
+                :hint="$fdata['hint'] ?? null"
+                :column-types="$fdata['column-types'] ?? null"
             />
             @endforeach
 

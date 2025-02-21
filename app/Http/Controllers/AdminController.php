@@ -182,6 +182,10 @@ class AdminController extends Controller
         $fields = $this->getFields($scope);
         $data = $rq->except("_token", "_connections", "method");
         foreach ($fields as $name => $fdata) {
+            switch ($fdata["type"]) {
+                case "checkbox": $data[$name] ??= false; break;
+                case "JSON": $data[$name] = json_decode($data[$name], count($fdata["column-types"]) == 2); break;
+            }
             if ($fdata["type"] == "checkbox") $data[$name] ??= false;
         }
 

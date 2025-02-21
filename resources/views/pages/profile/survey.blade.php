@@ -18,7 +18,7 @@
             <x-input :type="$question->options ? 'select' : 'text'"
                 name="question_{{ $question->id }}"
                 :label="$question->name"
-                :options="json_decode($question->options)"
+                :options="$question->options"
                 :empty-option="$question->options"
                 :value="auth()->user()->surveyQuestions()->wherePivot('user_survey_question_id', $question->id)->first()?->pivot->answer"
                 :hint="$question->description"

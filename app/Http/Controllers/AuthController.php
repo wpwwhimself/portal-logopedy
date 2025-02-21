@@ -74,10 +74,16 @@ class AuthController extends Controller
         $user = User::where("email", $rq->email)->first();
 
         if ($validator->fails() || !$user || !Hash::check($rq->password, $user->password)) {
-            return response()->json(["error" => "Błędne dane logowania"], 401);
+            return response()->json([
+                "status" => "error",
+                "message" => $validator->errors()?->first() ?? "Nieprawidłowe dane logowania",
+            ], 401);
         }
 
-        return $user->createToken($user->name)->plainTextToken;
+        return response()->json([
+            "status" => "success",
+            "token" => $user->createToken("token")->plainTextToken,
+        ]);
     }
     #endregion
 

@@ -15,6 +15,6 @@ Route::middleware("auth:sanctum")->group(function () {
     });
 
     Route::controller(AutomationController::class)->group(function () {
-        Route::middleware("role:course-master")->post("course", "processCourse");
+        Route::middleware("role:course-master")->post("course", "processCourse")->name("automation-course");
     });
 });

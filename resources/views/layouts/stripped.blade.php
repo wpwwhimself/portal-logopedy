@@ -10,6 +10,8 @@
 
 @section("body")
 
-@yield("content")
+<x-full-width>
+    @yield("content")
+</x-full-width>
 
 @endsection

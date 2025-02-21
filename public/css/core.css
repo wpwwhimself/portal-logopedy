@@ -249,6 +249,14 @@ body {
     }
 }
 
+code, pre {
+    background-color: var(--bg-light);
+    padding: var(--xxs) var(--xs);
+    border-radius: var(--xs);
+
+    font-family: 'Courier New', Courier, monospace;
+}
+
 .flex {
     display: flex;
     flex-wrap: wrap;

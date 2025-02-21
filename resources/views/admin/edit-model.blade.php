@@ -1,4 +1,4 @@
-@extends("layouts.admin")
+@extends("layouts.stripped")
 
 @section("title", ($data?->name ?: "Tworzenie")." | ".$meta["label"])
 @section("subtitle", "Administracja")

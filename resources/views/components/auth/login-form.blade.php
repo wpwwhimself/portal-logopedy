@@ -63,6 +63,7 @@
         name="remember_token"
         label="Zapamiętaj mnie"
         icon="content-save"
+        value="1"
     />
     @endif
 

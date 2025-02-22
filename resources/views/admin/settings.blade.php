@@ -98,6 +98,19 @@
                 />
             </x-tile>
 
+            <x-tile title="Strona główna" title-icon="billboard" class="flex down">
+                <x-h lvl="3" icon="image">Sekcja środkowa</x-h>
+
+                @for ($i = 1; $i <= 6; $i++)
+                <x-input type="storage_url"
+                    name="main_tile_{{ $i }}_icon_path"
+                    label="Ikona kafelka {{ $i }}"
+                    icon="image"
+                    :value="$setting::get('main_tile_'.$i.'_icon_path')"
+                />
+                @endfor
+            </x-tile>
+
             <x-tile title="Blog" :title-icon="App\Models\BlogArticle::META['icon']" clas="flex down">
                 <x-input
                     name="blog_name"

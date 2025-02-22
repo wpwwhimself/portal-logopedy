@@ -267,11 +267,9 @@ body {
 }
 
 code, pre {
-    background-color: var(--bg-light);
-    padding: var(--xxs) var(--xs);
-    border-radius: var(--xs);
-
     font-family: 'Courier New', Courier, monospace;
+    background-color: var(--bg-light);
+    border-radius: var(--xs);
 }
 
 .flex {

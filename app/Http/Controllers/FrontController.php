@@ -41,4 +41,44 @@ class FrontController extends Controller
         ));
     }
     #endregion
+
+    #region specialists
+    // public function listSpecialists(): View
+    // {
+    //     $courses = Course::visible()
+    //         ->with("industries")
+    //         ->paginate(25);
+
+    //     return view("pages.courses.list", compact(
+    //         "courses",
+    //     ));
+    // }
+
+    // public function viewCourse(Course $course): View
+    // {
+    //     return view("pages.courses.view", compact(
+    //         "course",
+    //     ));
+    // }
+    #endregion
+
+    #region films
+    // public function listCourses(): View
+    // {
+    //     $courses = Course::visible()
+    //         ->with("industries")
+    //         ->paginate(25);
+
+    //     return view("pages.courses.list", compact(
+    //         "courses",
+    //     ));
+    // }
+
+    // public function viewCourse(Course $course): View
+    // {
+    //     return view("pages.courses.view", compact(
+    //         "course",
+    //     ));
+    // }
+    #endregion
 }

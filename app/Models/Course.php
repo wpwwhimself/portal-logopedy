@@ -122,6 +122,11 @@ class Course extends Model
             ->where("id", "!=", $except_id)
             ->limit(3);
     }
+
+    public function scopeClasses($query, string $field)
+    {
+        return $query->select($field)->distinct()->orderBy($field)->get()->pluck($field);
+    }
     #endregion
 
     #region attributes

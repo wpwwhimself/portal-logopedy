@@ -5,22 +5,18 @@
 
             <div class="flex right but-mobile-down middle">
                 @foreach (App\Models\StandardPage::visible()->get() as $page)
-                <x-button :action="route('standard-page', ['slug' => $page->slug])" class="phantom">{{ $page->name }}</x-button>
+                <x-button :action="route('standard-page', ['slug' => $page->slug])" class="phantom accent primary">{{ $page->name }}</x-button>
                 @endforeach
             </div>
 
-            <div class="flex down center middle">
-                <span>Zajrzyj na nasze social media:</span>
-
-                <div class="flex right middle">
-                    @foreach (App\Models\SocialMedium::visible()->get() as $sm)
-                    {!! $sm->icon !!}
-                    @endforeach
-                </div>
+            <div class="flex right middle">
+                @foreach (App\Models\SocialMedium::visible()->get() as $sm)
+                {!! $sm->icon !!}
+                @endforeach
             </div>
         </div>
 
-        <div class="flex right but-mobile-down middle">
+        <div class="flex right but-mobile-down middle accent primary">
             Prawa autorskie {{ App\Models\Setting::get("app_name", config("app.name")) }}
             &copy; {{ date("Y") }}
         </div>

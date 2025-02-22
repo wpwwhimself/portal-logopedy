@@ -7,7 +7,9 @@
         {{ $slot }}
     </div>
 
-    <div class="content flex down padded">
-        {{ $sideContent }}
+    <div class="content">
+        <div class="flex down padded">
+            {{ $sideContent }}
+        </div>
     </div>
 </div>

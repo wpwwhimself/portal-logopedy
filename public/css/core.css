@@ -77,14 +77,17 @@ h3 {
 /******************** colors *******************/
 
 body {
-    --fg: black;
-    --bg: white;
+    --white: white;
+    --black: #1c1c1c;
+
+    --fg: var(--black);
+    --bg: var(--white);
     --bg-light: #e3e3e3;
     --shadow: #00000055;
 
     &.dark {
-        --fg: #eaeaea;
-        --bg: #1c1c1c;
+        --fg: var(--white);
+        --bg: var(--black);
         --bg-light: #313131;
         --shadow: #f6f6f655;
     }
@@ -95,10 +98,13 @@ body {
 
     &.background {
         background-color: var(--accent-color);
-        color: white;
+        color: var(--white);
     }
     &.bordered {
         border-color: var(--accent-color);
+    }
+    &.button {
+        color: var(--accent-color) !important;
     }
 
     &.primary {
@@ -130,11 +136,13 @@ body {
 
 /******************** attributes *******************/
 
+.always-light {
+    color: var(--white) !important;
+}
+
 .bordered {
     border: var(--xxs) solid currentColor;
     box-sizing: border-box;
-
-
 }
 
 .disabled, :disabled {
@@ -167,7 +175,11 @@ span.large {
 }
 
 .padded {
-    padding: var(--s) var(--m);
+    padding: var(--xs) var(--m);
+
+    &.large {
+        padding: var(--xl) var(--xxl);
+    }
 }
 
 .placeholder {
@@ -384,6 +396,12 @@ search {
 
     & > .content:last-child {
         border-left: var(--xxs) solid #00000033;
+
+        & > div {
+            position: sticky;
+            top: var(--m);
+        }
+
     }
 }
 
@@ -418,6 +436,10 @@ table {
 
 .tile {
     background-color: var(--bg);
+
+    &.accent.background {
+        color: var(--white);
+    }
 }
 
 /******************** mobile *******************/

@@ -1,6 +1,4 @@
 .blog-article-preview {
-    border-left: var(--xs) solid var(--primary);
-    padding-left: var(--xs);
     position: relative;
 
     & .banner {

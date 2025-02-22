@@ -15,6 +15,16 @@ Route::controller(FrontController::class)->group(function () {
         Route::get("{course}", "viewCourse")->name("course-view");
         Route::get("", "listCourses")->name("courses-list");
     });
+
+    Route::prefix("specialists")->group(function () {
+        Route::get("{specialist}", "viewSpecialist")->name("specialist-view");
+        Route::get("", "listSpecialists")->name("specialists-list");
+    });
+
+    Route::prefix("films")->group(function () {
+        Route::get("{film}", "viewFilm")->name("film-view");
+        Route::get("", "listFilms")->name("films-list");
+    });
 });
 
 Route::controller(BlogController::class)->prefix("blog")->group(function () {

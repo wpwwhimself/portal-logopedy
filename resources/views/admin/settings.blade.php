@@ -17,18 +17,20 @@
                     icon="card-account-details"
                     :value="$setting::get('app_name', config('app.name'))"
                 />
-                <x-input type="storage_url"
-                    name="app_logo_path"
-                    label="Logo"
-                    icon="image"
-                    :value="$setting::get('app_logo_path', asset('img/logo.svg'))"
-                />
-                <x-input type="storage_url"
-                    name="app_favicon_path"
-                    label="Ikona"
-                    icon="postage-stamp"
-                    :value="$setting::get('app_favicon_path')"
-                />
+                @foreach ([
+                    ["app_logo_path", "Logo", "image", null],
+                    ["app_logo_mono_path", "Logo mono", "image", "Logo monochromatyczne, wyświetlane w nagłówku. W przypadku braku, wyświetlane jest logo zwykłe."],
+                    ["app_favicon_path", "Ikona", "postage-stamp", "Ikona wyświetlająca się na karcie w przeglądarce"],
+                    ["welcome_banner_path", "Baner powitalny", "image", "Baner wyświetlający się jako pierwszy na stronie głównej"],
+                ] as [$name, $label, $icon, $hint])
+                    <x-input type="storage_url"
+                        :name="$name"
+                        :label="$label"
+                        :icon="$icon"
+                        :value="$setting::get($name)"
+                        :hint="$hint"
+                    />
+                @endforeach
             </x-tile>
 
             <x-tile title="Metadane" title-icon="card-account-details" class="flex down">

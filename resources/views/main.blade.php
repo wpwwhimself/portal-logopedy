@@ -5,7 +5,7 @@
 @section("content")
 
 @if (App\Models\Setting::get("welcome_banner_path"))
-<img src="{{ App\Models\Setting::get("welcome_banner_path") }}" class="full-width" alt="{{ App\Models\Setting::get("app_name") }}">
+<img src="{{ App\Models\Setting::get("welcome_banner_path") }}" class="banner full-width" alt="{{ App\Models\Setting::get("app_name") }}">
 @endif
 
 @if (App\Models\AdvertSetting::canBeSeen("thin"))
@@ -23,7 +23,7 @@
 
 @if (App\Models\AdvertSetting::canBeSeen("big"))
 <x-main.line-banner class="large" :action="App\Models\AdvertSetting::get('big', 'link')">
-    <img src="{{ App\Models\AdvertSetting::get('big', 'image_path') }}" alt="Reklama">
+    <img src="{{ App\Models\AdvertSetting::get('big', 'image_path') }}" class="banner full-width" alt="Reklama">
 </x-main.line-banner>
 @endif
 

@@ -157,6 +157,8 @@ body {
 }
 
 .full-width {
+    max-width: 100vw;
+
     &.bordered {
         border-inline: none;
 
@@ -236,6 +238,12 @@ span.large {
     &.in {
         top: var(--xl);
     }
+}
+
+.banner {
+    max-height: 60vh;
+    display: block;
+    margin: 0 auto;
 }
 
 body {

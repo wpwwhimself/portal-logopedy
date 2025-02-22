@@ -68,7 +68,7 @@
         </script>
         <script type="module" src="{{ asset("js/ckeditor.js") }}?{{ time() }}"></script>
     </head>
-    <body class="flex down">
+    <body class="flex down no-gap">
         <!-- Page Heading -->
         @yield("header")
 

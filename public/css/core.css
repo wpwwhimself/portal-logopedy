@@ -392,7 +392,10 @@ main {
 }
 
 search {
+    flex-grow: 1;
+
     & > form {
+        background-color: var(--bg);
         grid-template-columns: 1fr auto !important;
     }
 
@@ -470,5 +473,9 @@ table {
             border-left: none;
             border-top: var(--xxs) solid var(--bg-light);
         }
+    }
+
+    search {
+        width: 100%;
     }
 }

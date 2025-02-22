@@ -15,7 +15,7 @@
         color: {{ App\Models\AdvertSetting::get('thin', 'white_text') ? 'white' : 'black' }};
     "
 >
-    {{ App\Models\AdvertSetting::get("thin", "content") }}
+    {!! App\Models\AdvertSetting::get("thin", "content") !!}
 </x-main.line-banner>
 @endif
 
@@ -38,7 +38,7 @@
         color: {{ App\Models\AdvertSetting::get('lower_thin', 'white_text') ? 'white' : 'black' }};
     "
 >
-    {{ App\Models\AdvertSetting::get("lower_thin", "content") }}
+    {!! App\Models\AdvertSetting::get("lower_thin", "content") !!}
 </x-main.line-banner>
 @endif
 

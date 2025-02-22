@@ -24,7 +24,7 @@
                     :options="App\Http\Controllers\AdminController::VISIBILITIES"
                     :value="$setting::get($type, 'visible')"
                 />
-                <x-input type="TEXT"
+                <x-input type="HTML"
                     name="{{ $type }}%content"
                     label="Treść"
                     icon="pencil"
@@ -64,7 +64,7 @@
                     :options="App\Http\Controllers\AdminController::VISIBILITIES"
                     :value="$setting::get($type, 'visible')"
                 />
-                <x-input type="TEXT"
+                <x-input type="HTML"
                     name="{{ $type }}%content"
                     label="Treść"
                     icon="pencil"

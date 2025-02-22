@@ -38,7 +38,7 @@
         grid-template-columns: auto 1fr;
     }
 
-    & b {
+    & .large {
         font-size: var(--xxl);
     }
 

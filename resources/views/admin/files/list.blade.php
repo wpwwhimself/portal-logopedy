@@ -14,11 +14,14 @@
         </p>
 
         <x-tile>
-            <x-h lvl="2" icon="file-tree">{{ request("path", "public") }}</x-h>
+            <x-h lvl="2" icon="file-tree">{{ request("path", "Katalog główny") }}</x-h>
 
             <div class="flex right">
                 @if (!in_array(request("path"), ["public", null]))
-                <x-button :action="route('files-list', ['path' => Str::beforeLast(request('path'), '/'), 'select' => request('select')])" icon="arrow-left" class="phantom">..</x-button>
+                <x-button :action="route('files-list', [
+                    'path' => Str::contains(request('path'), '/') ? Str::beforeLast(request('path'), '/') : null,
+                    'select' => request('select'),
+                ])" icon="arrow-left" class="phantom">..</x-button>
                 @endif
 
                 @foreach ($directories as $dir)
@@ -55,7 +58,7 @@
             <x-tile title="Wgrywanie" title-icon="folder">
                 <form action="{{ route('files-upload') }}" method="post" enctype="multipart/form-data" class="flex down">
                     @csrf
-                    <input type="hidden" name="path" value="{{ request("path", "public") }}">
+                    <input type="hidden" name="path" value="{{ request("path") }}">
                     <input type="file" name="files[]" id="files" multiple>
 
                     <x-button action="submit" icon="upload">Wgraj</x-button>
@@ -65,17 +68,17 @@
             <x-tile title="Zarządzanie folderem" title-icon="folder" class="flex down">
                 <form action="{{ route('folder-create') }}" method="POST" class="flex down">
                     @csrf
-                    <input type="hidden" name="path" value="{{ request("path", "public") }}">
+                    <input type="hidden" name="path" value="{{ request("path") }}">
 
                     <x-h lvl="3" icon="folder-plus">Nowy folder</x-h>
 
-                    <p>Utworzony zostanie nowy folder w katalogu <strong>{{ request("path", "public") }}</strong></p>
+                    <p>Utworzony zostanie nowy folder w katalogu <strong>{{ request("path", "głównym") }}</strong></p>
                     <x-input name="name" label="Nazwa" />
 
                     <x-button action="submit" icon="folder-plus">Utwórz</x-button>
                 </form>
 
-                <x-button :action="route('folder-delete', ['path' => request('path', 'public')])"
+                <x-button :action="route('folder-delete', ['path' => request('path')])"
                     icon="folder-remove"
                     class="danger phantom"
                 >

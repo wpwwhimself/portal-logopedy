@@ -215,12 +215,13 @@ class AdminController extends Controller
     #region files
     public function files()
     {
-        $path = request("path") ?? "public";
+        $path = request("path") ?? "";
 
-        $directories = Storage::directories($path);
-        $files = collect(Storage::files($path))
+        $directories = Storage::disk("public")->directories($path);
+        $files = collect(Storage::disk("public")->files($path))
             ->filter(fn ($file) => !Str::contains($file, ".git"))
-            ->sortByDesc(fn ($file) => Storage::lastModified($file));
+            // ->sortByDesc(fn ($file) => Storage::lastModified($file) ?? 0)
+        ;
 
         return view("admin.files.list", compact(
             "files",
@@ -233,7 +234,8 @@ class AdminController extends Controller
         foreach ($rq->file("files") as $file) {
             $file->storePubliclyAs(
                 $rq->path,
-                $file->getClientOriginalName()
+                $file->getClientOriginalName(),
+                "public",
             );
         }
 
@@ -242,27 +244,27 @@ class AdminController extends Controller
 
     public function filesDownload(Request $rq)
     {
-        return Storage::download($rq->file);
+        return Storage::download("public/".$rq->file);
     }
 
     public function filesDelete(Request $rq)
     {
-        Storage::delete($rq->file);
+        Storage::disk("public")->delete($rq->file);
         return back()->with("success", "Usunięto");
     }
 
     public function folderCreate(Request $rq)
     {
-        $path = request("path") ?? "/";
-        Storage::makeDirectory($path . "/" . $rq->name);
+        $path = request("path") ?? "";
+        Storage::disk("public")->makeDirectory($path . "/" . $rq->name);
         return redirect()->route("files-list", ["path" => $path])->with("success", "Folder utworzony");
     }
 
     public function folderDelete(Request $rq)
     {
-        $path = request("path") ?? "/";
-        Storage::deleteDirectory($path);
-        return redirect()->route("files-list", ["path" => Str::beforeLast($path, "/")])->with("success", "Folder usunięty");
+        $path = request("path") ?? "";
+        Storage::disk("public")->deleteDirectory($path);
+        return redirect()->route("files-list", ["path" => Str::contains($path, '/') ? Str::beforeLast($path, '/') : null])->with("success", "Folder usunięty");
     }
     #endregion
 }

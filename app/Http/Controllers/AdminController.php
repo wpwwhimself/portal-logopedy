@@ -251,14 +251,6 @@ class AdminController extends Controller
         return back()->with("success", "Usunięto");
     }
 
-    public function folderNew()
-    {
-        $path = request("path") ?? "/";
-        return view("admin.files.new-folder", compact(
-            "path",
-        ));
-    }
-
     public function folderCreate(Request $rq)
     {
         $path = request("path") ?? "/";

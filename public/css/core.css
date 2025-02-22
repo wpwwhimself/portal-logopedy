@@ -240,10 +240,28 @@ span.large {
     }
 }
 
-.banner {
-    max-height: 60vh;
-    display: block;
-    margin: 0 auto;
+.banner.full-width {
+    height: 60vh;
+    position: relative;
+    overflow: hidden;
+
+    & img {
+        height: 100%;
+        display: block;
+        margin: 0 auto;
+    }
+
+    & .background {
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        z-index: -1;
+        scale: 1.1;
+
+        background-position: center center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        filter: blur(var(--s));
+    }
 }
 
 body {

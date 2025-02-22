@@ -65,6 +65,7 @@ class AdminController extends Controller
                 "type" => "text",
                 "label" => "Nazwa",
                 "icon" => "card-text",
+                "required" => true,
             ],
             "visible" => in_array($scope, ["users", "industries"]) ? null : [
                 "type" => "select", "options" => self::VISIBILITIES,

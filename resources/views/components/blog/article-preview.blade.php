@@ -13,7 +13,7 @@
     @endif
 
     <div class="content">
-        <span class="pre-heading ghost">{{ $article->created_at->diffForHumans() }}</span>
+        <span class="pre-heading ghost">{{ $article->type }}</span>
 
         <x-h lvl="3" class="accent secondary">{{ $article->name }}</x-h>
 

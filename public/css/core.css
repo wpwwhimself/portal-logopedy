@@ -104,7 +104,12 @@ body {
         border-color: var(--accent-color);
     }
     &.button {
-        color: var(--accent-color) !important;
+        &:not(.background) {
+            color: var(--accent-color) !important;
+        }
+        &.background {
+            color: var(--white) !important;
+        }
     }
 
     &.primary {

@@ -23,6 +23,7 @@ class BlogArticle extends Model
         "name", "visible", "order",
         "banner_path",
         "header_paragraph",
+        "type",
         "content",
         "outside_link",
     ];
@@ -37,6 +38,12 @@ class BlogArticle extends Model
             "type" => "TEXT",
             "label" => "Akapit początkowy",
             "icon" => "text-short",
+        ],
+        "type" => [
+            "type" => "text",
+            "label" => "Typ artykułu",
+            "icon" => "shape",
+            "required" => true,
         ],
         "content" => [
             "type" => "HTML",

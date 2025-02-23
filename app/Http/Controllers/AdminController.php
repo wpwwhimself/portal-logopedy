@@ -46,6 +46,17 @@ class AdminController extends Controller
         ],
     ];
 
+    public const SCOPE_GROUPS = [
+        "Użytkownicy" => [
+            "icon" => "account",
+            "scopes" => ["users", "user-survey-questions", "industries",],
+        ],
+        "Treści" => [
+            "icon" => "text",
+            "scopes" => ["standard-pages", "courses", "blog-articles","social-media",],
+        ],
+    ];
+
     public const VISIBILITIES = [
         0 => "nikt",
         1 => "zalogowani",

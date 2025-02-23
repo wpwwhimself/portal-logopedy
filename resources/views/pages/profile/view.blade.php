@@ -28,21 +28,30 @@
 
         @if (auth()->user()->hasRole("administrator"))
         <x-tile title="Strefa administratora" title-icon="wizard-hat">
+            <x-h lvl="3" icon="tools">Ogólne</x-h>
             <div class="grid col3 but-mobile-down">
-                <x-button :action="route('docs-index')" icon="book">Dokumentacja</x-button>
-                <x-button :action="route('files-list')" icon="file">Pliki</x-button>
-
                 @if (auth()->user()->hasRole("technical"))
                 <x-button :action="route('admin-settings')" :icon="App\Models\Setting::META['icon']">{{ App\Models\Setting::META['label'] }}</x-button>
                 <x-button :action="route('admin-advert-settings')" :icon="App\Models\AdvertSetting::META['icon']">{{ App\Models\AdvertSetting::META['label'] }}</x-button>
                 @endif
+                <x-button :action="route('docs-index')" icon="book" class="accent background secondary">Dokumentacja</x-button>
+                <x-button :action="route('files-list')" icon="file">Pliki</x-button>
+            </div>
 
-                @foreach (App\Http\Controllers\AdminController::SCOPES as $scope => ["model" => $model, "role" => $role])
+            @foreach (App\Http\Controllers\AdminController::SCOPE_GROUPS as $label => ["icon" => $icon, "scopes" => $scopes])
+            <x-h lvl="3" :icon="$icon">{{ $label }}</x-h>
+            <div class="grid col3 but-mobile-down">
+                @foreach ($scopes as $scope)
+                @php
+                ["model" => $model, "role" => $role] = App\Http\Controllers\AdminController::SCOPES[$scope]
+                @endphp
+
                 @if (auth()->user()->hasRole($role))
                 <x-button :action="route('admin-list-model', ['model' => $scope])" :icon="$model::META['icon']">{{ $model::META['label'] }}</x-button>
                 @endif
                 @endforeach
             </div>
+            @endforeach
         </x-tile>
         @endif
 

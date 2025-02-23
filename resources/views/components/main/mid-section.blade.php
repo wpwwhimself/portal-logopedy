@@ -1,5 +1,5 @@
 <x-full-width class="padded large">
-    <div class="grid but-mobile-down big-gap" style="--col-count: 3;">
+    <div class="grid col3 but-halfsize-2 but-mobile-down middle but-mobile-reset big-gap">
         @foreach ([
             ["Baza kursów, szkoleń...", route('courses-list')],
             ["Baza specjalistów", route('specialists-list')],

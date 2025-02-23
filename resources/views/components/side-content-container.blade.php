@@ -1,4 +1,4 @@
-<div class="side-content-container grid">
+<div class="side-content-container grid but-halfsize-down">
     <div {{ $attributes->class([
         "content",
         "flex", "down",

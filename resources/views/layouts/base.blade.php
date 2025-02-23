@@ -68,7 +68,7 @@
         </script>
         <script type="module" src="{{ asset("js/ckeditor.js") }}?{{ time() }}"></script>
     </head>
-    <body class="flex down no-gap">
+    <body class="flex down {{ Route::currentRouteNamed("main") ? "no-gap" : "" }}">
         <!-- Page Heading -->
         @yield("header")
 

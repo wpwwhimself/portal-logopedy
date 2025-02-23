@@ -39,7 +39,7 @@
             <input type="hidden" name="_connections[]" value="{{ $relation }}">
             <x-h lvl="2" :icon="$rdata['model']::META['icon']">{{ $rdata['model']::META['label'] }}</x-h>
 
-            <div class="grid" style="--col-count: 2;">
+            <div class="grid col3 but-halfsize-2">
                 @switch ($rdata['mode'])
                     @case ("one")
                     <x-input type="select"

@@ -168,7 +168,7 @@ body {
     }
 
     & > .contents {
-        max-width: min(1280px, calc(100vw - (var(--m) * 2)));
+        max-width: min(calc(1920px * 2 / 3), calc(100vw - (var(--m) * 2)));
         margin: 0 auto;
     }
 }
@@ -241,12 +241,14 @@ span.large {
 }
 
 .banner.full-width {
-    height: 60vh;
+    height: calc(15 * var(--xxl));
     position: relative;
     overflow: hidden;
 
     & img {
-        height: 100%;
+        max-height: 100%;
+        width: auto;
+        max-width: 100vw;
         display: block;
         margin: 0 auto;
     }
@@ -321,6 +323,13 @@ code, pre {
     display: grid;
     grid-auto-flow: row;
     grid-template-columns: repeat(var(--col-count), 1fr);
+
+    &.col2 {
+        --col-count: 2;
+    }
+    &.col3 {
+        --col-count: 3;
+    }
 
     &.right {
         grid-auto-flow: column;
@@ -476,11 +485,40 @@ table {
 
 /******************** mobile *******************/
 
-@media screen and (max-width: 850px) {
+@media screen and (max-width: 960px) {
+    .grid {
+        &.but-halfsize-down {
+            display: flex;
+            flex-direction: column;
+        }
+
+        &.col3 {
+            &.but-halfsize-2 {
+                --col-count: 2;
+            }
+        }
+    }
+
+    .side-content-container {
+        & > .content:last-child {
+            border-left: none;
+            border-top: var(--xxs) solid var(--bg-light);
+        }
+    }
+}
+
+@media screen and (max-width: 550px) {
     .flex.right, .grid {
         &.but-mobile-down {
             display: flex;
             flex-direction: column;
+        }
+
+        &.center, &.middle {
+            &.but-mobile-reset {
+                justify-content: initial;
+                align-items: initial;
+            }
         }
     }
 
@@ -494,14 +532,5 @@ table {
 
     search {
         width: 100%;
-    }
-
-    .side-content-container {
-        grid-template-columns: auto;
-
-        & > .content:last-child {
-            border-left: none;
-            border-top: var(--xxs) solid var(--bg-light);
-        }
     }
 }

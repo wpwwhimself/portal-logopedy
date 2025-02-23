@@ -28,7 +28,7 @@
 
         @if (auth()->user()->hasRole("administrator"))
         <x-tile title="Strefa administratora" title-icon="wizard-hat">
-            <div class="grid" style="--col-count: 3;">
+            <div class="grid col3 but-mobile-down">
                 <x-button :action="route('docs-index')" icon="book">Dokumentacja</x-button>
                 <x-button :action="route('files-list')" icon="file">Pliki</x-button>
 

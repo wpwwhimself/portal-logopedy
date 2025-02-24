@@ -13,7 +13,9 @@ Poprawne ciało zapytania posiada następującą strukturę:
     "category": <string>,
     "subcategory": <string?>,
     "description": <string?>,
+    "keywords": <string[]?>,
     "thumbnail_path": <string?>,
+    "image_paths": <string[]?>,
     "link": <string?>,
     "trainer_name": <string>,
     "trainer_organization": <string?>,
@@ -21,7 +23,7 @@ Poprawne ciało zapytania posiada następującą strukturę:
     "dates": <datetime[]?>,
     "cost": <string?>,
     "final_document": <string?>,
-    "industries": <string[]?>
+    // "industries": <string[]?> -- ⚠️ obecnie wyłączone
 }
 ```
 
@@ -37,4 +39,4 @@ W obu przypadkach w odpowiedzi pojawi się również utworzony wpis.
 
 - `dates` - array zawierający daty i godziny kursów
 - `location` - miejsce kursu - pusta wartość oznacza kurs online
-- `industries` - nazwy branż powiązanych z kursem. Portal doda do utworzonego/edytowanego kursu branże, jakie istnieją w jego bazie, na podstawie przekazanych nazw.
+<!-- - `industries` - nazwy branż powiązanych z kursem. Portal doda do utworzonego/edytowanego kursu branże, jakie istnieją w jego bazie, na podstawie przekazanych nazw. -->

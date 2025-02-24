@@ -48,10 +48,26 @@ class Course extends Model
             "label" => "Opis",
             "icon" => "pencil",
         ],
+        "keywords" => [
+            "type" => "JSON",
+            "column-types" => [
+                "Fraza" => "text",
+            ],
+            "icon" => "tag",
+            "label" => "Słowa kluczowe",
+        ],
         "thumbnail_path" => [
             "type" => "url",
             "label" => "Miniatura",
             "icon" => "image",
+        ],
+        "image_paths" => [
+            "type" => "JSON",
+            "column-types" => [
+                "Link" => "url",
+            ],
+            "icon" => "image",
+            "label" => "Zdjęcia",
         ],
         "link" => [
             "type" => "url",

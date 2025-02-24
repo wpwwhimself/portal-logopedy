@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\CanBeReviewed;
 use App\CanBeStringified;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
@@ -11,7 +12,7 @@ use Wildside\Userstamps\Userstamps;
 
 class Course extends Model
 {
-    use Userstamps, CanBeStringified;
+    use Userstamps, CanBeStringified, CanBeReviewed;
 
     public const META = [
         "label" => "Kursy i szkolenia",
@@ -23,7 +24,8 @@ class Course extends Model
         "name", "visible", "order",
         "category", "subcategory",
         "description",
-        "thumbnail_path",
+        "keywords",
+        "thumbnail_path", "image_paths",
         "link",
         "trainer_name", "trainer_organization",
         "location",
@@ -149,7 +151,9 @@ class Course extends Model
     protected function casts(): array
     {
         return [
-            "dates" => "array",
+            "dates" => "collection",
+            "keywords" => "collection",
+            "image_paths" => "collection",
         ];
     }
 
@@ -158,17 +162,39 @@ class Course extends Model
         return $this->visible > 1 - Auth::check();
     }
 
-    public function fullCategory(): Attribute
+    public function fullCategoryPretty(): Attribute
     {
         return Attribute::make(
-            get: fn () => implode(" | ", array_filter([$this->category, $this->subcategory])),
+            get: fn () => view("components.icon", [
+                "name" => self::FIELDS["category"]["icon"],
+                "hint" => self::FIELDS["category"]["label"],
+            ])->render() . implode(" | ", array_filter([$this->category, $this->subcategory])),
         );
     }
 
-    public function trainer(): Attribute
+    public function trainerPretty(): Attribute
     {
         return Attribute::make(
-            get: fn () => implode(" | ", array_filter([$this->trainer_name, $this->trainer_organization])),
+            get: fn () => view("components.icon", [
+                "name" => self::FIELDS["trainer_name"]["icon"],
+                "hint" => "Prowadzący",
+            ])->render() . implode(" | ", array_filter([$this->trainer_name, $this->trainer_organization])),
+        );
+    }
+
+    public function location(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->location ?? "online",
+        );
+    }
+    public function locationPretty(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => view("components.icon", [
+                "name" => self::FIELDS["location"]["icon"],
+                "hint" => self::FIELDS["location"]["label"],
+            ])->render() . $this->location,
         );
     }
     #endregion

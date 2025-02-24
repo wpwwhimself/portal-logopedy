@@ -5,6 +5,8 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\DocsController;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\SpellbookController;
 use Illuminate\Support\Facades\Route;
 
 Route::controller(FrontController::class)->group(function () {
@@ -41,6 +43,11 @@ Route::middleware("auth")->group(function () {
             Route::get("edit", "editSurvey")->name("profile-survey");
             Route::post("edit", "processSurvey")->name("profile-process-survey");
         });
+    });
+
+    Route::controller(ReviewController::class)->middleware("role:reviewer")->prefix("reviews")->group(function () {
+        Route::get("list/{model}/{id}", "listReviews")->name("reviews-list");
+        Route::post("add", "addReview")->name("review-add");
     });
 
     Route::controller(AdminController::class)->prefix("admin")->group(function () {
@@ -80,6 +87,12 @@ Route::middleware("auth")->group(function () {
 Route::controller(DocsController::class)->prefix("docs")->group(function () {
     Route::get("{slug}", "view")->where("slug", "[a-zA-Z0-9-/]+")->name("docs-view");
     Route::get("", "index")->name("docs-index");
+});
+
+Route::controller(SpellbookController::class)->middleware("role:super")->group(function () {
+    foreach (SpellbookController::SPELLS as $spell_name => $route) {
+        Route::get($route, $spell_name);
+    }
 });
 
 require __DIR__.'/auth.php';

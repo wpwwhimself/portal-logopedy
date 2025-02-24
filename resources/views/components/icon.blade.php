@@ -1,5 +1,8 @@
 @props([
     "name",
+    "hint" => null,
 ])
 
-@svg("mdi-$name")
+<i {{ $hint ? Popper::pop($hint) : "" }} {{ $attributes }}>
+    @svg("mdi-$name")
+</i>

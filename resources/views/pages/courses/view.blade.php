@@ -9,9 +9,57 @@
     <x-side-content-container>
         <x-h :icon="$course::META['icon']">{{ $course->name }}</x-h>
 
-        <div class="placeholder">Zostanie uzupełnione wkrótce</div>
+        @if ($course->thumbnail_path)
+        <img src="{{ $course->thumbnail_path }}" alt="{{ $course->name }}">
+        @endif
+
+        <p class="ghost">
+            {!! $course->trainer_pretty !!}
+            {!! $course->full_category_pretty !!}
+            <x-icon name="cash" hint="Koszt" />{{ $course->cost }}
+        </p>
+
+        <x-h lvl="3" icon="text">Opis</x-h>
+        {!! $course->description !!}
+
+        @if ($course->keywords)
+        <x-h lvl="3" icon="tag">Słowa kluczowe</x-h>
+        <ul>
+            @foreach ($course->keywords as $keyword)
+            <li>{{ $keyword }}</li>
+            @endforeach
+        </ul>
+        @endif
+
+        @if ($course->image_paths)
+        <x-h lvl="3" icon="image">Zdjęcia</x-h>
+        <div class="grid col3">
+            @foreach ($course->image_paths as $path)
+            <img src="{{ $path }}" alt="{{ $course->name }}" class="thumbnail">
+            @endforeach
+        </div>
+        @endif
+
+        <x-h icon="message-star">Oceny</x-h>
+        <x-reviews.list :reviewable="$course" />
 
         <x-slot:side-content>
+            @if ($course->dates)
+            <x-h lvl="3" icon="calendar">Terminy</x-h>
+            <ul>
+                @foreach ($course->dates as $date)
+                <li>{{ Carbon\Carbon::parse($date)->format("d.m.Y H:i") }}</li>
+                @endforeach
+            </ul>
+            @endif
+
+            <x-h lvl="3" icon="map-marker">Miejsce</x-h>
+            <span>{{ $course->location ?? "online" }}</span>
+
+            <x-button :action="$course->link" target="_blank" icon="link">Strona organizatora</x-button>
+
+            {{--  --}}
+
             <x-button :action="route('courses-list')" class="phantom" icon="arrow-left">Wróć</x-button>
 
             @if (

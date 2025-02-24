@@ -47,6 +47,10 @@ input, select, textarea {
     }
 }
 
+i {
+    font-style: normal;
+}
+
 h1, h2, h3, h4, h5, h6, p {
     margin: var(--s) 0 var(--xs);
 }
@@ -57,7 +61,7 @@ h1, h2, h3, h4, h5, h6, p {
     font-family: 'Myriad Pro', sans-serif;
     font-weight: 300;
 
-    & b, & strong {
+    & b, & strong, & h1, & h2, & h3 {
         font-weight: 600;
     }
 }
@@ -309,6 +313,10 @@ code, pre {
     }
     &.down {
         flex-direction: column;
+
+        & > * {
+            margin: 0;
+        }
     }
 
     &.spread {
@@ -358,7 +366,7 @@ code, pre {
 
 .icon {
     height: 1.5em;
-    vertical-align: middle;
+    vertical-align: -25%;
 
     &.large {
         height: 3em;

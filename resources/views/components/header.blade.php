@@ -20,7 +20,7 @@
             @endauth
 
             @guest
-            <x-button class="phantom" icon="login" :action="route('login')">Zaloguj</x-button>
+            <x-button class="phantom always-light" icon="login" :action="route('login')">Zaloguj</x-button>
             <x-button icon="account-plus" :action="route('register')">Dołącz za DARMO!</x-button>
             @endguest
         </div>

@@ -8,6 +8,6 @@
     @if (Route::current()->getName() == "blog-view")
     <x-button :action="route('blog-list')" class="phantom" icon="arrow-left">Wróć</x-button>
     @else
-    <x-button :action="route('blog-list')" class="phantom always-light" icon="more">Czytaj więcej</x-button>
+    <x-button :action="route('blog-list')" class="phantom always-light pin-right" icon="more">Czytaj więcej</x-button>
     @endif
 </div>

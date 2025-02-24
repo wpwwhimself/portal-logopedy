@@ -325,6 +325,10 @@ code, pre {
     &.nowrap {
         flex-wrap: nowrap;
     }
+
+    & > .pin-right {
+        margin-left: auto;
+    }
 }
 
 .grid {

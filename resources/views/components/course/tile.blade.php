@@ -42,6 +42,6 @@
     </div>
 
     @if ($course->thumbnail_path)
-    <img src="{{ $course->thumbnail_path }}" alt="{{ $course->name }}" class="thumbnail" style="margin-left: auto;">
+    <img src="{{ $course->thumbnail_path }}" alt="{{ $course->name }}" class="thumbnail pin-right">
     @endif
 </x-tile>

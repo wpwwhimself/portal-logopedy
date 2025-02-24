@@ -18,6 +18,16 @@
                 @endunless
                 @endforeach
             </x-hint>
+
+            @if (auth()->user()->hasRole("technical"))
+            <x-button :action="route('admin-edit-model', ['model' => 'standard-pages', 'id' => $page->id])"
+                icon="pencil"
+                class="accent background tertiary"
+                target="_blank"
+            >
+                Edytuj
+            </x-button>
+            @endif
         </x-slot:side-content>
     </x-side-content-container>
 </x-full-width>

@@ -41,13 +41,18 @@
             @foreach (App\Http\Controllers\AdminController::SCOPE_GROUPS as $label => ["icon" => $icon, "scopes" => $scopes])
             <x-h lvl="3" :icon="$icon">{{ $label }}</x-h>
             <div class="grid col3 but-mobile-down">
-                @foreach ($scopes as $scope)
+                @foreach ($scopes as $scope_name)
                 @php
-                ["model" => $model, "role" => $role] = App\Http\Controllers\AdminController::SCOPES[$scope]
+                $scope = App\Http\Controllers\AdminController::SCOPES[$scope_name]
                 @endphp
 
-                @if (auth()->user()->hasRole($role))
-                <x-button :action="route('admin-list-model', ['model' => $scope])" :icon="$model::META['icon']">{{ $model::META['label'] }}</x-button>
+                @if (auth()->user()->hasRole($scope["role"]))
+                <x-button :action="route('admin-list-model', ['model' => $scope_name])"
+                    :icon="$scope['model']::META['icon']"
+                    :disabled="$scope['disabled'] ?? false"
+                >
+                    {{ $scope['model']::META['label'] }}
+                </x-button>
                 @endif
                 @endforeach
             </div>

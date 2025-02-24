@@ -22,6 +22,7 @@
     "center",
     "middle",
     "interactive" => $action, "highlight",
+    "disabled" => $attributes->get("disabled"),
 ]) }}>
     @if ($icon) @svg("mdi-$icon") @endif
 

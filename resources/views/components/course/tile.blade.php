@@ -23,10 +23,10 @@
 
         <big class="placeholder">TU BĘDĄ OCENY</big>
 
-        <div class="flex right">
+        {{-- <div class="flex right">
             @foreach ($course->industries as $industry)
             <x-tag>{{ $industry->name }}</x-tag>
             @endforeach
-        </div>
+        </div> --}}
     </div>
 </a>

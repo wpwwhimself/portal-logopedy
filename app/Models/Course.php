@@ -95,10 +95,10 @@ class Course extends Model
     ];
 
     public const CONNECTIONS = [
-        "industries" => [
-            "model" => Industry::class,
-            "mode" => "many",
-        ],
+        // "industries" => [
+        //     "model" => Industry::class,
+        //     "mode" => "many",
+        // ],
     ];
 
     #region scopes

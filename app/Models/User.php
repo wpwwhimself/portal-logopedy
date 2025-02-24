@@ -60,10 +60,10 @@ class User extends Authenticatable
             "mode" => "many",
             "role" => "technical",
         ],
-        "industries" => [
-            "model" => Industry::class,
-            "mode" => "many",
-        ],
+        // "industries" => [
+        //     "model" => Industry::class,
+        //     "mode" => "many",
+        // ],
     ];
 
     /**

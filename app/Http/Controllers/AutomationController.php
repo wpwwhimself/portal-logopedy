@@ -21,9 +21,9 @@ class AutomationController extends Controller
         ], 400);
 
         // process industries
-        $industries = Industry::whereIn("name", $rq->industries)
-            ->get()
-            ->pluck("id");
+        // $industries = Industry::whereIn("name", $rq->industries)
+        //     ->get()
+        //     ->pluck("id");
 
         $course = Course::where("name", $rq->name)
             ->where("category", $rq->category)
@@ -32,7 +32,7 @@ class AutomationController extends Controller
 
         if ($course) {
             $course->update($rq->all());
-            $course->industries()->sync($industries);
+            // $course->industries()->sync($industries);
             return response()->json([
                 "status" => "course updated",
                 "course" => $course,
@@ -42,7 +42,7 @@ class AutomationController extends Controller
         $course = Course::create(array_merge($rq->all(), [
             "visible" => 2,
         ]));
-        $course->industries()->sync($industries);
+        // $course->industries()->sync($industries);
 
         return response()->json([
             "status" => "course created",

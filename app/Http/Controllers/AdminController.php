@@ -43,6 +43,7 @@ class AdminController extends Controller
         "industries" => [
             "model" => \App\Models\Industry::class,
             "role" => "course-master",
+            "disabled" => true,
         ],
     ];
 

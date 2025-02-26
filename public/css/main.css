@@ -25,6 +25,12 @@
     }
 }
 
+.bulletpoints {
+    & h1 {
+        text-align: center;
+    }
+}
+
 .mid-section-tile {
     font-size: var(--xl);
     gap: 0 !important;

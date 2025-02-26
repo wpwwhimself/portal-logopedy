@@ -447,8 +447,16 @@ search {
 .side-content-container {
     grid-template-columns: auto 350px;
 
+    &.flipped {
+        grid-template-columns: 350px auto;
+
+        & > .content:last-child {
+            order: -1;
+        }
+    }
+
     & > .content:last-child {
-        border-left: var(--xxs) solid #00000033;
+        /* border-left: var(--xxs) solid #00000033; */
 
         & > div {
             position: sticky;

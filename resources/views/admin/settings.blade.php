@@ -111,6 +111,21 @@
                 @endfor
             </x-tile>
 
+            <x-tile title="Kursy" :title-icon="App\Models\Course::META['icon']" class="flex down">
+                <x-input type="JSON"
+                    :column-types="[
+                        'Kolejność' => 'number',
+                        'Treść' => 'TEXT',
+                        'Link do ikony' => 'storage_url',
+                    ]"
+                    name="course_bulletpoints"
+                    label="Bullet-pointy"
+                    icon="format-list-bulleted"
+                    :value="json_decode($setting::get('course_bulletpoints'), true)"
+                    hint="Ikony z informacjami na początku listingu kursów"
+                />
+            </x-tile>
+
             <x-tile title="Blog" :title-icon="App\Models\BlogArticle::META['icon']" clas="flex down">
                 <x-input
                     name="blog_name"

@@ -76,7 +76,7 @@ function JSONInputUpdate(input_name) {
                 break
 
             default:
-                newValue[row_no] = Array.of(row.querySelectorAll("input")).map(input => input.value)
+                newValue[row_no] = Array.from(row.querySelectorAll("input")).map(input => input.value || null)
         }
     })
 

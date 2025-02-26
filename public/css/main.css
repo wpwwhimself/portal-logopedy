@@ -25,6 +25,24 @@
     }
 }
 
+.bulletpoints {
+    & h1 {
+        text-align: center;
+    }
+
+    & .grid {
+        grid-template-columns: auto 300px;
+    }
+
+    & .icon-container {
+        --dim: var(--xxl);
+        width: var(--dim); height: var(--dim);
+        padding: var(--xs);
+        border-radius: 100%;
+        background-color: var(--primary);
+    }
+}
+
 .mid-section-tile {
     font-size: var(--xl);
     gap: 0 !important;

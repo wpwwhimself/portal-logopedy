@@ -1,4 +1,8 @@
-<div class="side-content-container grid but-halfsize-down">
+@props([
+    "flipped" => false,
+])
+
+<div class="side-content-container grid but-halfsize-down {{ $flipped ? "flipped" : "" }}">
     <div {{ $attributes->class([
         "content",
         "flex", "down",

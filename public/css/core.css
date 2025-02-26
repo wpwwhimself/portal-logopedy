@@ -87,7 +87,7 @@ body {
     --white: white;
     --black: #1c1c1c;
 
-    --fg: var(--black);
+    --fg: var(--secondary);
     --bg: var(--white);
     --bg-light: #e3e3e3;
     --shadow: #00000055;
@@ -353,6 +353,11 @@ code, pre {
     }
 }
 
+hr {
+    border: 1px solid var(--secondary);
+    margin: var(--m) var(--xxl);
+}
+
 .flex, .grid {
     gap: var(--s);
 
@@ -450,8 +455,16 @@ search {
 .side-content-container {
     grid-template-columns: auto 350px;
 
+    &.flipped {
+        grid-template-columns: 350px auto;
+
+        & > .content:last-child {
+            order: -1;
+        }
+    }
+
     & > .content:last-child {
-        border-left: var(--xxs) solid #00000033;
+        /* border-left: var(--xxs) solid #00000033; */
 
         & > div {
             position: sticky;

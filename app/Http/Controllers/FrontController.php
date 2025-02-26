@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Course;
+use App\Models\Setting;
 use App\Models\StandardPage;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -29,8 +30,12 @@ class FrontController extends Controller
             ->with("industries")
             ->paginate(25);
 
+        $bulletpoints = collect(json_decode(Setting::get("course_bulletpoints")))
+            ->sortBy(fn ($bp) => (int) $bp[0]);
+
         return view("pages.courses.list", compact(
             "courses",
+            "bulletpoints",
         ));
     }
 

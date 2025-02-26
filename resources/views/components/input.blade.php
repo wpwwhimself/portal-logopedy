@@ -105,7 +105,7 @@
                 <tr role="new-row">
                     @foreach ($columnTypes as $t)
                     <td class="rounded">
-                        <input type="{{ $t }}" />
+                        <input type="{{ $t }}" onchange="JSONInputUpdate('{{ $name }}')" />
                     </td>
                     @endforeach
 

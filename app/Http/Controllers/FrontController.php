@@ -43,8 +43,9 @@ class FrontController extends Controller
     #endregion
 
     #region specialists
-    // public function listSpecialists(): View
-    // {
+    public function listSpecialists(): View
+    {
+        return view("errors.under-construction");
     //     $courses = Course::visible()
     //         ->with("industries")
     //         ->paginate(25);
@@ -52,7 +53,7 @@ class FrontController extends Controller
     //     return view("pages.courses.list", compact(
     //         "courses",
     //     ));
-    // }
+    }
 
     // public function viewCourse(Course $course): View
     // {
@@ -63,8 +64,9 @@ class FrontController extends Controller
     #endregion
 
     #region films
-    // public function listCourses(): View
-    // {
+    public function listFilms(): View
+    {
+        return view("errors.under-construction");
     //     $courses = Course::visible()
     //         ->with("industries")
     //         ->paginate(25);
@@ -72,7 +74,7 @@ class FrontController extends Controller
     //     return view("pages.courses.list", compact(
     //         "courses",
     //     ));
-    // }
+    }
 
     // public function viewCourse(Course $course): View
     // {

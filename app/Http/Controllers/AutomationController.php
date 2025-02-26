@@ -12,7 +12,6 @@ class AutomationController extends Controller
     public function processCourse(Request $rq) {
         $validator = Validator::make($rq->all(), [
             'name' => ['required'],
-            'category' => ['required'],
             'trainer_organization' => ['required'],
         ]);
         if ($validator->fails()) return response()->json([
@@ -26,7 +25,6 @@ class AutomationController extends Controller
         //     ->pluck("id");
 
         $course = Course::where("name", $rq->name)
-            ->where("category", $rq->category)
             ->where("trainer_organization", $rq->trainer_organization)
             ->first();
 

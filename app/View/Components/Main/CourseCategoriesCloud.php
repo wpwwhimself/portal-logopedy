@@ -16,7 +16,7 @@ class CourseCategoriesCloud extends Component
      */
     public function __construct()
     {
-        $this->categories = Course::classes("category");
+        $this->categories = Course::classes("categories");
     }
 
     /**

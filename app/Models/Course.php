@@ -22,7 +22,7 @@ class Course extends Model
 
     protected $fillable = [
         "name", "visible", "order",
-        "category", "subcategory",
+        "categories",
         "description",
         "keywords",
         "thumbnail_path", "image_paths",
@@ -35,15 +35,13 @@ class Course extends Model
     ];
 
     public const FIELDS = [
-        "category" => [
-            "type" => "text",
+        "categories" => [
+            "type" => "JSON",
+            "column-types" => [
+                "Nazwa" => "text",
+            ],
             "label" => "Kategoria",
             "icon" => "shape",
-        ],
-        "subcategory" => [
-            "type" => "text",
-            "label" => "Podkategoria",
-            "icon" => "shape-outline",
         ],
         "description" => [
             "type" => "HTML",
@@ -151,6 +149,7 @@ class Course extends Model
     protected function casts(): array
     {
         return [
+            "categories" => "collection",
             "dates" => "collection",
             "keywords" => "collection",
             "image_paths" => "collection",
@@ -166,9 +165,9 @@ class Course extends Model
     {
         return Attribute::make(
             get: fn () => view("components.icon", [
-                "name" => self::FIELDS["category"]["icon"],
-                "hint" => self::FIELDS["category"]["label"],
-            ])->render() . implode(" | ", array_filter([$this->category, $this->subcategory])),
+                "name" => self::FIELDS["categories"]["icon"],
+                "hint" => self::FIELDS["categories"]["label"],
+            ])->render() . collect($this->categories)->first(),
         );
     }
 

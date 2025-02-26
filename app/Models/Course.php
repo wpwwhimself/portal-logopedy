@@ -141,7 +141,11 @@ class Course extends Model
 
     public function scopeClasses($query, string $field)
     {
-        return $query->select($field)->distinct()->orderBy($field)->get()->pluck($field);
+        return $query->select($field)->get()
+            ->pluck($field)
+            ->flatten()
+            ->sort()
+            ->unique();
     }
     #endregion
 
@@ -167,7 +171,7 @@ class Course extends Model
             get: fn () => view("components.icon", [
                 "name" => self::FIELDS["categories"]["icon"],
                 "hint" => self::FIELDS["categories"]["label"],
-            ])->render() . collect($this->categories)->first(),
+            ])->render() . $this->categories->first() . (($this->categories->count() > 1) ? " (+".($this->categories->count() - 1).")" : ""),
         );
     }
 

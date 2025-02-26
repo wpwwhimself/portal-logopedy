@@ -19,6 +19,7 @@ class FrontController extends Controller
     {
         $page = StandardPage::visible()->get()
             ->firstWhere(fn ($page) => $page->slug == $slug);
+        if (!$page) abort(404);
 
         return view("standard-page", compact("page"));
     }

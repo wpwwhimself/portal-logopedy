@@ -84,7 +84,7 @@ body {
     --white: white;
     --black: #1c1c1c;
 
-    --fg: var(--black);
+    --fg: var(--secondary);
     --bg: var(--white);
     --bg-light: #e3e3e3;
     --shadow: #00000055;
@@ -348,6 +348,11 @@ code, pre {
         grid-template-columns: none;
         grid-template-rows: repeat(var(--col-count), 1fr);
     }
+}
+
+hr {
+    border: 1px solid var(--secondary);
+    margin: var(--m) var(--xxl);
 }
 
 .flex, .grid {

@@ -4,20 +4,25 @@
 
 @section("content")
 
-<x-full-width class="bulletpoints">
+<x-full-width class="bulletpoints padded">
     <h1>Wyszukiwarka aktualnych <b>kursów i szkoleń</b> dla logopedów dostępnych w Polsce!</h1>
 
-    <div class="grid col3">
-        @foreach (json_decode(App\Models\Setting::get("course_bulletpoints")) ?? [] as $bp)
-
+    <div class="flex right center middle">
+        @foreach ($bulletpoints as [, $text, $icon_path])
+        <div class="grid middle">
+            <div class="icon-container flex right center middle">
+                <img src="{{ $icon_path }}" alt="Ikona">
+            </div>
+            <p>{{ $text }}</p>
+        </div>
         @endforeach
     </div>
 </x-full-width>
 
+<hr>
+
 <x-full-width>
     <x-side-content-container flipped>
-        <x-h :icon="\App\Models\Course::META['icon']">{{ \App\Models\Course::META['label'] }}</x-h>
-
         @forelse ($courses as $course)
         <x-course.tile :course="$course" />
         @empty

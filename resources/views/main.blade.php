@@ -19,7 +19,13 @@
 </x-main.line-banner>
 @endif
 
-<x-main.mid-section />
+@endsection
+
+@section("content_after")
+
+<x-full-width class="padded large">
+    <x-main.course-categories-cloud />
+</x-full-width>
 
 @if (App\Models\AdvertSetting::canBeSeen("big"))
 <x-main.banner :src="App\Models\AdvertSetting::get('big', 'image_path')" alt="Reklama" :action="App\Models\AdvertSetting::get('big', 'link')" />
@@ -28,16 +34,5 @@
 <x-full-width class="padded large accent background secondary">
     <x-blog.highlights />
 </x-full-width>
-
-@if (App\Models\AdvertSetting::canBeSeen("lower_thin"))
-<x-main.line-banner :action="App\Models\AdvertSetting::get('lower_thin', 'link')"
-    background-style="
-        background-color: {{ App\Models\AdvertSetting::get('lower_thin', 'background-color') }};
-        color: {{ App\Models\AdvertSetting::get('lower_thin', 'white_text') ? 'white' : 'black' }};
-    "
->
-    {!! App\Models\AdvertSetting::get("lower_thin", "content") !!}
-</x-main.line-banner>
-@endif
 
 @endsection

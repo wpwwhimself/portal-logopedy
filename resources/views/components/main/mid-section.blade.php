@@ -18,7 +18,3 @@
         @endforeach
     </div>
 </x-full-width>
-
-<x-full-width class="padded large">
-    <x-main.course-categories-cloud />
-</x-full-width>

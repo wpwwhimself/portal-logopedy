@@ -4,8 +4,8 @@
             ["Baza kursów, szkoleń...", route('courses-list')],
             ["Baza specjalistów", route('specialists-list')],
             ["Filmy, podcasty", route('films-list')],
-            ["<span><b class=\"large\">DODAJ</b></span><span>kurs/szkolenie/...</span>", route("admin-edit-model", ["model" => "courses"])],
             ["<span><b class=\"large\">OCEŃ</b></span><span>kurs/szkolenie/...</span>", route("courses-list")],
+            ["O Portalu", route("standard-page", ["slug" => "o-portalu"])],
             ["<span><b>Zapisz się na newsletter,</b></span><span>żeby dowiedzieć się, co dla Ciebie przygotowaliśmy!</span>", route("profile")],
         ] as $i => [$label, $link])
         <x-tile class="grid middle accent background {{ $i == 5 ? 'primary' : 'secondary' }} mid-section-tile" no-border :action="$link">

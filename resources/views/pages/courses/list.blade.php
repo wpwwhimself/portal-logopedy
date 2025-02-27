@@ -8,7 +8,9 @@
     <h1>Wyszukiwarka aktualnych <b>kursów i szkoleń</b> dla logopedów dostępnych w Polsce!</h1>
 
     <div class="flex right center middle">
-        @foreach ($bulletpoints as [, $text, $icon_path])
+        @foreach (collect(json_decode(App\Models\Setting::get("course_bulletpoints")))
+            ->sortBy(fn ($bp) => (int) $bp[0])
+        as [, $text, $icon_path])
         <div class="grid middle">
             <div class="icon-container flex right center middle">
                 <img src="{{ $icon_path }}" alt="Ikona">
@@ -25,16 +27,16 @@
     <x-side-content-container flipped>
         <div class="grid col2 middle">
             <x-search-bar placeholder="Wyszukaj" />
-            <strong style="text-align: right;">Wyników: {{ $courses->total() }}</strong>
+            <strong style="text-align: right;">Wyników: {{ $data->total() }}</strong>
         </div>
 
-        @forelse ($courses as $course)
+        @forelse ($data as $course)
         <x-course.tile :course="$course" />
         @empty
         <p class="ghost">Brak danych do wyświetlenia</p>
         @endforelse
 
-        {{ $courses->links() }}
+        {{ $data->links() }}
 
         <x-slot:side-content>
 

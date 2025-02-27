@@ -27,6 +27,8 @@ Route::controller(FrontController::class)->group(function () {
         Route::get("{film}", "viewFilm")->name("film-view");
         Route::get("", "listFilms")->name("films-list");
     });
+
+    Route::get("search/{model_name}", "search")->name("search");
 });
 
 Route::controller(BlogController::class)->prefix("blog")->group(function () {

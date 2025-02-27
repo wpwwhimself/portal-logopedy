@@ -7,6 +7,7 @@ use App\Models\Setting;
 use App\Models\StandardPage;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Illuminate\Support\Str;
 
 class FrontController extends Controller
 {
@@ -24,19 +25,32 @@ class FrontController extends Controller
         return view("standard-page", compact("page"));
     }
 
+    #region search
+    public function search(string $model_name, Request $rq)
+    {
+        $model = "App\\Models\\" . Str::of($model_name)->studly()->singular();
+        $data = $model::visible()
+            ->where("name", "like", "%{$rq->q}%")
+            ->orWhere("description", "like", "%{$rq->q}%")
+            ->orWhere("categories", "like", "%{$rq->q}%")
+            ->orWhere("keywords", "like", "%{$rq->q}%")
+            ->paginate(25);
+
+        return view("pages.$model_name.list", compact(
+            "data",
+        ));
+    }
+    #endregion
+
     #region courses
     public function listCourses(): View
     {
-        $courses = Course::visible()
+        $data = Course::visible()
             ->with("industries")
             ->paginate(25);
 
-        $bulletpoints = collect(json_decode(Setting::get("course_bulletpoints")))
-            ->sortBy(fn ($bp) => (int) $bp[0]);
-
         return view("pages.courses.list", compact(
-            "courses",
-            "bulletpoints",
+            "data",
         ));
     }
 

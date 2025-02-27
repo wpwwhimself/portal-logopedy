@@ -217,6 +217,11 @@ span.large {
     box-shadow: 0 0 var(--s) var(--shadow);
 }
 
+.stick-top {
+    position: sticky;
+    top: 0;
+}
+
 /******************** animations *******************/
 
 .animatable, .interactive {
@@ -452,6 +457,10 @@ main {
     flex-grow: 1;
 }
 
+nav {
+    z-index: 100;
+}
+
 search {
     flex-grow: 1;
 
@@ -579,5 +588,9 @@ table {
 
     search {
         width: 100%;
+    }
+
+    .stick-top.but-mobile-reset {
+        position: initial;
     }
 }

@@ -47,6 +47,12 @@ function selectFile(url, input_id) {
 }
 // #endregion
 
+// #region nav
+function toggleNav() {
+    document.querySelector("nav").classList.toggle("hidden");
+}
+// #endregion
+
 // #region theme management
 if (localStorage.getItem("theme") == "dark") toggleTheme()
 

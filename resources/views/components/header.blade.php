@@ -2,12 +2,12 @@
     "hideBrowsing" => false,
 ])
 
-<x-full-width class="accent background secondary">
+<x-full-width class="accent background secondary stick-top but-mobile-reset">
     <header class="flex right but-mobile-down spread middle padded">
         <x-logo mono />
 
         <div class="flex right middle">
-            @unless ($hideBrowsing) <x-button icon="menu" class="always-light phantom bordered">Przeglądaj</x-button> @endunless
+            @unless ($hideBrowsing) <x-button icon="menu" class="always-light phantom bordered interactive" onclick="toggleNav()">Przeglądaj</x-button> @endunless
         </div>
 
         @unless ($hideBrowsing) <x-search-bar /> @endunless
@@ -25,4 +25,6 @@
             @endguest
         </div>
     </header>
+
+    <x-nav />
 </x-full-width>

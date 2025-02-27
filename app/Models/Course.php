@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\CanBeReviewed;
 use App\CanBeStringified;
+use App\HasIconedAttributes;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
@@ -12,7 +13,7 @@ use Wildside\Userstamps\Userstamps;
 
 class Course extends Model
 {
-    use Userstamps, CanBeStringified, CanBeReviewed;
+    use Userstamps, CanBeStringified, CanBeReviewed, HasIconedAttributes;
 
     public const META = [
         "label" => "Kursy i szkolenia",
@@ -167,21 +168,18 @@ class Course extends Model
 
     public function fullCategoryPretty(): Attribute
     {
-        return Attribute::make(
-            get: fn () => view("components.icon", [
-                "name" => self::FIELDS["categories"]["icon"],
-                "hint" => self::FIELDS["categories"]["label"],
-            ])->render() . $this->categories->first() . (($this->categories->count() > 1) ? " (+".($this->categories->count() - 1).")" : ""),
-        );
+        return $this->iconedAttribute(
+            $this->categories->first() . (($this->categories->count() > 1) ? " (+".($this->categories->count() - 1).")" : ""),
+            "categories"
+        ) ;
     }
 
     public function trainerPretty(): Attribute
     {
-        return Attribute::make(
-            get: fn () => view("components.icon", [
-                "name" => self::FIELDS["trainer_name"]["icon"],
-                "hint" => "Prowadzący",
-            ])->render() . implode(" | ", array_filter([$this->trainer_name, $this->trainer_organization])),
+        return $this->iconedAttribute(
+            implode(" | ", array_filter([$this->trainer_name, $this->trainer_organization])),
+            "trainer_name",
+            icon_hint: "Prowadzący"
         );
     }
 
@@ -193,11 +191,9 @@ class Course extends Model
     }
     public function locationPretty(): Attribute
     {
-        return Attribute::make(
-            get: fn () => view("components.icon", [
-                "name" => self::FIELDS["location"]["icon"],
-                "hint" => self::FIELDS["location"]["label"],
-            ])->render() . $this->location,
+        return $this->iconedAttribute(
+            $this->location,
+            "location"
         );
     }
     #endregion

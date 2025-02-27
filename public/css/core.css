@@ -13,7 +13,7 @@
     --error: rgb(215, 61, 61);
     --danger: rgb(227, 147, 36);
 
-    --xxs: 3px;
+    --xxs: 2px;
     --xs: 6px;
     --s: 10px;
     --m: 16px;
@@ -188,6 +188,15 @@ span.large {
     font-size: var(--xl);
 }
 
+.line-separated {
+    border-bottom: var(--xxs) solid var(--bg-light);
+    border-bottom-left-radius: 0 !important; border-bottom-right-radius: 0 !important;
+
+    &:last-of-type {
+        border-bottom: none;
+    }
+}
+
 .padded {
     padding: var(--xs) var(--m);
 
@@ -298,6 +307,11 @@ body {
     &.danger {
         background-color: var(--danger);
         color: white;
+    }
+
+    &.small {
+        font-size: var(--m);
+        padding: 0 var(--s) !important;
     }
 }
 
@@ -443,6 +457,7 @@ search {
 
     & > form {
         background-color: var(--bg);
+        border: var(--xxs) solid var(--secondary);
         grid-template-columns: 1fr auto !important;
     }
 

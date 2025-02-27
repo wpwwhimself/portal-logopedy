@@ -23,6 +23,11 @@
 
 <x-full-width>
     <x-side-content-container flipped>
+        <div class="grid col2 middle">
+            <x-search-bar placeholder="Wyszukaj" />
+            <strong style="text-align: right;">Wyników: {{ $courses->total() }}</strong>
+        </div>
+
         @forelse ($courses as $course)
         <x-course.tile :course="$course" />
         @empty

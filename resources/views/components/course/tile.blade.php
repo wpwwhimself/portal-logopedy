@@ -2,46 +2,35 @@
     "course",
 ])
 
+
 <x-tile :action="route('course-view', ['course' => $course])"
-    class="course flex right interactive shift-right"
+    class="course flex right middle interactive shift-right"
+    no-border line-separated
 >
-    <div class="description flex down">
-        <x-h lvl="2">{{ $course->name }}</x-h>
-
-        <x-reviews.score :reviewable="$course" />
-
-        <span>{!! $course->full_category_pretty !!}</span>
-
-        <span class="ghost">{!! $course->trainer_pretty !!}</span>
-
-        {{-- <div class="flex right">
-            @foreach ($course->industries as $industry)
-            <x-tag>{{ $industry->name }}</x-tag>
-            @endforeach
-        </div> --}}
-    </div>
-
-    <div class="details flex down">
-        @if ($course->dates)
+    <div class="description flex down no-gap">
         <span class="flex right middle">
+            @if ($course->dates)
             <x-icon name="calendar" hint="Najbliższy termin" />
             {{ Carbon\Carbon::parse($course->dates->sort()->first())->diffForHumans() }}
-        </span>
-        @endif
+            @endif
 
-        <span class="flex right middle">
             {!! $course->location_pretty !!}
         </span>
 
-        @if ($course->cost)
+        <x-h lvl="2">{{ $course->name }}</x-h>
+
         <span class="flex right middle">
-            <x-icon name="cash" hint="Koszt" />
-            {{ $course->cost }}
+            {!! $course->trainer_pretty !!}
         </span>
-        @endif
+
+        <x-reviews.score :reviewable="$course" />
     </div>
 
-    @if ($course->thumbnail_path)
-    <img src="{{ $course->thumbnail_path }}" alt="{{ $course->name }}" class="thumbnail pin-right">
-    @endif
+    <div class="pin-right">
+        @if ($course->cost)
+        <strong class="flex right middle">
+            {!! $course->pretty("cost") !!}
+        </strong>
+        @endif
+    </div>
 </x-tile>

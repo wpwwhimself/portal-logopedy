@@ -15,7 +15,13 @@ trait CanBeReviewed
     public function averageRating(): Attribute
     {
         return Attribute::make(
-            get: fn () => number_format($this->reviews()->avg("rating"), 2, ","),
+            get: fn () => $this->reviews()->avg("rating"),
+        );
+    }
+    public function averageRatingPretty(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => number_format($this->reviews()->avg("rating"), 1, ","),
         );
     }
 }

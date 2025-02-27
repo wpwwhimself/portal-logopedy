@@ -3,9 +3,10 @@
     "title" => null,
     "titleIcon" => null,
     "noBorder" => false,
+    "lineSeparated" => false,
 ])
 
-@if ($action) <a href="{{ $action }}"> @endif
+@if ($action) <a href="{{ $action }}" class="{{ $lineSeparated ? 'line-separated' : '' }}"> @endif
 
 <div {{ $attributes->class([
     "tile",

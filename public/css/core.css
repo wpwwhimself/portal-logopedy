@@ -573,6 +573,10 @@ table {
         }
     }
 
+    .pin-right.but-mobile-reset {
+        margin-left: 0;
+    }
+
     search {
         width: 100%;
     }

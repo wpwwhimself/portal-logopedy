@@ -7,7 +7,7 @@
 @endif
 
 <x-tile title="Dodaj swoją opinię" title-icon="pencil">
-    @unless (auth()->user()->hasRole("reviewer"))
+    @unless (auth()->user()?->hasRole("reviewer"))
     <x-button :action="route('register')" icon="account-plus">Załóż konto kursanta</x-button>
     @endunless
 

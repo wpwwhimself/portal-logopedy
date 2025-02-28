@@ -19,7 +19,7 @@
                 @endforeach
             </x-hint>
 
-            @if (auth()->user()->hasRole("technical"))
+            @if (auth()->user()?->hasRole("technical"))
             <x-button :action="route('admin-edit-model', ['model' => 'standard-pages', 'id' => $page->id])"
                 icon="pencil"
                 class="accent background tertiary"

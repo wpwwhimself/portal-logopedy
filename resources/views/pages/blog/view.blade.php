@@ -29,7 +29,7 @@
         <x-slot:side-content>
             <x-blog.highlights title="Polecane artykuły" :except-id="$article->id" />
 
-            @if (auth()->user()->hasRole("blogger"))
+            @if (auth()->user()?->hasRole("blogger"))
             <x-button :action="route('admin-edit-model', ['model' => 'blog-articles', 'id' => $article->id])"
                 icon="pencil"
                 class="accent background tertiary"

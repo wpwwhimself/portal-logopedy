@@ -63,8 +63,8 @@
             <x-button :action="route('courses-list')" class="phantom" icon="arrow-left">Wróć</x-button>
 
             @if (
-                auth()->user()->hasRole("course-master")
-                || auth()->user()->hasRole("course-manager") && $course->created_by == auth()->user()->id
+                auth()->user()?->hasRole("course-master")
+                || auth()->user()?->hasRole("course-manager") && $course->created_by == auth()->user()->id
             )
             <x-button :action="route('admin-edit-model', ['model' => 'courses', 'id' => $course->id])"
                 icon="pencil"

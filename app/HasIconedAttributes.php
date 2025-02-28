@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 trait HasIconedAttributes
 {
     private function iconedAttribute(
-        string $text,
+        string $text = null,
         string $field = null,
         string $icon_name = null,
         string $icon_hint = null

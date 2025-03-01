@@ -25,6 +25,12 @@
     }
 }
 
+.course {
+    &.grid {
+        grid-template-columns: 1fr auto;
+    }
+}
+
 .bulletpoints {
     & h1 {
         text-align: center;

@@ -47,9 +47,24 @@ function selectFile(url, input_id) {
 }
 // #endregion
 
+// #region filters
+function resetFilters(btn) {
+    btn.parentElement.querySelectorAll("input[type='checkbox']").forEach(input => input.checked = false)
+}
+// #endregion
+
 // #region nav
 function toggleNav() {
     document.querySelector("nav").classList.toggle("hidden");
+}
+// #endregion
+
+// #region tiles
+function expandTile(expandable_uuid) {
+    const expandable = document.querySelector(`.tile[data-expandable="${expandable_uuid}"]`)
+
+    expandable.querySelector(".contents").classList.toggle("hidden")
+    expandable.querySelector(".expand-btn").classList.toggle("expanded")
 }
 // #endregion
 

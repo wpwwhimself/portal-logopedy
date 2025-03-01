@@ -38,10 +38,10 @@ class FrontController extends Controller
         $data = $model::visible(false)
             ->where(fn ($q) => $q
                 // search query
-            ->where("name", "like", "%{$rq->q}%")
-            ->orWhere("description", "like", "%{$rq->q}%")
-            ->orWhere("categories", "like", "%{$rq->q}%")
-            ->orWhere("keywords", "like", "%{$rq->q}%")
+                ->where("name", "like", "%{$rq->q}%")
+                ->orWhere("description", "like", "%{$rq->q}%")
+                ->orWhere("categories", "like", "%{$rq->q}%")
+                ->orWhere("keywords", "like", "%{$rq->q}%")
             )
             ->where(function ($q) use ($rq) {
                 // filters

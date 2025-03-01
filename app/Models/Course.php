@@ -42,7 +42,7 @@ class Course extends Model
             "column-types" => [
                 "Nazwa" => "text",
             ],
-            "label" => "Kategoria",
+            "label" => "Kategorie",
             "icon" => "shape",
         ],
         "description" => [
@@ -110,6 +110,23 @@ class Course extends Model
             "label" => "Rodzaj dokumentu",
             "icon" => "certificate",
         ],
+    ];
+
+    public const SORTS = [
+    ];
+
+    public const FILTERS = [
+        "categories" => "list-from-db",
+        // "ranking" => [
+        //     "label" => "Ranking",
+        //     "icon" => "star",
+        //     "options" => [
+        //         "4,5 i wyższa" => "4.5",
+        //     ],
+        // ],
+        "keywords" => "list-from-db",
+        "location" => "list-from-db",
+        "final_document" => "list-from-db",
     ];
 
     public const CONNECTIONS = [

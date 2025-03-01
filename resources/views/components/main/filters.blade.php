@@ -14,7 +14,7 @@
                 value="{{ $name }}"
                 {{ request()->get("sort") == $name ? "checked" : "" }}
             />
-            <label for="sort-{{ $name }}-asc">{{ $srt["label"] }} rosnąco</label>
+            <label for="sort-{{ $name }}-asc">{{ $srt["label"] }} <x-icon name="sort-ascending" /></label>
         </div>
         <div class="grid middle">
             <input type="radio" name="sort"
@@ -22,7 +22,7 @@
                 value="-{{ $name }}"
                 {{ request()->get("sort") == "-{$name}" ? "checked" : "" }}
             />
-            <label for="sort-{{ $name }}-desc">{{ $srt["label"] }} malejąco</label>
+            <label for="sort-{{ $name }}-desc">{{ $srt["label"] }} <x-icon name="sort-descending" /></label>
         </div>
         @endforeach
     </x-tile>

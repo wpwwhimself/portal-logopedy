@@ -24,11 +24,7 @@ class Filters extends Component
         $this->model = "App\\Models\\" . Str::of($modelName)->studly()->singular();
         $this->fields = $this->model::FIELDS;
 
-        $this->sorts = array_merge([
-            "name" => [
-                "label" => "Po nazwie",
-            ]
-        ], $this->model::SORTS);
+        $this->sorts = $this->model::getSorts();
         $this->filters = $this->model::FILTERS;
     }
 

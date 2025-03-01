@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\CanBeReviewed;
+use App\CanBeSorted;
 use App\CanBeStringified;
 use App\HasIconedAttributes;
 use App\HasStandardScopes;
@@ -112,7 +113,13 @@ class Course extends Model
         ],
     ];
 
+    use CanBeSorted;
     public const SORTS = [
+        "rating" => [
+            "label" => "Po ocenie",
+            "mode" => "function",
+            "discr" => "averageRating",
+        ],
     ];
 
     public const FILTERS = [

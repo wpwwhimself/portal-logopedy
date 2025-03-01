@@ -6,6 +6,7 @@ use App\Models\Course;
 use App\Models\Setting;
 use App\Models\StandardPage;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\View\View;
 use Illuminate\Support\Str;
 
@@ -30,10 +31,6 @@ class FrontController extends Controller
     {
         if (in_array($model_name, ["specialists", "films"])) return view("errors.under-construction");
 
-        $default_sort = "-updated_at";
-        $sort_direction = ($rq->get("sort", $default_sort)[0] == "-") ? "desc" : "asc";
-        $sort_field = Str::after($rq->get("sort", $default_sort), "-");
-
         $model = "App\\Models\\" . Str::of($model_name)->studly()->singular();
         $data = $model::visible(false)
             ->where(fn ($q) => $q
@@ -52,8 +49,24 @@ class FrontController extends Controller
                 }
                 return $q;
             })
-            ->orderBy($sort_field, $sort_direction)
-            ->paginate(25);
+            ->get();
+
+        $default_sort = "-updated_at";
+        $sort_direction = ($rq->get("sort", $default_sort)[0] == "-") ? "desc" : "asc";
+        $sort_field = Str::after($rq->get("sort", $default_sort), "-");
+
+        $data = $data->sort(fn ($a, $b) => ($sort_direction == "asc")
+            ? $a->sortable($model::getSorts()[$sort_field]) <=> $b->sortable($model::getSorts()[$sort_field])
+            : $b->sortable($model::getSorts()[$sort_field]) <=> $a->sortable($model::getSorts()[$sort_field])
+        );
+
+        $data = new LengthAwarePaginator(
+            $data,
+            $data->count(),
+            25,
+            $rq->page ?? 1,
+            $rq->all()
+        );
 
         return view("pages.$model_name.list", compact(
             "data",

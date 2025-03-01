@@ -33,8 +33,8 @@ class Role extends Model
 
     #region helpers
     public const ACCOUNT_TYPES = [
-        "reviewer" => "Kursant",
-        "course-manager" => "Twórca",
+        "reviewer" => "Użytkownik",
+        "course-manager" => "Organizator",
     ];
     #endregion
 }

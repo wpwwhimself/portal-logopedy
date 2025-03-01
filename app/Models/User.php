@@ -19,7 +19,7 @@ class User extends Authenticatable
     use HasFactory, Notifiable, CanBeStringified, HasApiTokens;
 
     public const META = [
-        "label" => "Użytkownicy",
+        "label" => "Użytkownicy",
         "icon" => "account",
         "description" => "Lista użytkowników systemu. Każdy z wymienionych może otrzymać role, które nadają mu uprawnienia do korzystania z konkretnych funkcjonalności.",
     ];

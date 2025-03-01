@@ -10,7 +10,7 @@
 ]) }}>
     @if ($icon) @svg("mdi-$icon") @endif
 
-    <label for="{{ $name }}" class="flex right middle no-gap ghost">
+    <label for="{{ $name }}">
         {!! $label !!}
         @if ($hint) <span {{ Popper::pop($hint) }}>@svg("mdi-information")</span> @endif
         :

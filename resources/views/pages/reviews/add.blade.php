@@ -10,7 +10,18 @@
         @csrf
 
         <x-side-content-container>
-            <x-h :icon="App\Models\Review::META['icon']">Dodaj opinię</x-h>
+            <x-h :icon="App\Models\Review::META['icon']">Formularz oceny szkolenia/kursu na {{ App\Models\Setting::get("app_name") }}</x-h>
+
+            <p>
+                Twoja opinia pomaga kształtować jakość szkoleń i wspiera społeczność logopedów w wyborze wartościowych kursów. Wypełnienie formularza zajmie Ci ok. 2-3 minuty. Dziękujemy za Twój wkład!
+            </p>
+
+            <x-input type="checkbox"
+                name="confirmed"
+                label="Potwierdzam, że brałam/em udział w tym szkoleniu i akceptuję <a href='/pages/regulamin'>regulamin</a>"
+                icon="check"
+                required
+            />
 
             <input type="hidden" name="reviewable_type" value="{{ get_class($entity) }}">
             <input type="hidden" name="reviewable_id" value="{{ $entity->id }}">

@@ -46,6 +46,11 @@ class Review extends Model
             ->map(fn($c) => $c->pivot->answer)
             ->avg();
     }
+
+    public function averageRatingPretty(): ?string
+    {
+        return number_format($this->averageRating(), 1, ",");
+    }
     #endregion
 
     #region helpers

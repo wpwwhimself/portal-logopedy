@@ -45,6 +45,8 @@ class ReviewController extends Controller
 
     public function processReview(Request $rq): RedirectResponse
     {
+        if (!$rq->has("confirmed")) return back()->with("error", "Potwierdzenie uczestnictwa jest wymagane");
+
         $review = Review::create($rq->except(["_token"]));
 
         $criteria = collect($rq->all())

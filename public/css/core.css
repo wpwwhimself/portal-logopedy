@@ -248,7 +248,7 @@ span.large {
 
 /******************** components *******************/
 
-a.button, a:has(> .tile) {
+a.button, a:has(> .tile), a:has(> .full-width) {
     text-decoration: none;
 }
 

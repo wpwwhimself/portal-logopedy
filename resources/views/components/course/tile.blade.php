@@ -3,8 +3,8 @@
 ])
 
 
-<x-tile :action="route('course-view', ['course' => $course])"
-    class="course flex right but-mobile-down middle but-mobile-reset interactive shift-right"
+<x-tile :action="route('front-view-course', ['course' => $course])"
+    class="course grid but-mobile-down middle but-mobile-reset interactive shift-right"
     no-border line-separated
 >
     <div class="description flex down no-gap">
@@ -26,7 +26,7 @@
         <x-reviews.score :reviewable="$course" />
     </div>
 
-    <div class="pin-right but-mobile-reset">
+    <div>
         @if ($course->cost)
         <strong class="flex right middle">
             {!! $course->pretty("cost") !!}

@@ -30,9 +30,9 @@ class Nav extends Component
     public static function navLinks(): array
     {
         return [
-            ["Baza kursów, szkoleń...", route('courses-list')],
-            ["Baza specjalistów", route('specialists-list')],
-            ["Filmy, podcasty", route('films-list')],
+            ["Baza kursów, szkoleń...", route('front-list', ["model_name" => "courses"])],
+            ["Baza specjalistów", route('front-list', ["model_name" => "specialists"])],
+            ["Filmy, podcasty", route('front-list', ["model_name" => "films"])],
         ];
     }
     #endregion

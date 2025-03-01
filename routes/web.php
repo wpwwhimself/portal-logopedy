@@ -13,22 +13,10 @@ Route::controller(FrontController::class)->group(function () {
     Route::get("/", "index")->name("main");
     Route::get("/pages/{slug}", "standardPage")->name("standard-page");
 
-    Route::prefix("courses")->group(function () {
-        Route::get("{course}", "viewCourse")->name("course-view");
-        Route::get("", "listCourses")->name("courses-list");
+    Route::prefix("list")->group(function () {
+        Route::get("/{model_name}", "list")->name("front-list");
+        Route::get("/courses/{course}", "viewCourse")->name("front-view-course");
     });
-
-    Route::prefix("specialists")->group(function () {
-        Route::get("{specialist}", "viewSpecialist")->name("specialist-view");
-        Route::get("", "listSpecialists")->name("specialists-list");
-    });
-
-    Route::prefix("films")->group(function () {
-        Route::get("{film}", "viewFilm")->name("film-view");
-        Route::get("", "listFilms")->name("films-list");
-    });
-
-    Route::get("search/{model_name}", "search")->name("search");
 });
 
 Route::controller(BlogController::class)->prefix("blog")->group(function () {

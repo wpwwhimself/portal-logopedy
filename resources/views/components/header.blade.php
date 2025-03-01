@@ -2,7 +2,7 @@
     "hideBrowsing" => false,
 ])
 
-<x-full-width class="accent background secondary stick-top but-mobile-reset">
+<x-full-width class="accent background secondary but-mobile-reset">
     <header class="flex right but-mobile-down spread middle padded">
         <x-logo mono />
 

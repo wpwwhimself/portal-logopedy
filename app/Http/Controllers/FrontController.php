@@ -25,15 +25,34 @@ class FrontController extends Controller
         return view("standard-page", compact("page"));
     }
 
-    #region search
-    public function search(string $model_name, Request $rq)
+    #region list & search
+    public function list(string $model_name, Request $rq): View
     {
+        if (in_array($model_name, ["specialists", "films"])) return view("errors.under-construction");
+
+        $default_sort = "-updated_at";
+        $sort_direction = ($rq->get("sort", $default_sort)[0] == "-") ? "desc" : "asc";
+        $sort_field = Str::after($rq->get("sort", $default_sort), "-");
+
         $model = "App\\Models\\" . Str::of($model_name)->studly()->singular();
-        $data = $model::visible()
+        $data = $model::visible(false)
+            ->where(fn ($q) => $q
+                // search query
             ->where("name", "like", "%{$rq->q}%")
             ->orWhere("description", "like", "%{$rq->q}%")
             ->orWhere("categories", "like", "%{$rq->q}%")
             ->orWhere("keywords", "like", "%{$rq->q}%")
+            )
+            ->where(function ($q) use ($rq) {
+                // filters
+                foreach ($rq->except(["q", "sort"]) as $filter => $value) {
+                    $q = (is_array($value))
+                        ? $q->where(fn ($qq) => collect($value)->each(fn ($v) => $qq->orWhereJsonContains($filter, $v)))
+                        : $q->where($filter, $value);
+                }
+                return $q;
+            })
+            ->orderBy($sort_field, $sort_direction)
             ->paginate(25);
 
         return view("pages.$model_name.list", compact(
@@ -42,65 +61,12 @@ class FrontController extends Controller
     }
     #endregion
 
-    #region courses
-    public function listCourses(): View
-    {
-        $data = Course::visible()
-            ->with("industries")
-            ->paginate(25);
-
-        return view("pages.courses.list", compact(
-            "data",
-        ));
-    }
-
+    #region view models
     public function viewCourse(Course $course): View
     {
         return view("pages.courses.view", compact(
             "course",
         ));
     }
-    #endregion
-
-    #region specialists
-    public function listSpecialists(): View
-    {
-        return view("errors.under-construction");
-    //     $courses = Course::visible()
-    //         ->with("industries")
-    //         ->paginate(25);
-
-    //     return view("pages.courses.list", compact(
-    //         "courses",
-    //     ));
-    }
-
-    // public function viewCourse(Course $course): View
-    // {
-    //     return view("pages.courses.view", compact(
-    //         "course",
-    //     ));
-    // }
-    #endregion
-
-    #region films
-    public function listFilms(): View
-    {
-        return view("errors.under-construction");
-    //     $courses = Course::visible()
-    //         ->with("industries")
-    //         ->paginate(25);
-
-    //     return view("pages.courses.list", compact(
-    //         "courses",
-    //     ));
-    }
-
-    // public function viewCourse(Course $course): View
-    // {
-    //     return view("pages.courses.view", compact(
-    //         "course",
-    //     ));
-    // }
     #endregion
 }

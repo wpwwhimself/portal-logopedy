@@ -4,7 +4,7 @@
 ])
 
 <search>
-    <form action="{{ route('search', ["model_name" => $model]) }}" class="grid middle rounded padded">
+    <form action="{{ route('front-list', ["model_name" => $model]) }}" class="grid middle rounded padded">
         <input type="text" placeholder="{{ $placeholder }}"
             name="q"
             value="{{ request("q") }}"

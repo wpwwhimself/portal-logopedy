@@ -12,7 +12,7 @@
     </div>
 
     <div class="content">
-        <div class="flex down padded">
+        <div class="flex down padded stick-top">
             {{ $sideContent }}
         </div>
     </div>

@@ -219,7 +219,8 @@ span.large {
 
 .stick-top {
     position: sticky;
-    top: 0;
+    top: var(--m);
+    z-index: 99;
 }
 
 /******************** animations *******************/
@@ -326,6 +327,16 @@ code, pre {
     border-radius: var(--xs);
 }
 
+#filters {
+    & .grid {
+        &:has(input[type='checkbox']),
+        &:has(input[type='radio']) {
+            grid-template-columns: auto 1fr;
+        }
+    }
+
+}
+
 .flex {
     display: flex;
     flex-wrap: wrap;
@@ -343,7 +354,12 @@ code, pre {
 
     &.spread {
         justify-content: space-between;
+
+        &.and-cover > * {
+            flex-grow: 1;
+        }
     }
+
     &.nowrap {
         flex-wrap: nowrap;
     }
@@ -413,12 +429,6 @@ hr {
         border-color: var(--primary);
     }
 
-    & [type="checkbox"] {
-        accent-color: var(--primary);
-        height: var(--m);
-        width: var(--m);
-    }
-
     & textarea {
         font-family: monospace;
     }
@@ -429,6 +439,12 @@ hr {
             background-color: var(--bg);
         }
     }
+}
+input[type="checkbox"],
+input[type="radio"] {
+    accent-color: var(--primary);
+    height: var(--m);
+    width: var(--m);
 }
 
 .input, search form {
@@ -489,12 +505,6 @@ search {
 
     & > .content:last-child {
         /* border-left: var(--xxs) solid #00000033; */
-
-        & > div {
-            position: sticky;
-            top: var(--m);
-        }
-
     }
 }
 
@@ -532,6 +542,14 @@ table {
 
     &.accent.background {
         color: var(--white);
+    }
+
+    &.activated {
+        border-color: var(--primary)
+    }
+
+    & .button.expanded {
+        rotate: 180deg;
     }
 }
 

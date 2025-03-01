@@ -26,7 +26,7 @@
 <x-full-width>
     <x-side-content-container flipped>
         <div class="grid col2 middle">
-            <x-search-bar placeholder="Wyszukaj" />
+            <x-search-bar placeholder="Wyszukaj" model="courses" />
             <strong style="text-align: right;">Wyników: {{ $data->total() }}</strong>
         </div>
 
@@ -39,7 +39,7 @@
         {{ $data->links() }}
 
         <x-slot:side-content>
-
+            <x-main.filters model-name="courses" />
         </x-slot:side-content>
     </x-side-content-container>
 </x-full-width>

@@ -49,12 +49,16 @@ class AdminController extends Controller
             "model" => \App\Models\ReviewCriterion::class,
             "role" => "technical",
         ],
+        "newsletter-subscribers" => [
+            "model" => \App\Models\NewsletterSubscriber::class,
+            "role" => "technical",
+        ],
     ];
 
     public const SCOPE_GROUPS = [
         "Użytkownicy" => [
             "icon" => "account",
-            "scopes" => ["users", "user-survey-questions", "industries", "review-criteria",],
+            "scopes" => ["users", "user-survey-questions", "industries", "review-criteria", "newsletter-subscribers",],
         ],
         "Treści" => [
             "icon" => "text",
@@ -77,18 +81,18 @@ class AdminController extends Controller
     {
         $modelName = $this->getModelName($scope);
         return array_merge(array_filter([
-            "name" => [
+            "name" => in_array($scope, ["newsletter-subscribers"]) ? null : [
                 "type" => "text",
                 "label" => "Nazwa",
                 "icon" => "card-text",
                 "required" => true,
             ],
-            "visible" => in_array($scope, ["users", "industries"]) ? null : [
+            "visible" => in_array($scope, ["users", "industries", "newsletter-subscribers"]) ? null : [
                 "type" => "select", "options" => self::VISIBILITIES,
                 "label" => "Widoczny dla",
                 "icon" => "eye",
             ],
-            "order" => in_array($scope, ["users", "industries"]) ? null : [
+            "order" => in_array($scope, ["users", "industries", "newsletter-subscribers"]) ? null : [
                 "type" => "number",
                 "label" => "Wymuś kolejność",
                 "icon" => "order-numeric-ascending",
@@ -214,7 +218,11 @@ class AdminController extends Controller
 
             if ($rq->has("_connections")) {
                 foreach ($rq->get("_connections") as $connection) {
-                    $model->{$connection}()->sync($rq->get($connection));
+                    switch ($modelName::CONNECTIONS[$connection]["mode"]) {
+                        case "many":
+                            $model->{$connection}()->sync($rq->get($connection));
+                            break;
+                    }
                 }
             }
 

@@ -3,13 +3,15 @@
 namespace App;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Schema;
 
 trait HasStandardScopes
 {
     public function scopeForAdminList($query)
     {
-        return $query->orderBy("order")
-            ->orderBy("name");
+        if (Schema::hasColumn($this->getTable(), "order")) $query = $query->orderBy("order");
+        if (Schema::hasColumn($this->getTable(), "name")) $query = $query->orderBy("name");
+        return $query;
     }
 
     public function scopeVisible($query, bool $sort = true)

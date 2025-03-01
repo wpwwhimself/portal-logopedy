@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\DocsController;
 use App\Http\Controllers\FrontController;
+use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\SpellbookController;
@@ -39,6 +40,12 @@ Route::middleware("auth")->group(function () {
         Route::get("list/{model}/{id}", "listReviews")->name("reviews-list");
         Route::get("add/{model}/{id}", "addReview")->name("review-add");
         Route::post("add", "processReview")->name("review-process");
+    });
+
+    Route::controller(NewsletterController::class)->prefix("newsletter")->group(function () {
+        Route::get("{mode?}", "form")->name("newsletter-form");
+        Route::post("subscribe", "subscribe")->name("newsletter-subscribe");
+        Route::post("unsubscribe", "unsubscribe")->name("newsletter-unsubscribe");
     });
 
     Route::controller(AdminController::class)->prefix("admin")->group(function () {

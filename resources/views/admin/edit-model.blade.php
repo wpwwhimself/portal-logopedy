@@ -43,11 +43,13 @@
                 @switch ($rdata['mode'])
                     @case ("one")
                     <x-input type="select"
-                        name="{{ $relation }}"
+                        name="{{ Str::snake($relation) }}_id"
                         label="Wybierz"
-                        :value="$data?->{$relation} ? $data?->{$relation}->id : null"
-                        :options="$rdata['model']::all()->pluck('name', 'id')"
+                        :icon="$rdata['model']::META['icon']"
+                        :value="$data?->{Str::studly($relation)} ? $data?->{Str::studly($relation)}->id : null"
+                        :options="$rdata['model']::all()->pluck('name', 'id')->toArray()"
                         empty-option
+                    />
                     @break
 
                     @case ("many")

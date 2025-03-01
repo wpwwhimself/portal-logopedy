@@ -34,7 +34,6 @@ class User extends Authenticatable
         'email',
         'password',
         'phone',
-        'wants_newsletter',
     ];
 
     public const FIELDS = [
@@ -47,11 +46,6 @@ class User extends Authenticatable
             "type" => "tel",
             "label" => "Numer telefonu",
             "icon" => "phone",
-        ],
-        "wants_newsletter" => [
-            "type" => "checkbox",
-            "label" => "Zapisany do newslettera",
-            "icon" => "email-newsletter",
         ],
     ];
 
@@ -87,7 +81,6 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
-            'wants_newsletter' => 'boolean',
         ];
     }
 

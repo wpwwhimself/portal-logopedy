@@ -3,7 +3,7 @@
         @foreach (array_merge(App\View\Components\Nav::navLinks(), [
             ["<span><b class=\"large\">OCEŃ</b></span><span>kurs/szkolenie/...</span>", route("front-list", ['model_name' => 'courses'])],
             ["O Portalu", route("standard-page", ["slug" => "o-portalu"])],
-            ["<span><b>Zapisz się na newsletter,</b></span><span>żeby dowiedzieć się, co dla Ciebie przygotowaliśmy!</span>", route("profile")],
+            ["<span><b>Zapisz się na newsletter,</b></span><span>żeby dowiedzieć się, co dla Ciebie przygotowaliśmy!</span>", route("newsletter-form")],
         ]) as $i => [$label, $link])
         <x-tile background-class="accent background {{ $i == 5 ? 'primary' : 'secondary' }}"
             class="grid middle mid-section-tile"

@@ -29,9 +29,8 @@ class AutomationController extends Controller
             function ($v) {
                 if (is_array($v)) {
                     $v = array_filter($v);
-                    return (empty($v)) ? null : $v;
                 }
-                return $v;
+                return (empty($v)) ? null : $v;
             },
             $rq->all()
         );

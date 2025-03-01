@@ -161,7 +161,10 @@ class Course extends Model
     public function fullCategoryPretty(): Attribute
     {
         return $this->iconedAttribute(
-            $this->categories->first() . (($this->categories->count() > 1) ? " (+".($this->categories->count() - 1).")" : ""),
+            $this->categories->first() . (($this->categories->count() > 1)
+                ? " (+".($this->categories->count() - 1).")" . view("components.icon", ['name' => "chevron-down", "hint" => $this->categories->join("<br>")])->render()
+                : ""
+            ),
             "categories"
         ) ;
     }

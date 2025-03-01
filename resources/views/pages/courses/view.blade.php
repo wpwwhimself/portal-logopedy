@@ -35,7 +35,9 @@
         <x-h lvl="3" icon="image">Zdjęcia</x-h>
         <div class="grid col3">
             @foreach ($course->image_paths as $path)
-            <img src="{{ $path }}" alt="{{ $course->name }}" class="thumbnail">
+            <a href="{{ $path }}" target="_blank">
+                <img src="{{ $path }}" alt="{{ $course->name }}" class="thumbnail">
+            </a>
             @endforeach
         </div>
         @endif

@@ -1,9 +1,13 @@
 <div class="blog-highlights flex down">
     {{-- <x-h lvl="2" :icon="$meta['icon']">{{ $title }}</x-h> --}}
 
-    @foreach ($articles as $article)
+    @forelse ($articles as $article)
     <x-blog.article-preview :article="$article" />
-    @endforeach
+    @empty
+    <div class="ghost flex right center middle">
+        {{ App\Models\Setting::get("blog_name") }} nie ma na razie żadnych wpisów
+    </div>
+    @endforelse
 
     @if (Route::current()->getName() == "blog-view")
     <x-button :action="route('blog-list')" class="phantom" icon="arrow-left">Wróć</x-button>

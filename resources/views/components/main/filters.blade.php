@@ -36,21 +36,22 @@
         class="flex down"
         :activated="request()->has($name)"
     >
-        @if ($flt == "list-from-db")
         <x-button icon="filter-off" onclick="resetFilters(this)" class="accent background secondary interactive small">Wyczyść</x-button>
 
-        @foreach ($model::classes($name) as $class)
+        @foreach ($flt["options"] ?? $model::classes($name) as $label => $class)
         <div class="grid middle">
-            <input type="checkbox"
+            <input type="{{ ($flt['mode'] ?? 'many') == 'one' ? 'radio' : 'checkbox' }}"
                 id="filters-{{ $name }}-{{ $class }}"
-                name="{{ $name }}[]"
+                name="{{ $name }}{{ ($flt['mode'] ?? 'many') == 'one' ? '' : '[]' }}"
                 value="{{ $class }}"
-                {{ in_array($class, request()->get($name, [])) ? "checked" : "" }}
+                {{ !empty($class) && (is_array(request()->get($name))
+                    ? in_array($class, request()->get($name, []))
+                    : request()->get($name) == $class
+                ) ? "checked" : "" }}
             />
-            <label for="filters-{{ $name }}-{{ $class }}">{{ $class ?? "bd." }}</label>
+            <label for="filters-{{ $name }}-{{ $class }}">{{ $label ?: "bd." }}</label>
         </div>
         @endforeach
-        @endif
     </x-tile>
     @endforeach
 

@@ -40,24 +40,31 @@ class FrontController extends Controller
                 ->orWhere("categories", "like", "%{$rq->q}%")
                 ->orWhere("keywords", "like", "%{$rq->q}%")
             )
-            ->where(function ($q) use ($rq) {
-                // filters
-                foreach ($rq->except(["q", "sort"]) as $filter => $value) {
-                    $q = (is_array($value))
-                        ? $q->where(fn ($qq) => collect($value)->each(fn ($v) => $qq->orWhereJsonContains($filter, $v)))
-                        : $q->where($filter, $value);
-                }
-                return $q;
-            })
             ->get();
 
+        // filtering
+        foreach ($rq->except(["q", "sort"]) as $filter => $value) {
+            $flt_data = $model::FILTERS[$filter];
+
+            $data = $data->filter(function ($item) use ($flt_data, $value) {
+                switch ($flt_data["operator"] ?? "=") {
+                    case ">=": return $item->discr($flt_data) >= $value;
+                    case ">": return $item->discr($flt_data) > $value;
+                    case "any": return count(array_intersect($item->discr($flt_data)->toArray(), $value)) > 0;
+                    case "all": return count(array_intersect($item->discr($flt_data)->toArray(), $value)) == count($value);
+                    default: return $item->discr($flt_data) == $value;
+                }
+            });
+        }
+
+        // sorting
         $default_sort = "-updated_at";
         $sort_direction = ($rq->get("sort", $default_sort)[0] == "-") ? "desc" : "asc";
         $sort_field = Str::after($rq->get("sort", $default_sort), "-");
 
         $data = $data->sort(fn ($a, $b) => ($sort_direction == "asc")
-            ? $a->sortable($model::getSorts()[$sort_field]) <=> $b->sortable($model::getSorts()[$sort_field])
-            : $b->sortable($model::getSorts()[$sort_field]) <=> $a->sortable($model::getSorts()[$sort_field])
+            ? $a->discr($model::getSorts()[$sort_field]) <=> $b->discr($model::getSorts()[$sort_field])
+            : $b->discr($model::getSorts()[$sort_field]) <=> $a->discr($model::getSorts()[$sort_field])
         );
 
         $data = new LengthAwarePaginator(

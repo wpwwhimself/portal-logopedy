@@ -117,23 +117,46 @@ class Course extends Model
     public const SORTS = [
         "rating" => [
             "label" => "Po ocenie",
-            "mode" => "function",
+            "compare-using" => "function",
             "discr" => "averageRating",
         ],
     ];
 
     public const FILTERS = [
-        "categories" => "list-from-db",
-        // "ranking" => [
-        //     "label" => "Ranking",
-        //     "icon" => "star",
-        //     "options" => [
-        //         "4,5 i wyższa" => "4.5",
-        //     ],
-        // ],
-        "keywords" => "list-from-db",
-        "location" => "list-from-db",
-        "final_document" => "list-from-db",
+        "categories" => [
+            "compare-using" => "field",
+            "discr" => "categories",
+            "operator" => "any",
+        ],
+        "rating" => [
+            "label" => "Ranking",
+            "icon" => "star",
+            "compare-using" => "function",
+            "discr" => "averageRating",
+            "mode" => "one",
+            "operator" => ">=",
+            "options" => [
+                "4,5 i wyższa" => 4.5,
+                "4,0 i wyższa" => 4,
+                "3.5 i wyższa" => 3.5,
+                "3,0 i wyższa" => 3,
+                "2,0 i wyższa" => 2,
+                "ocenione" => 1,
+            ],
+        ],
+        "keywords" => [
+            "compare-using" => "field",
+            "discr" => "keywords",
+            "operator" => "any",
+        ],
+        "location" => [
+            "compare-using" => "field",
+            "discr" => "location",
+        ],
+        "final_document" => [
+            "compare-using" => "field",
+            "discr" => "final_document",
+        ],
     ];
 
     public const CONNECTIONS = [

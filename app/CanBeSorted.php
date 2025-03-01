@@ -8,9 +8,14 @@ trait CanBeSorted
     {
         return array_filter(array_merge(
             [
+                "updated_at" => [
+                    "label" => "Po dacie aktualizacji",
+                    "compare-using" => "field",
+                    "discr" => "updated_at",
+                ],
                 "name" => [
                     "label" => "Po nazwie",
-                    "mode" => "field",
+                    "compare-using" => "field",
                     "discr" => "name",
                 ],
             ],
@@ -18,15 +23,15 @@ trait CanBeSorted
         ));
     }
 
-    public function sortable(array $sort_data)
+    public function discr(array $data)
     {
-        switch ($sort_data["mode"]) {
+        switch ($data["compare-using"]) {
             case "field":
-                return $this->{$sort_data["discr"]};
+                return $this->{$data["discr"]};
             case "function":
-                return $this->{$sort_data["discr"]}();
+                return $this->{$data["discr"]}();
             default:
-                throw new \InvalidArgumentException("Unknown sort mode: ".$sort_data["mode"]);
+                throw new \InvalidArgumentException("Unknown sort criterion: ".$data["compare-using"]);
         }
     }
 }

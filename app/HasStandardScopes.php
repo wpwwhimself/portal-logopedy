@@ -33,10 +33,13 @@ trait HasStandardScopes
 
     public function scopeClasses($query, string $field)
     {
-        return $query->select($field)->get()
+        $data = $query->select($field)->get()
             ->pluck($field)
             ->flatten()
             ->sort()
-            ->unique();
+            ->unique()
+            ->filter();
+
+        return $data->combine($data);
     }
 }

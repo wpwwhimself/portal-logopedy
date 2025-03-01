@@ -38,18 +38,18 @@
     >
         <x-button icon="filter-off" onclick="resetFilters(this)" class="accent background secondary interactive small">Wyczyść</x-button>
 
-        @foreach ($flt["options"] ?? $model::classes($name) as $label => $class)
+        @foreach ($flt["options"] ?? $model::classes($name) as $label => $level)
         <div class="grid middle">
             <input type="{{ ($flt['mode'] ?? 'many') == 'one' ? 'radio' : 'checkbox' }}"
-                id="filters-{{ $name }}-{{ $class }}"
+                id="filters-{{ $name }}-{{ $level }}"
                 name="{{ $name }}{{ ($flt['mode'] ?? 'many') == 'one' ? '' : '[]' }}"
-                value="{{ $class }}"
-                {{ !empty($class) && (is_array(request()->get($name))
-                    ? in_array($class, request()->get($name, []))
-                    : request()->get($name) == $class
-                ) ? "checked" : "" }}
+                value="{{ $level }}"
+                {{ (request()->has($name) && (is_array(request()->get($name)) ? in_array($level, request()->get($name, [])) : request()->get($name) == $level))
+                    ? "checked"
+                    : ""
+                }}
             />
-            <label for="filters-{{ $name }}-{{ $class }}">{{ $label ?: "bd." }}</label>
+            <label for="filters-{{ $name }}-{{ $level }}">{{ $label ?: "bd." }}</label>
         </div>
         @endforeach
     </x-tile>

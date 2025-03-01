@@ -28,7 +28,7 @@
 
     <div>
         @if ($course->cost)
-        <strong class="flex right middle">
+        <strong class="flex right middle {{ $course->isFree() ? "accent tertiary" : "" }}">
             {!! $course->pretty("cost") !!}
         </strong>
         @endif

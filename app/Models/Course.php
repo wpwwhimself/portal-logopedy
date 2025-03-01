@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 use Wildside\Userstamps\Userstamps;
 
 class Course extends Model
@@ -89,7 +90,7 @@ class Course extends Model
         ],
         "location" => [
             "type" => "text",
-            "label" => "Miejscowość",
+            "label" => "Miejsce",
             "icon" => "map-marker",
         ],
         "dates" => [
@@ -143,6 +144,17 @@ class Course extends Model
                 "ocenione" => 1,
             ],
         ],
+        "cost" => [
+            "label" => "Cena",
+            "icon" => self::FIELDS["cost"]["icon"],
+            "compare-using" => "function",
+            "discr" => "isFree",
+            "mode" => "one",
+            "options" => [
+                "Płatny" => 0,
+                "Bezpłatny" => 1,
+            ],
+        ],
         "keywords" => [
             "compare-using" => "field",
             "discr" => "keywords",
@@ -151,6 +163,7 @@ class Course extends Model
         "location" => [
             "compare-using" => "field",
             "discr" => "location",
+            "operator" => "any",
         ],
         "final_document" => [
             "compare-using" => "field",
@@ -213,6 +226,15 @@ class Course extends Model
             $this->location,
             "location"
         );
+    }
+
+    public function isFree(): bool
+    {
+        return in_array(Str::lower($this->cost), [
+            "bezpłatny",
+            "bezpłatnie",
+            "za darmo",
+        ]);
     }
     #endregion
 

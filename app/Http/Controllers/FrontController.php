@@ -50,8 +50,8 @@ class FrontController extends Controller
                 switch ($flt_data["operator"] ?? "=") {
                     case ">=": return $item->discr($flt_data) >= $value;
                     case ">": return $item->discr($flt_data) > $value;
-                    case "any": return count(array_intersect($item->discr($flt_data)->toArray(), $value)) > 0;
-                    case "all": return count(array_intersect($item->discr($flt_data)->toArray(), $value)) == count($value);
+                    case "any": return count(array_intersect(collect($item->discr($flt_data))->toArray(), $value)) > 0;
+                    case "all": return count(array_intersect(collect($item->discr($flt_data))->toArray(), $value)) == count($value);
                     default: return $item->discr($flt_data) == $value;
                 }
             });

@@ -14,7 +14,7 @@ use Wildside\Userstamps\Userstamps;
 
 class Course extends Model
 {
-    use Userstamps, CanBeStringified, CanBeReviewed;
+    use Userstamps, CanBeStringified;
 
     public const META = [
         "label" => "Kursy i szkolenia",
@@ -191,6 +191,8 @@ class Course extends Model
     #endregion
 
     #region relations
+    use CanBeReviewed;
+
     public function industries(): MorphToMany
     {
         return $this->morphToMany(Industry::class, "industriable");

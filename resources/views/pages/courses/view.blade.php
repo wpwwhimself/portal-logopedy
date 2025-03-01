@@ -42,6 +42,7 @@
 
         <x-h icon="message-star">Oceny</x-h>
         <x-reviews.list :reviewable="$course" />
+        <x-button :action="route('review-add', ['model' => 'course', 'id' => $course->id])" icon="star">Dodaj ocenę</x-button>
 
         <x-slot:side-content>
             @if ($course->dates)

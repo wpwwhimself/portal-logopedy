@@ -29,6 +29,23 @@ class Review extends Model
     {
         return $this->morphTo();
     }
+
+    public function criteria()
+    {
+        return $this->belongsToMany(ReviewCriterion::class)
+            ->withPivot("answer")
+            ->orderBy("order");
+    }
+    #endregion
+
+    #region attributes
+    public function averageRating(): ?float
+    {
+        return $this->criteria
+            ->filter(fn($c) => is_numeric($c->pivot->answer))
+            ->map(fn($c) => $c->pivot->answer)
+            ->avg();
+    }
     #endregion
 
     #region helpers

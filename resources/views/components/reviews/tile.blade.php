@@ -2,10 +2,15 @@
     "review",
 ])
 
-<x-tile :title="$review->title" :title-icon="App\Models\Review::META['icon']">
-    <p class="ghost">
+<x-tile>
+    <x-h lvl="2">
         {!! $review->creator !!}
-        <x-reviews.stars :rating="$review->rating" />
+        <x-reviews.stars :rating="$review->averageRating()" />
+    </x-h>
+
+    @foreach ($review->criteria as $criterion)
+    <p>
+        <strong>{{ $criterion->name }}:</strong> {{ $criterion->pivot->answer }}
     </p>
-    <p>{{ $review->description }}</p>
+    @endforeach
 </x-tile>

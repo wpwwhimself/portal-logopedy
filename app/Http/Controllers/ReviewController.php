@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Review;
+use App\Models\ReviewCriterion;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Illuminate\Support\Str;
 
 class ReviewController extends Controller
 {
@@ -25,10 +27,31 @@ class ReviewController extends Controller
         ));
     }
 
-    public function addReview(Request $rq): RedirectResponse
+    public function addReview(string $model, int $id): View
     {
-        Review::create($rq->except(["_token"]));
+        $entity_name = "App\\Models\\$model";
+        $entity = $entity_name::find($id);
 
-        return back()->with("success", "Ocena dodana, dziękujemy!");
+        $criteria = ReviewCriterion::visible()
+            ->where("used_in_".Str::plural($model), true)
+            ->get();
+
+        return view('pages.reviews.add', compact(
+            "entity",
+            "model",
+            "criteria",
+        ));
+    }
+
+    public function processReview(Request $rq): RedirectResponse
+    {
+        $review = Review::create($rq->except(["_token"]));
+
+        $criteria = collect($rq->all())
+            ->filter(fn ($v, $k) => Str::startsWith($k, "criterion_"))
+            ->mapWithKeys(fn ($v, $k) => [Str::after($k, "criterion_") => ["answer" => $v]]);
+        $review->criteria()->sync($criteria);
+
+        return redirect()->route("front-view-$rq->model", ["course" => $rq->reviewable_type::find($rq->reviewable_id)])->with("success", "Ocena dodana, dziękujemy!");
     }
 }

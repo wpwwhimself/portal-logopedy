@@ -37,7 +37,8 @@ Route::middleware("auth")->group(function () {
 
     Route::controller(ReviewController::class)->middleware("role:reviewer")->prefix("reviews")->group(function () {
         Route::get("list/{model}/{id}", "listReviews")->name("reviews-list");
-        Route::post("add", "addReview")->name("review-add");
+        Route::get("add/{model}/{id}", "addReview")->name("review-add");
+        Route::post("add", "processReview")->name("review-process");
     });
 
     Route::controller(AdminController::class)->prefix("admin")->group(function () {

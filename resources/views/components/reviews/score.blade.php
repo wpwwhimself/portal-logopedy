@@ -3,13 +3,9 @@
 ])
 
 <div class="score flex right middle">
-    <strong class="accent tertiary">{{ $reviewable->average_rating_pretty }}</strong>
+    <strong class="accent tertiary">{{ $reviewable->averageRatingPretty() }}</strong>
 
-    <div class="flex right middle no-gap accent tertiary">
-        @for ($i = 0; $i < 5; $i++)
-        <x-icon :name="$i < $reviewable->average_rating ? 'star' : 'star-outline'" />
-        @endfor
-    </div>
+    <x-reviews.stars :rating="$reviewable->averageRating() ?? 0" />
 
     <span>({{ $reviewable->reviews->count() }})</span>
 

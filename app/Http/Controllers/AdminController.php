@@ -45,12 +45,16 @@ class AdminController extends Controller
             "role" => "course-master",
             "disabled" => true,
         ],
+        "review-criteria" => [
+            "model" => \App\Models\ReviewCriterion::class,
+            "role" => "technical",
+        ],
     ];
 
     public const SCOPE_GROUPS = [
         "Użytkownicy" => [
             "icon" => "account",
-            "scopes" => ["users", "user-survey-questions", "industries",],
+            "scopes" => ["users", "user-survey-questions", "industries", "review-criteria",],
         ],
         "Treści" => [
             "icon" => "text",

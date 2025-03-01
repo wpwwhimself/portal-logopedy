@@ -49,7 +49,7 @@ function selectFile(url, input_id) {
 
 // #region filters
 function resetFilters(btn) {
-    btn.parentElement.querySelectorAll("input[type='checkbox']").forEach(input => input.checked = false)
+    btn.parentElement.querySelectorAll("input").forEach(input => input.checked = false)
 }
 // #endregion
 

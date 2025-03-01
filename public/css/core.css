@@ -248,6 +248,10 @@ span.large {
 
 /******************** components *******************/
 
+a.button, a:has(> .tile) {
+    text-decoration: none;
+}
+
 .alert {
     position: fixed;
     top: calc(-5 * var(--xl));
@@ -304,7 +308,6 @@ body {
 .button {
     background-color: var(--primary);
     color: white;
-    text-decoration: none;
 
     &.phantom {
         background-color: transparent;

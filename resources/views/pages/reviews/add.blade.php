@@ -34,6 +34,8 @@
                 :icon="$criterion::META['icon']"
                 :hint="$criterion->description"
                 :options="$criterion->options"
+                empty-option
+                required
             />
             @endforeach
 

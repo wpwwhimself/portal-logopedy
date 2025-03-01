@@ -44,7 +44,16 @@
 
         <x-h icon="message-star">Oceny</x-h>
         <x-reviews.list :reviewable="$course" />
-        <x-button :action="route('review-add', ['model' => 'course', 'id' => $course->id])" icon="star">Dodaj ocenę</x-button>
+
+        <x-button :action="route('review-add', ['model' => 'course', 'id' => $course->id])" icon="star"
+            :disabled="$course->reviewsByCurrentUser()->count() > 0"
+        >
+            @if ($course->reviewsByCurrentUser()->count() > 0)
+            Twoja ocena została dodana
+            @else
+            Dodaj ocenę
+            @endif
+        </x-button>
 
         <x-slot:side-content>
             @if ($course->dates)

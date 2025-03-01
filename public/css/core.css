@@ -433,6 +433,10 @@ hr {
         border-color: var(--primary);
     }
 
+    & input, & textarea, & select {
+        color: var(--fg);
+    }
+
     & textarea {
         font-family: monospace;
     }

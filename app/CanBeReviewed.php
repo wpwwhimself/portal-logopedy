@@ -6,6 +6,7 @@ use App\Models\Review;
 use App\Models\ReviewCriterion;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Auth;
 
 trait CanBeReviewed
 {
@@ -13,6 +14,12 @@ trait CanBeReviewed
     public function reviews()
     {
         return $this->morphMany(Review::class, 'reviewable');
+    }
+
+    public function reviewsByCurrentUser()
+    {
+        return $this->reviews()
+            ->where("created_by", Auth::id());
     }
     #endregion
 

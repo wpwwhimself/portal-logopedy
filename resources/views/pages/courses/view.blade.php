@@ -65,8 +65,10 @@
             </ul>
             @endif
 
+            @if ($course->location)
             <x-h lvl="3" icon="map-marker">Miejsce</x-h>
-            <span>{{ $course->location ?? "online" }}</span>
+            <span>{{ $course->location }}</span>
+            @endif
 
             <x-button :action="$course->link" target="_blank" icon="link">Strona organizatora</x-button>
 

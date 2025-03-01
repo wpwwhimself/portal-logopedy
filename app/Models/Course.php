@@ -91,7 +91,6 @@ class Course extends Model
             "type" => "text",
             "label" => "Miejscowość",
             "icon" => "map-marker",
-            "placeholder" => "online",
         ],
         "dates" => [
             "type" => "JSON",
@@ -208,12 +207,6 @@ class Course extends Model
         );
     }
 
-    public function location(): Attribute
-    {
-        return Attribute::make(
-            get: fn () => $this->location ?? "online",
-        );
-    }
     public function locationPretty(): Attribute
     {
         return $this->iconedAttribute(

@@ -24,12 +24,25 @@ class AutomationController extends Controller
         //     ->get()
         //     ->pluck("id");
 
-        $course = Course::where("name", $rq->name)
-            ->where("trainer_organization", $rq->trainer_organization)
+        // incoming data cleanup
+        $data = array_map(
+            function ($v) {
+                if (is_array($v)) {
+                    $v = array_filter($v);
+                    return (empty($v)) ? null : $v;
+                }
+                return $v;
+            },
+            $rq->all()
+        );
+        if ($data["trainer_name"] == $data["trainer_organization"]) $data["trainer_name"] = null;
+
+        $course = Course::where("name", $data["name"])
+            ->where("trainer_organization", $data["trainer_organization"])
             ->first();
 
         if ($course) {
-            $course->update($rq->all());
+            $course->update($data);
             // $course->industries()->sync($industries);
             return response()->json([
                 "status" => "course updated",
@@ -37,7 +50,7 @@ class AutomationController extends Controller
             ]);
         }
 
-        $course = Course::create(array_merge($rq->all(), [
+        $course = Course::create(array_merge($data, [
             "visible" => 2,
         ]));
         // $course->industries()->sync($industries);

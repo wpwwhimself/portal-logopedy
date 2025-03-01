@@ -29,6 +29,11 @@ class AutomationController extends Controller
             function ($v) {
                 if (is_array($v)) {
                     $v = array_filter($v);
+                    $v = array_map(fn ($vv) => preg_replace_callback(
+                        '/\\\\u([0-9a-f]{4})/',
+                        fn ($match) => mb_convert_encoding(pack('H*', $match[1]), 'UTF-8', 'UCS-2BE'),
+                        (string) $vv
+                    ), $v);
                 }
                 return (empty($v)) ? null : $v;
             },

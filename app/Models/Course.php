@@ -5,6 +5,7 @@ namespace App\Models;
 use App\CanBeReviewed;
 use App\CanBeStringified;
 use App\HasIconedAttributes;
+use App\HasStandardScopes;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
@@ -13,7 +14,7 @@ use Wildside\Userstamps\Userstamps;
 
 class Course extends Model
 {
-    use Userstamps, CanBeStringified, CanBeReviewed, HasIconedAttributes;
+    use Userstamps, CanBeStringified, CanBeReviewed;
 
     public const META = [
         "label" => "Kursy i szkolenia",
@@ -119,38 +120,12 @@ class Course extends Model
     ];
 
     #region scopes
-    public function scopeForAdminList($query)
-    {
-        return $query->orderBy("order")
-            ->orderBy("name");
-    }
-
-    public function scopeVisible($query)
-    {
-        return $query->where("visible", ">", 1 - Auth::check())
-            ->orderBy("order")
-            ->orderBy("name");
-    }
-
-    public function scopeRecent($query, string $except_id = null)
-    {
-        return $query->where("visible", ">", 1 - Auth::check())
-            ->orderByDesc("updated_at")
-            ->where("id", "!=", $except_id)
-            ->limit(3);
-    }
-
-    public function scopeClasses($query, string $field)
-    {
-        return $query->select($field)->get()
-            ->pluck($field)
-            ->flatten()
-            ->sort()
-            ->unique();
-    }
+    use HasStandardScopes;
     #endregion
 
     #region attributes
+    use HasIconedAttributes;
+
     protected function casts(): array
     {
         return [

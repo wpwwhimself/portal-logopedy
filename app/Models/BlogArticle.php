@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\CanBeStringified;
+use App\HasStandardScopes;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
@@ -65,26 +66,7 @@ class BlogArticle extends Model
     ];
 
     #region scopes
-    public function scopeForAdminList($query)
-    {
-        return $query->orderBy("order")
-            ->orderBy("name");
-    }
-
-    public function scopeVisible($query)
-    {
-        return $query->where("visible", ">", 1 - Auth::check())
-            ->orderBy("order")
-            ->orderBy("name");
-    }
-
-    public function scopeRecent($query, string $except_id = null)
-    {
-        return $query->where("visible", ">", 1 - Auth::check())
-            ->orderByDesc("updated_at")
-            ->where("id", "!=", $except_id)
-            ->limit(3);
-    }
+    use HasStandardScopes;
     #endregion
 
     #region attributes

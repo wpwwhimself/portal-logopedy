@@ -5,6 +5,7 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
 use App\CanBeStringified;
+use App\HasStandardScopes;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -91,10 +92,7 @@ class User extends Authenticatable
     }
 
     #region scopes
-    public function scopeForAdminList($query)
-    {
-        return $query->orderBy("name");
-    }
+    use HasStandardScopes;
     #endregion
 
     #region attributes

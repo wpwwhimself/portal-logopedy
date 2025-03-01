@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\CanBeStringified;
+use App\HasStandardScopes;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Support\Facades\Auth;
@@ -32,10 +33,7 @@ class Industry extends Model
     ];
 
     #region scopes
-    public function scopeForAdminList($query)
-    {
-        return $query->orderBy("name");
-    }
+    use HasStandardScopes;
     #endregion
 
     #region attributes

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\CanBeStringified;
+use App\HasStandardScopes;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
@@ -38,18 +39,7 @@ class SocialMedium extends Model
     ];
 
     #region scopes
-    public function scopeForAdminList($query)
-    {
-        return $query->orderBy("order")
-            ->orderBy("name");
-    }
-
-    public function scopeVisible($query)
-    {
-        return $query->where("visible", ">", 1 - Auth::check())
-            ->orderBy("order")
-            ->orderBy("name");
-    }
+    use HasStandardScopes;
     #endregion
 
     #region attributes

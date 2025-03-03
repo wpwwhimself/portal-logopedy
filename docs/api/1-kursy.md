@@ -18,7 +18,7 @@ Poprawne ciało zapytania posiada następującą strukturę:
     "link": <string?>,
     "trainer_name": <string>,
     "trainer_organization": <string?>,
-    "location": <string?>,
+    "locations": <string[]?>,
     "dates": <datetime[]?>,
     "cost": <string?>,
     "final_document": <string?>,
@@ -38,4 +38,5 @@ W obu przypadkach w odpowiedzi pojawi się również utworzony wpis.
 
 - `categories` - array zawierający nazwy kategorii
 - `dates` - array zawierający daty i godziny kursów
+- `locations` - array zawierający nazwy miejsc, gdzie kurs się odbywa. Jeśli kurs jest online, to array powinien zawierać tekst `"online"`
 <!-- - `industries` - nazwy branż powiązanych z kursem. Portal doda do utworzonego/edytowanego kursu branże, jakie istnieją w jego bazie, na podstawie przekazanych nazw. -->

@@ -65,9 +65,13 @@
             </ul>
             @endif
 
-            @if ($course->location)
-            <x-h lvl="3" icon="map-marker">Miejsce</x-h>
-            <span>{{ $course->location }}</span>
+            @if ($course->locations)
+            <x-h lvl="3" icon="map-marker">Miejsca</x-h>
+            <ul>
+                @foreach ($course->locations as $location)
+                <li>{{ $location }}</li>
+                @endforeach
+            </ul>
             @endif
 
             <x-button :action="$course->link" target="_blank" icon="link">Strona organizatora</x-button>

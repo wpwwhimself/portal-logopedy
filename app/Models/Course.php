@@ -32,7 +32,7 @@ class Course extends Model
         "thumbnail_path", "image_paths",
         "link",
         "trainer_name", "trainer_organization",
-        "location",
+        "locations",
         "dates",
         "cost",
         "final_document",
@@ -88,9 +88,12 @@ class Course extends Model
             "label" => "Organizator",
             "icon" => "badge-account",
         ],
-        "location" => [
-            "type" => "text",
-            "label" => "Miejsce",
+        "locations" => [
+            "type" => "JSON",
+            "column-types" => [
+                "Miejsce" => "text",
+            ],
+            "label" => "Miejsca",
             "icon" => "map-marker",
         ],
         "dates" => [
@@ -160,9 +163,9 @@ class Course extends Model
             "discr" => "keywords",
             "operator" => "any",
         ],
-        "location" => [
+        "locations" => [
             "compare-using" => "field",
-            "discr" => "location",
+            "discr" => "locations",
             "operator" => "any",
         ],
         "final_document" => [
@@ -189,6 +192,7 @@ class Course extends Model
     {
         return [
             "categories" => "collection",
+            "locations" => "collection",
             "dates" => "collection",
             "keywords" => "collection",
             "image_paths" => "collection",
@@ -203,12 +207,12 @@ class Course extends Model
     public function fullCategoryPretty(): Attribute
     {
         return $this->iconedAttribute(
-            $this->categories->first() . (($this->categories->count() > 1)
+            $this->categories?->first() . (($this->categories?->count() > 1)
                 ? " (+".($this->categories->count() - 1).")" . view("components.icon", ['name' => "chevron-down", "hint" => $this->categories->join("<br>")])->render()
                 : ""
             ),
             "categories"
-        ) ;
+        );
     }
 
     public function trainerPretty(): Attribute
@@ -223,8 +227,11 @@ class Course extends Model
     public function locationPretty(): Attribute
     {
         return $this->iconedAttribute(
-            $this->location,
-            "location"
+            ($this->locations?->first() ?? "brak informacji") . (($this->locations?->count() > 1)
+                ? " (+".($this->categories->count() - 1).")" . view("components.icon", ['name' => "chevron-down", "hint" => $this->locations->join("<br>")])->render()
+                : ""
+            ),
+            "locations"
         );
     }
 

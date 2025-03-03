@@ -9,13 +9,12 @@
 >
     <div class="description flex down no-gap">
         <span class="flex right middle">
-            <x-icon name="calendar" hint="Najbliższy termin" />
             @if ($course->dates)
             <span {{ Popper::pop(Carbon\Carbon::parse($course->dates->sort()->first())) }}>
                 {{ Carbon\Carbon::parse($course->dates->sort()->first())->diffForHumans() }}
             @else
             <span>
-                Dostępny
+                dostępny
             @endif
             </span>
 

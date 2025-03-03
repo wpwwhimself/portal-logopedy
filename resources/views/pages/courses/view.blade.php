@@ -56,18 +56,16 @@
         </x-button>
 
         <x-slot:side-content>
-            @if ($course->dates)
             <x-h lvl="3" icon="calendar">Terminy</x-h>
             <ul>
-                @if (is_array($course->dates))
+                @if ($course->dates)
                 @foreach ($course->dates as $date)
                 <li>{{ Carbon\Carbon::parse($date)->format("d.m.Y H:i") }}</li>
                 @endforeach
                 @else
-                <p>{{ $course->dates }}</p>
+                <p>dostępny</p>
                 @endif
             </ul>
-            @endif
 
             @if ($course->locations)
             <x-h lvl="3" icon="map-marker">Miejsca</x-h>

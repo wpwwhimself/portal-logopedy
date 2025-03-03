@@ -29,6 +29,10 @@
     &.grid {
         grid-template-columns: 1fr auto;
     }
+
+    & .description {
+        gap: var(--xs);
+    }
 }
 
 .bulletpoints {

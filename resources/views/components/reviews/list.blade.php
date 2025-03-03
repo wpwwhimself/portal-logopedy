@@ -15,10 +15,10 @@
 
 <x-tile class="flex down">
     @foreach (App\Models\ReviewCriterion::visible()->get() as $criterion)
-    <div class="flex right spread">
+    <div class="flex right but-mobile-down spread but-mombile-reset">
         <strong>{{ $criterion->name }}</strong>
 
-        <span>
+        <span class="flex right but-mobile-down middle but-mobile-reset">
             @if ($criterion->options)
             {!! $reviewable->averageRatingByCriterionPretty($criterion) !!}
             @else

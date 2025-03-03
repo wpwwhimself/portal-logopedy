@@ -13,10 +13,10 @@
         <img src="{{ $course->thumbnail_path }}" alt="{{ $course->name }}">
         @endif
 
-        <p class="ghost">
-            {!! $course->trainer_pretty !!}
-            {!! $course->full_category_pretty !!}
-            <x-icon name="cash" hint="Koszt" />{{ $course->cost }}
+        <p class="ghost flex right middle big-gap">
+            <span>{!! $course->trainer_pretty !!}</span>
+            <span>{!! $course->full_category_pretty !!}</span>
+            <span>{{ $course->cost }}</span>
         </p>
 
         <x-h lvl="3" icon="text">Opis</x-h>
@@ -33,7 +33,7 @@
 
         @if ($course->image_paths)
         <x-h lvl="3" icon="image">Zdjęcia</x-h>
-        <div class="grid col3">
+        <div class="grid col3 but-halfsize-2">
             @foreach ($course->image_paths as $path)
             <a href="{{ $path }}" target="_blank">
                 <img src="{{ $path }}" alt="{{ $course->name }}" class="thumbnail">

@@ -7,8 +7,8 @@
     class="course grid but-mobile-down middle but-mobile-reset interactive shift-right"
     no-border line-separated
 >
-    <div class="description flex down no-gap">
-        <span class="flex right middle">
+    <div class="description flex down">
+        <span class="flex right middle big-gap">
             @if ($course->dates)
             <span {{ Popper::pop(Carbon\Carbon::parse($course->dates->sort()->first())) }}>
                 {{ Carbon\Carbon::parse($course->dates->sort()->first())->diffForHumans() }}
@@ -18,10 +18,12 @@
             @endif
             </span>
 
-            {!! $course->location_pretty !!}
+            <span>
+                {!! $course->location_pretty !!}
+            </span>
         </span>
 
-        <x-h lvl="2">{{ $course->name }}</x-h>
+        <x-h lvl="3">{{ $course->name }}</x-h>
 
         <span class="flex right middle">
             {!! $course->trainer_pretty !!}

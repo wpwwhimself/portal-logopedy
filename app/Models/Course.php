@@ -206,32 +206,44 @@ class Course extends Model
 
     public function fullCategoryPretty(): Attribute
     {
-        return $this->iconedAttribute(
-            $this->categories?->first() . (($this->categories?->count() > 1)
-                ? " (+".($this->categories->count() - 1).")" . view("components.icon", ['name' => "chevron-down", "hint" => $this->categories->join("<br>")])->render()
+    //     return $this->iconedAttribute(
+    //         $this->categories?->first() . (($this->categories?->count() > 1)
+    //             ? " (+".($this->categories->count() - 1).")" . view("components.icon", ['name' => "chevron-down", "hint" => $this->categories->join("<br>")])->render()
+    //             : ""
+    //         ),
+    //         "categories"
+    //     );
+        return Attribute::make(
+            get: fn () => $this->categories?->first() . (($this->categories?->count() > 1)
+                ? " (+".($this->categories->count() - 1).")"
                 : ""
             ),
-            "categories"
         );
     }
 
     public function trainerPretty(): Attribute
     {
-        return $this->iconedAttribute(
-            implode(" | ", array_filter([$this->trainer_name, $this->trainer_organization])),
-            "trainer_name",
-            icon_hint: "Prowadzący"
+        // return $this->iconedAttribute(
+        //     implode(" | ", array_filter([$this->trainer_name, $this->trainer_organization])),
+        //     "trainer_name",
+        //     icon_hint: "Prowadzący"
+        // );
+        return Attribute::make(
+            get: fn () => implode(" | ", array_filter([$this->trainer_name, $this->trainer_organization])),
         );
     }
 
     public function locationPretty(): Attribute
     {
-        return $this->iconedAttribute(
-            ($this->locations?->first() ?? "brak informacji") . (($this->locations?->count() > 1)
-                ? " (+".($this->categories->count() - 1).")" . view("components.icon", ['name' => "chevron-down", "hint" => $this->locations->join("<br>")])->render()
-                : ""
-            ),
-            "locations"
+        // return $this->iconedAttribute(
+        //     ($this->locations?->first() ?? "brak informacji") . (($this->locations?->count() > 1)
+        //         ? " (+".($this->categories->count() - 1).")" . view("components.icon", ['name' => "chevron-down", "hint" => $this->locations->join("<br>")])->render()
+        //         : ""
+        //     ),
+        //     "locations"
+        // );
+        return Attribute::make(
+            get: fn () => $this->locations?->first() ?? "brak informacji",
         );
     }
 

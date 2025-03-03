@@ -189,6 +189,7 @@ span.large {
 }
 
 .line-separated {
+    padding-bottom: var(--xs);
     border-bottom: var(--xxs) solid var(--bg-light);
     border-bottom-left-radius: 0 !important; border-bottom-right-radius: 0 !important;
 

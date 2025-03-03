@@ -11,7 +11,9 @@
         <span class="flex right middle">
             @if ($course->dates)
             <x-icon name="calendar" hint="Najbliższy termin" />
-            {{ Carbon\Carbon::parse($course->dates->sort()->first())->diffForHumans() }}
+            <span {{ Popper::pop(Carbon\Carbon::parse($course->dates->sort()->first())) }}>
+                {{ Carbon\Carbon::parse($course->dates->sort()->first())->diffForHumans() }}
+            </span>
             @endif
 
             {!! $course->location_pretty !!}

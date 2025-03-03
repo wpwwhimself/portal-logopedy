@@ -224,6 +224,13 @@ class Course extends Model
         );
     }
 
+    public function dates(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->dates ?? "dostępny",
+        );
+    }
+
     public function locationPretty(): Attribute
     {
         return $this->iconedAttribute(

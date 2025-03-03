@@ -17,9 +17,9 @@
     --xs: 6px;
     --s: 10px;
     --m: 16px;
-    --l: 20px;
-    --xl: 24px;
-    --xxl: 32px;
+    --l: 18px;
+    --xl: 22px;
+    --xxl: 26px;
 }
 
 /******************** discard existing *******************/
@@ -267,7 +267,7 @@ a.button, a:has(> .tile), a:has(> .full-width) {
 }
 
 .banner.full-width {
-    height: calc(15 * var(--xxl));
+    height: 480px;
     position: relative;
     overflow: hidden;
 

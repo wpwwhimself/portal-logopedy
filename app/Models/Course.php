@@ -32,7 +32,7 @@ class Course extends Model
         "thumbnail_path", "image_paths",
         "link",
         "trainer_name", "trainer_organization",
-        "locations",
+        "location",
         "dates",
         "cost",
         "final_document",
@@ -88,12 +88,9 @@ class Course extends Model
             "label" => "Organizator",
             "icon" => "badge-account",
         ],
-        "locations" => [
-            "type" => "JSON",
-            "column-types" => [
-                "Miejsce" => "text",
-            ],
-            "label" => "Miejsca",
+        "location" => [
+            "type" => "text",
+            "label" => "Miejsce",
             "icon" => "map-marker",
         ],
         "dates" => [
@@ -163,9 +160,9 @@ class Course extends Model
             "discr" => "keywords",
             "operator" => "any",
         ],
-        "locations" => [
+        "location" => [
             "compare-using" => "field",
-            "discr" => "locations",
+            "discr" => "location",
             "operator" => "any",
         ],
         "final_document" => [
@@ -192,7 +189,6 @@ class Course extends Model
     {
         return [
             "categories" => "collection",
-            "locations" => "collection",
             "dates" => "collection",
             "keywords" => "collection",
             "image_paths" => "collection",
@@ -243,7 +239,7 @@ class Course extends Model
         //     "locations"
         // );
         return Attribute::make(
-            get: fn () => $this->locations?->first() ?? "brak informacji",
+            get: fn () => $this->location ?? "brak informacji",
         );
     }
 

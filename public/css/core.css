@@ -518,6 +518,12 @@ search {
 }
 
 table {
+    &.scrollable {
+        display: block;
+        max-width: fit-content;
+        overflow-x: auto;
+    }
+
     & thead, & tfoot {
         & > tr > * {
             font-weight: bold;
@@ -531,6 +537,10 @@ table {
         &:hover {
             background-color: var(--bg-light);
         }
+    }
+
+    & tr:hover {
+        background-color: var(--bg-light);
     }
 
     & .button {

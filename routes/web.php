@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\DocsController;
+use App\Http\Controllers\EntityManagementController;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\ProfileController;
@@ -78,6 +79,12 @@ Route::middleware("auth")->group(function () {
             Route::get("", "listModel")->name("admin-list-model");
             Route::get("edit/{id?}", "editModel")->name("admin-edit-model");
             Route::post("edit", "processEditModel")->name("admin-process-edit-model");
+        });
+    });
+
+    Route::controller(EntityManagementController::class)->prefix("admin/entmgr")->group(function () {
+        Route::prefix("{model}")->group(function () {
+            Route::get("", "listModel")->name("entmgr-list");
         });
     });
 });

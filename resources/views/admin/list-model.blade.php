@@ -35,6 +35,7 @@
             @foreach ($actions as $action)
             <x-button :action="route($action['route'])" :icon="$action['icon']" class="phantom">{{ $action['label'] }}</x-button>
             @endforeach
+            <x-button :action="route('entmgr-list', ['model' => $scope])" icon="eye" class="phantom">Przegląd danych</x-button>
             <x-button :action="route('profile')" icon="arrow-left" class="phantom">Wróć</x-button>
         </x-slot:side-content>
     </x-side-content-container>

@@ -35,7 +35,7 @@
     <div>
         @if ($course->cost)
         <strong class="flex right middle {{ $course->isFree() ? "accent tertiary" : "" }}">
-            {{ $course->cost }}
+            {{ $course->cost_pretty }}
         </strong>
         @endif
     </div>

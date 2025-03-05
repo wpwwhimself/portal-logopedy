@@ -16,7 +16,6 @@
         <p class="ghost flex right middle big-gap">
             <span>{!! $course->trainer_pretty !!}</span>
             <span>{!! $course->full_category_pretty !!}</span>
-            <span>{{ $course->cost }}</span>
         </p>
 
         <x-h lvl="3" icon="text">Opis</x-h>
@@ -56,7 +55,7 @@
         </x-button>
 
         <x-slot:side-content>
-            <x-h lvl="3" icon="calendar">Terminy</x-h>
+            <x-h lvl="3" :icon="$course::FIELDS['dates']['icon']">Terminy</x-h>
             <ul>
                 @if ($course->dates)
                 @foreach ($course->dates as $date)
@@ -68,8 +67,13 @@
             </ul>
 
             @if ($course->location)
-            <x-h lvl="3" icon="map-marker">Miejsce</x-h>
+            <x-h lvl="3" :icon="$course::FIELDS['location']['icon']">Miejsce</x-h>
             <span>{{ $course->location }}</span>
+            @endif
+
+            @if ($course->cost)
+            <x-h lvl="3" :icon="$course::FIELDS['cost']['icon']">Koszt</x-h>
+            <span>{{ $course->cost_pretty }}</span>
             @endif
 
             <x-button :action="$course->link" target="_blank" icon="link">Strona organizatora</x-button>

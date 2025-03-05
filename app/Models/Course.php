@@ -104,7 +104,7 @@ class Course extends Model
         "cost" => [
             "type" => "text",
             "label" => "Koszt",
-            "icon" => "currency-usd",
+            "icon" => "cash-multiple",
         ],
         "final_document" => [
             "type" => "text",
@@ -240,6 +240,14 @@ class Course extends Model
         // );
         return Attribute::make(
             get: fn () => $this->location ?? "brak informacji",
+        );
+    }
+
+    public function costPretty(): Attribute
+    {
+        $show_suffix = is_numeric($this->cost);
+        return Attribute::make(
+            get: fn () => $this->cost . ($show_suffix ? " zł" : ""),
         );
     }
 

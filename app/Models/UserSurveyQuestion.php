@@ -45,6 +45,7 @@ class UserSurveyQuestion extends Model
         [
             "icon" => "eye",
             "label" => "Przeglądaj odpowiedzi",
+            "show-on" => "list",
             "route" => "profile-surveys",
         ],
     ];

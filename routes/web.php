@@ -9,6 +9,7 @@ use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\SpellbookController;
+use App\Models\SpecialModelActionsController;
 use Illuminate\Support\Facades\Route;
 
 Route::controller(FrontController::class)->group(function () {
@@ -17,7 +18,7 @@ Route::controller(FrontController::class)->group(function () {
 
     Route::prefix("list")->group(function () {
         Route::get("/{model_name}", "list")->name("front-list");
-        Route::get("/courses/{course}", "viewCourse")->name("front-view-course");
+        Route::get("/{model_name}/{id}", "view")->name("front-view");
     });
 });
 
@@ -79,6 +80,11 @@ Route::middleware("auth")->group(function () {
             Route::get("", "listModel")->name("admin-list-model");
             Route::get("edit/{id?}", "editModel")->name("admin-edit-model");
             Route::post("edit", "processEditModel")->name("admin-process-edit-model");
+        });
+
+        Route::controller(SpecialModelActionsController::class)->group(function () {
+            Route::get("courses/edit/{id}/morph-to/university", "morphCourseToUniversity")->middleware("role:course-master")->name("morph-course-to-university");
+
         });
     });
 

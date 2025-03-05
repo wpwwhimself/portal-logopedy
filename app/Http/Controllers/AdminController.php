@@ -53,6 +53,10 @@ class AdminController extends Controller
             "model" => \App\Models\NewsletterSubscriber::class,
             "role" => "technical",
         ],
+        "universities" => [
+            "model" => \App\Models\University::class,
+            "role" => "course-master",
+        ],
     ];
 
     public const SCOPE_GROUPS = [
@@ -62,7 +66,7 @@ class AdminController extends Controller
         ],
         "Treści" => [
             "icon" => "text",
-            "scopes" => ["standard-pages", "courses", "blog-articles","social-media",],
+            "scopes" => ["standard-pages", "courses", "universities", "blog-articles", "social-media",],
         ],
     ];
 
@@ -108,11 +112,13 @@ class AdminController extends Controller
         ));
     }
 
-    private function getActions(string $scope): array
+    private function getActions(string $scope, string $showOn): array
     {
         $modelName = $this->getModelName($scope);
         return array_filter(array_merge(
-            defined($modelName."::ACTIONS") ? $modelName::ACTIONS : [],
+            defined($modelName."::ACTIONS")
+                ? array_filter($modelName::ACTIONS, fn ($a) => ($a["show-on"] ?? "list") == $showOn)
+                : [],
         ));
     }
     #endregion
@@ -171,7 +177,7 @@ class AdminController extends Controller
         $meta = array_merge(self::SCOPES[$scope], $modelName::META);
         $data = $modelName::forAdminList()
             ->paginate(25);
-        $actions = $this->getActions($scope);
+        $actions = $this->getActions($scope, "list");
 
         return view("admin.list-model", compact("data", "meta", "scope", "actions"));
     }
@@ -188,8 +194,9 @@ class AdminController extends Controller
         $data = $modelName::find($id);
         $fields = $this->getFields($scope);
         $connections = $this->getConnections($scope);
+        $actions = $this->getActions($scope, "edit");
 
-        return view("admin.edit-model", compact("data", "meta", "scope", "fields", "connections"));
+        return view("admin.edit-model", compact("data", "meta", "scope", "fields", "connections", "actions"));
     }
 
     public function processEditModel(Request $rq, string $scope): RedirectResponse

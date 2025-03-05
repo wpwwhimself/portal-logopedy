@@ -31,7 +31,7 @@ class Nav extends Component
     {
         return [
             ["Baza kursów, szkoleń...", route('front-list', ["model_name" => "courses"])],
-            ["Baza specjalistów", route('front-list', ["model_name" => "specialists"])],
+            ["Baza uczelni", route('front-list', ["model_name" => "universities"])],
             ["Filmy, podcasty", route('front-list', ["model_name" => "films"])],
         ];
     }

@@ -34,4 +34,12 @@ trait CanBeSorted
                 throw new \InvalidArgumentException("Unknown sort criterion: ".$data["compare-using"]);
         }
     }
+
+    public static function queryableFields(): array
+    {
+        return array_keys(array_filter(self::FIELDS, fn ($f) =>
+            in_array($f["type"], ["text", "TEXT", "HTML"])
+            || $f["type"] == "JSON" && count($f["column-types"]) == 1 && current($f["column-types"]) == "text"
+        ));
+    }
 }

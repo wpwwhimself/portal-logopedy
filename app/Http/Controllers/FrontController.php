@@ -33,15 +33,13 @@ class FrontController extends Controller
 
         $model = "App\\Models\\" . Str::of($model_name)->studly()->singular();
         $data = $model::visible(false)
-            ->where(fn ($q) => $q
+            ->where(function ($q) use ($model, $rq) {
                 // search query
-                ->where("name", "like", "%{$rq->q}%")
-                ->orWhere("description", "like", "%{$rq->q}%")
-                ->orWhere("categories", "like", "%{$rq->q}%")
-                ->orWhere("keywords", "like", "%{$rq->q}%")
-                ->orWhere("trainer_name", "like", "%{$rq->q}%")
-                ->orWhere("trainer_organization", "like", "%{$rq->q}%")
-            )
+                foreach ($model::queryableFields() as $field) {
+                    $q = $q->orWhere($field, "like", "%{$rq->q}%");
+                }
+                return $q;
+            })
             ->get();
 
         // filtering
@@ -84,10 +82,13 @@ class FrontController extends Controller
     #endregion
 
     #region view models
-    public function viewCourse(Course $course): View
+    public function view(string $model_name, int $id): View
     {
-        return view("pages.courses.view", compact(
-            "course",
+        $model = "App\\Models\\" . Str::of($model_name)->studly()->singular();
+        $data = $model::find($id);
+
+        return view("pages.".Str::of($model_name)->plural().".view", compact(
+            "data",
         ));
     }
     #endregion

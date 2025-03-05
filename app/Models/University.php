@@ -9,19 +9,18 @@ use App\HasIconedAttributes;
 use App\HasStandardScopes;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Wildside\Userstamps\Userstamps;
 
-class Course extends Model
+class University extends Model
 {
     use Userstamps, CanBeStringified;
 
     public const META = [
-        "label" => "Kursy i szkolenia",
-        "icon" => "book-open-page-variant",
-        "description" => "Lista dostępnych kursów. Każda pozycja przechowuje informacje o kursie, jego terminy i oceny.",
+        "label" => "Uczelnie",
+        "icon" => "school",
+        "description" => "Lista uczelni. Każda pozycja przechowuje informacje o uczelni. Te informacje mogą pochodzić z kursu, kiedy automatyzacja sklasyfikuje ją jako takiego.",
     ];
 
     protected $fillable = [
@@ -31,11 +30,8 @@ class Course extends Model
         "keywords",
         "thumbnail_path", "image_paths",
         "link",
-        "trainer_name", "trainer_organization",
         "location",
-        "dates",
         "cost",
-        // "final_document",
     ];
 
     public const FIELDS = [
@@ -78,48 +74,15 @@ class Course extends Model
             "label" => "Link",
             "icon" => "link",
         ],
-        "trainer_name" => [
-            "type" => "text",
-            "label" => "Nazwisko prowadzącego",
-            "icon" => "badge-account",
-        ],
-        "trainer_organization" => [
-            "type" => "text",
-            "label" => "Organizator",
-            "icon" => "badge-account",
-        ],
         "location" => [
             "type" => "text",
             "label" => "Miejsce",
             "icon" => "map-marker",
         ],
-        "dates" => [
-            "type" => "JSON",
-            "column-types" => [
-                "Data i godzina" => "datetime-local",
-            ],
-            "label" => "Terminy",
-            "icon" => "calendar",
-        ],
         "cost" => [
             "type" => "text",
             "label" => "Koszt",
             "icon" => "cash-multiple",
-        ],
-        // "final_document" => [
-        //     "type" => "text",
-        //     "label" => "Rodzaj dokumentu",
-        //     "icon" => "certificate",
-        // ],
-    ];
-
-    public const ACTIONS = [
-        [
-            "icon" => University::META["icon"],
-            "label" => "Przekształć na Uczelnię",
-            "show-on" => "edit",
-            "route" => "morph-course-to-university",
-            "dangerous" => true,
         ],
     ];
 
@@ -175,10 +138,6 @@ class Course extends Model
             "discr" => "location",
             "operator" => "any",
         ],
-        // "final_document" => [
-        //     "compare-using" => "field",
-        //     "discr" => "final_document",
-        // ],
     ];
 
     public const CONNECTIONS = [
@@ -199,7 +158,6 @@ class Course extends Model
     {
         return [
             "categories" => "collection",
-            "dates" => "collection",
             "keywords" => "collection",
             "image_paths" => "collection",
         ];
@@ -212,13 +170,6 @@ class Course extends Model
 
     public function fullCategoryPretty(): Attribute
     {
-    //     return $this->iconedAttribute(
-    //         $this->categories?->first() . (($this->categories?->count() > 1)
-    //             ? " (+".($this->categories->count() - 1).")" . view("components.icon", ['name' => "chevron-down", "hint" => $this->categories->join("<br>")])->render()
-    //             : ""
-    //         ),
-    //         "categories"
-    //     );
         return Attribute::make(
             get: fn () => $this->categories?->first() . (($this->categories?->count() > 1)
                 ? " (+".($this->categories->count() - 1).")" . view("components.icon", ['name' => "chevron-down", "hint" => $this->categories->join("<br>")])->render()
@@ -227,27 +178,8 @@ class Course extends Model
         );
     }
 
-    public function trainerPretty(): Attribute
-    {
-        // return $this->iconedAttribute(
-        //     implode(" | ", array_filter([$this->trainer_name, $this->trainer_organization])),
-        //     "trainer_name",
-        //     icon_hint: "Prowadzący"
-        // );
-        return Attribute::make(
-            get: fn () => implode(" | ", array_filter([$this->trainer_name, $this->trainer_organization])),
-        );
-    }
-
     public function locationPretty(): Attribute
     {
-        // return $this->iconedAttribute(
-        //     ($this->locations?->first() ?? "brak informacji") . (($this->locations?->count() > 1)
-        //         ? " (+".($this->categories->count() - 1).")" . view("components.icon", ['name' => "chevron-down", "hint" => $this->locations->join("<br>")])->render()
-        //         : ""
-        //     ),
-        //     "locations"
-        // );
         return Attribute::make(
             get: fn () => $this->location ?? "brak informacji",
         );
@@ -273,10 +205,5 @@ class Course extends Model
 
     #region relations
     use CanBeReviewed;
-
-    public function industries(): MorphToMany
-    {
-        return $this->morphToMany(Industry::class, "industriable");
-    }
     #endregion
 }

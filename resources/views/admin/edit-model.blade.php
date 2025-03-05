@@ -70,6 +70,11 @@
 
             <x-slot:side-content>
                 <x-button action="submit" name="method" value="save" icon="check">Zapisz</x-button>
+
+                @foreach ($actions as $action)
+                <x-button :action="route($action['route'], ['id' => $data?->id])" :icon="$action['icon']" class="phantom {{ $action['dangerous'] ? 'danger' : '' }}">{{ $action['label'] }}</x-button>
+                @endforeach
+
                 @if ($data) <x-button action="submit" name="method" value="delete" icon="delete" class="danger">Usuń</x-button> @endif
                 <x-button :action="auth()->user()->hasRole('technical')
                     ? route('admin-list-model', ['model' => $scope])

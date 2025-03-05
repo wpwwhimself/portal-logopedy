@@ -15,7 +15,6 @@
 
         <ul>
             @foreach ([
-                ["trainer_organization", $data->trainer_pretty],
                 ["categories", $data->full_category_pretty],
             ] as [$field_name, $value])
             <li>
@@ -51,7 +50,7 @@
         <x-h icon="message-star">Oceny</x-h>
         <x-reviews.list :reviewable="$data" />
 
-        <x-button :action="route('review-add', ['model' => 'course', 'id' => $data->id])" icon="star"
+        <x-button :action="route('review-add', ['model' => 'university', 'id' => $data->id])" icon="star"
             :disabled="$data->reviewsByCurrentUser()->count() > 0"
         >
             @if ($data->reviewsByCurrentUser()->count() > 0)
@@ -62,17 +61,6 @@
         </x-button>
 
         <x-slot:side-content>
-            <x-h lvl="3" :icon="$data::FIELDS['dates']['icon']">Terminy</x-h>
-            <ul>
-                @if ($data->dates)
-                @foreach ($data->dates as $date)
-                <li>{{ Carbon\Carbon::parse($date)->format("d.m.Y H:i") }}</li>
-                @endforeach
-                @else
-                <p>dostępny</p>
-                @endif
-            </ul>
-
             @if ($data->location)
             <x-h lvl="3" :icon="$data::FIELDS['location']['icon']">Miejsce</x-h>
             <span>{{ $data->location }}</span>
@@ -93,7 +81,7 @@
                 auth()->user()?->hasRole("course-master")
                 || auth()->user()?->hasRole("course-manager") && $data->created_by == auth()->user()->id
             )
-            <x-button :action="route('admin-edit-model', ['model' => 'courses', 'id' => $data->id])"
+            <x-button :action="route('admin-edit-model', ['model' => 'universities', 'id' => $data->id])"
                 icon="pencil"
                 class="accent background tertiary"
                 target="_blank"

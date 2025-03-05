@@ -30,8 +30,8 @@
             <strong style="text-align: right;">Wyników: {{ $data->total() }}</strong>
         </div>
 
-        @forelse ($data as $course)
-        <x-course.tile :course="$course" />
+        @forelse ($data as $item)
+        <x-model-tile.course :data="$item" />
         @empty
         <p class="ghost">Brak danych do wyświetlenia</p>
         @endforelse

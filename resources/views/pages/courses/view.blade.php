@@ -13,10 +13,17 @@
         <img src="{{ $course->thumbnail_path }}" alt="{{ $course->name }}">
         @endif
 
-        <p class="ghost flex right middle big-gap">
-            <span>{!! $course->trainer_pretty !!}</span>
-            <span>{!! $course->full_category_pretty !!}</span>
-        </p>
+        <ul>
+            @foreach ([
+                ["trainer_organization", $course->trainer_pretty],
+                ["categories", $course->full_category_pretty],
+            ] as [$field_name, $value])
+            <li>
+                <strong>{{ $course::FIELDS[$field_name]['label'] }}</strong>:
+                {!! $value !!}
+            </li>
+            @endforeach
+        </ul>
 
         <x-h lvl="3" icon="text">Opis</x-h>
         {!! $course->description !!}

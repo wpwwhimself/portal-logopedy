@@ -211,7 +211,7 @@ class Course extends Model
     //     );
         return Attribute::make(
             get: fn () => $this->categories?->first() . (($this->categories?->count() > 1)
-                ? " (+".($this->categories->count() - 1).")"
+                ? " (+".($this->categories->count() - 1).")" . view("components.icon", ['name' => "chevron-down", "hint" => $this->categories->join("<br>")])->render()
                 : ""
             ),
         );

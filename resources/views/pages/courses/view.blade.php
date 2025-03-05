@@ -65,8 +65,8 @@
             <x-h lvl="3" :icon="$data::FIELDS['dates']['icon']">Terminy</x-h>
             <ul>
                 @if ($data->dates)
-                @foreach ($data->dates as $date)
-                <li>{{ Carbon\Carbon::parse($date)->format("d.m.Y H:i") }}</li>
+                @foreach ($data->dates_processed as $date)
+                <li>{{ $date }}</li>
                 @endforeach
                 @else
                 <p>dostępny</p>

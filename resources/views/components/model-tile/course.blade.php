@@ -9,11 +9,10 @@
 >
     <div class="description flex down">
         <span class="flex right middle big-gap">
-            @if ($data->dates)
-            <span {{ Popper::pop(Carbon\Carbon::parse($data->dates->sort()->first())) }}>
-                {{ Carbon\Carbon::parse($data->dates->sort()->first())->diffForHumans() }}
-            @else
             <span>
+            @if ($data->dates)
+                {{ $data->dates_processed->first() }}
+            @else
                 dostępny
             @endif
             </span>

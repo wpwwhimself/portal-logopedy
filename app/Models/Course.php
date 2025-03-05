@@ -7,6 +7,7 @@ use App\CanBeSorted;
 use App\CanBeStringified;
 use App\HasIconedAttributes;
 use App\HasStandardScopes;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
@@ -96,7 +97,7 @@ class Course extends Model
         "dates" => [
             "type" => "JSON",
             "column-types" => [
-                "Data i godzina" => "datetime-local",
+                "Data i godzina" => "text",
             ],
             "label" => "Terminy",
             "icon" => "calendar",
@@ -212,13 +213,6 @@ class Course extends Model
 
     public function fullCategoryPretty(): Attribute
     {
-    //     return $this->iconedAttribute(
-    //         $this->categories?->first() . (($this->categories?->count() > 1)
-    //             ? " (+".($this->categories->count() - 1).")" . view("components.icon", ['name' => "chevron-down", "hint" => $this->categories->join("<br>")])->render()
-    //             : ""
-    //         ),
-    //         "categories"
-    //     );
         return Attribute::make(
             get: fn () => $this->categories?->first() . (($this->categories?->count() > 1)
                 ? " (+".($this->categories->count() - 1).")" . view("components.icon", ['name' => "chevron-down", "hint" => $this->categories->join("<br>")])->render()
@@ -229,11 +223,6 @@ class Course extends Model
 
     public function trainerPretty(): Attribute
     {
-        // return $this->iconedAttribute(
-        //     implode(" | ", array_filter([$this->trainer_name, $this->trainer_organization])),
-        //     "trainer_name",
-        //     icon_hint: "Prowadzący"
-        // );
         return Attribute::make(
             get: fn () => implode(" | ", array_filter([$this->trainer_name, $this->trainer_organization])),
         );
@@ -241,15 +230,15 @@ class Course extends Model
 
     public function locationPretty(): Attribute
     {
-        // return $this->iconedAttribute(
-        //     ($this->locations?->first() ?? "brak informacji") . (($this->locations?->count() > 1)
-        //         ? " (+".($this->categories->count() - 1).")" . view("components.icon", ['name' => "chevron-down", "hint" => $this->locations->join("<br>")])->render()
-        //         : ""
-        //     ),
-        //     "locations"
-        // );
         return Attribute::make(
             get: fn () => $this->location ?? "brak informacji",
+        );
+    }
+
+    public function datesProcessed(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->dates?->map(fn ($d) => Str::of($d)->test('/^\d{4}-\d{2}-\d{2}/') ? Carbon::parse($d)->format("d.m.Y H:i") : $d),
         );
     }
 

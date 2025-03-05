@@ -10,7 +10,7 @@
             value="{{ request("q") }}"
         >
 
-        <button type="submit" class="rounded accent background secondary interactive">
+        <button type="submit" class="rounded always-light accent background secondary interactive">
             @svg("mdi-magnify")
         </button>
     </form>

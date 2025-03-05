@@ -39,6 +39,8 @@ class FrontController extends Controller
                 ->orWhere("description", "like", "%{$rq->q}%")
                 ->orWhere("categories", "like", "%{$rq->q}%")
                 ->orWhere("keywords", "like", "%{$rq->q}%")
+                ->orWhere("trainer_name", "like", "%{$rq->q}%")
+                ->orWhere("trainer_organization", "like", "%{$rq->q}%")
             )
             ->get();
 

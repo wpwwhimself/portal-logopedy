@@ -83,7 +83,7 @@ Route::middleware("auth")->group(function () {
         });
 
         Route::controller(SpecialModelActionsController::class)->group(function () {
-            Route::get("courses/edit/{id}/morph-to/university", "morphCourseToUniversity")->middleware("role:course-master")->name("morph-course-to-university");
+            Route::get("courses/edit/{id}/morph-to/university", "morphCourseToUniversity")->middleware(["role:course-master", "role:university-master"])->name("morph-course-to-university");
 
         });
     });

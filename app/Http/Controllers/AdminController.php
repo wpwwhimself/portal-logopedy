@@ -55,7 +55,7 @@ class AdminController extends Controller
         ],
         "universities" => [
             "model" => \App\Models\University::class,
-            "role" => "course-master",
+            "role" => "university-master",
         ],
     ];
 

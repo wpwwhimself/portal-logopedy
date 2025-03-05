@@ -78,8 +78,7 @@
             <x-button :action="route('front-list', ['model_name' => 'courses'])" class="phantom" icon="arrow-left">Wróć</x-button>
 
             @if (
-                auth()->user()?->hasRole("course-master")
-                || auth()->user()?->hasRole("course-manager") && $data->created_by == auth()->user()->id
+                auth()->user()?->hasRole("university-master")
             )
             <x-button :action="route('admin-edit-model', ['model' => 'universities', 'id' => $data->id])"
                 icon="pencil"

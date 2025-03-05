@@ -35,7 +35,7 @@ class Course extends Model
         "location",
         "dates",
         "cost",
-        "final_document",
+        // "final_document",
     ];
 
     public const FIELDS = [
@@ -106,11 +106,11 @@ class Course extends Model
             "label" => "Koszt",
             "icon" => "cash-multiple",
         ],
-        "final_document" => [
-            "type" => "text",
-            "label" => "Rodzaj dokumentu",
-            "icon" => "certificate",
-        ],
+        // "final_document" => [
+        //     "type" => "text",
+        //     "label" => "Rodzaj dokumentu",
+        //     "icon" => "certificate",
+        // ],
     ];
 
     use CanBeSorted;
@@ -165,10 +165,10 @@ class Course extends Model
             "discr" => "location",
             "operator" => "any",
         ],
-        "final_document" => [
-            "compare-using" => "field",
-            "discr" => "final_document",
-        ],
+        // "final_document" => [
+        //     "compare-using" => "field",
+        //     "discr" => "final_document",
+        // ],
     ];
 
     public const CONNECTIONS = [

@@ -21,7 +21,7 @@ Poprawne ciało zapytania posiada następującą strukturę:
     "location": <string?>,
     "dates": <datetime[]?>,
     "cost": <string?>,
-    "final_document": <string?>,
+    // "final_document": <string?>, -- ⚠️ obecnie wyłączone
     // "industries": <string[]?> -- ⚠️ obecnie wyłączone
 }
 ```

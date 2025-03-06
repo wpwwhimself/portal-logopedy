@@ -87,6 +87,17 @@ class User extends Authenticatable
 
     #region scopes
     use HasStandardScopes;
+
+    public function scopeMailableAdmins($query, ?string $role = null)
+    {
+        $query = $query->whereHas("roles", fn ($q) => $q->where("name", "administrator"));
+        if ($role) {
+            $query = $query->whereHas("roles", fn ($q) => $q->where("name", $role));
+        }
+        $query = $query->where("email", "NOT REGEXP", "\.test$");
+
+        return $query;
+    }
     #endregion
 
     #region attributes

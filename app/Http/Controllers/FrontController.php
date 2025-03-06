@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\StandardPage;
+use App\Models\User;
+use App\Notifications\ErrorReportNotification;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -107,7 +109,8 @@ class FrontController extends Controller
 
     public function processErrorReport(Request $rq): RedirectResponse
     {
-        //todo wyślij maila ze zgromadzonymi informacjami
+        User::mailableAdmins("course-master")
+            ->each(fn ($u) => $u->notify(new ErrorReportNotification($rq->except(["_token"]))));
 
         return redirect()->route("front-view", ["model_name" => $rq->model_name, "id" => $rq->id])->with("success", "Zgłoszenie wysłane, dziękujemy");
     }

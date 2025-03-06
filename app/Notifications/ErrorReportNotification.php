@@ -6,8 +6,9 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use Illuminate\Support\Str;
 
-class ResetPasswordNotification extends Notification
+class ErrorReportNotification extends Notification
 {
     use Queueable;
 
@@ -15,9 +16,9 @@ class ResetPasswordNotification extends Notification
      * Create a new notification instance.
      */
     public function __construct(
-        public $token
+        public $data
     ) {
-        $this->token = $token;
+        $this->data = $data;
     }
 
     /**
@@ -35,12 +36,15 @@ class ResetPasswordNotification extends Notification
      */
     public function toMail(object $notifiable): MailMessage
     {
+        $model = "App\\Models\\" . Str::of($this->data["model_name"])->studly()->singular();
+        $entity = $model::find($this->data["id"]);
+
         return (new MailMessage)
-            ->subject("Resetowanie hasła")
-            ->line('Otrzymaliśmy prośbę o zresetowanie hasła.')
-            ->line("Kliknij przycisk poniżej, aby zresetować hasło.")
-            ->action('Resetuj hasło', route('password.reset', ["token" => $this->token]))
-            ->line('Jeśli to nie Ty poprosiłeś o zresetowanie hasła, zignoruj tę wiadomość.');
+            ->subject("Zgłoszenie błędu w danych")
+            ->line('Otrzymaliśmy nowe zgłoszenie o błędnych danych.')
+            ->line("Ten wpis dotyczy: " . $entity->name . " (" . $model::META['label'] . ")")
+            ->line("Opis błędu podany przez użytkownika: " . $this->data["description"])
+            ->action('Przejdź do edycji', route("admin-edit-model", ["model" => $this->data["model_name"], "id" => $entity->id]));
     }
 
     /**

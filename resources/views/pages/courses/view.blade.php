@@ -85,6 +85,8 @@
 
             <x-button :action="$data->link" target="_blank" icon="link">Strona organizatora</x-button>
 
+            <x-button :action="route('error-report-view', ['model_name' => 'courses', 'id' => $data->id])" icon="bug" class="accent background tertiary">Zgłoś błąd</x-button>
+
             {{--  --}}
 
             <x-button :action="route('front-list', ['model_name' => 'courses'])" class="phantom" icon="arrow-left">Wróć</x-button>

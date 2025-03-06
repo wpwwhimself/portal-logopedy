@@ -19,6 +19,8 @@ Route::controller(FrontController::class)->group(function () {
     Route::prefix("list")->group(function () {
         Route::get("/{model_name}", "list")->name("front-list");
         Route::get("/{model_name}/{id}", "view")->name("front-view");
+        Route::get("/{model_name}/{id}/error-report", "viewErrorReport")->name("error-report-view");
+        Route::post("error-report/process", "processErrorReport")->name("error-report-process");
     });
 });
 

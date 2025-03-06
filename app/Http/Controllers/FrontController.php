@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Course;
-use App\Models\Setting;
 use App\Models\StandardPage;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\View\View;
@@ -91,6 +90,26 @@ class FrontController extends Controller
         return view("pages.".Str::of($model_name)->plural().".view", compact(
             "data",
         ));
+    }
+    #endregion
+
+    #region error reporting
+    public function viewErrorReport(string $model_name, int $id): View
+    {
+        $model = "App\\Models\\" . Str::of($model_name)->studly()->singular();
+        $entity = $model::find($id);
+
+        return view("errors.error-report", compact(
+            "model_name", "id", "model",
+            "entity",
+        ));
+    }
+
+    public function processErrorReport(Request $rq): RedirectResponse
+    {
+        //todo wyślij maila ze zgromadzonymi informacjami
+
+        return redirect()->route("front-view", ["model_name" => $rq->model_name, "id" => $rq->id])->with("success", "Zgłoszenie wysłane, dziękujemy");
     }
     #endregion
 }

@@ -36,9 +36,10 @@ class ResetPasswordNotification extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', route('password.reset', ["token" => $this->token]))
-                    ->line('Thank you for using our application!');
+                    ->line('Otrzymaliśmy prośbę o zresetowanie hasła.')
+                    ->line("Kliknij przycisk poniżej, aby zresetować hasło.")
+                    ->action('Resetuj hasło', route('password.reset', ["token" => $this->token]))
+                    ->line('Jeśli to nie Ty poprosiłeś o zresetowanie hasła, zignoruj tę wiadomość.');
     }
 
     /**

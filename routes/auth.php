@@ -10,6 +10,7 @@ use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Controllers\AuthController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::controller(AuthController::class)->prefix("auth")->group(function () {
@@ -30,4 +31,8 @@ Route::controller(AuthController::class)->prefix("auth")->group(function () {
     Route::post("/forgot-password", "processForgotPassword")->name("process-forgot-password");
     Route::get("/reset-password/{token}", "resetPassword")->name("password.reset");
     Route::post("/reset-password", "processResetPassword")->name("process-reset-password");
+});
+
+Route::get("/aaa", function () {
+    return (new App\Notifications\ResetPasswordNotification("asdb"))->toMail(Auth::user());
 });

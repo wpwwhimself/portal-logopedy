@@ -5,7 +5,7 @@
 
 @section("content")
 
-<table class="scrollable">
+<table class="tight scrollable">
     <thead>
         <tr>
             <th>Nazwa</th>

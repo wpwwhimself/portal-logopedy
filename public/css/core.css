@@ -524,6 +524,12 @@ table {
         overflow-x: auto;
     }
 
+    &.tight {
+        & td, & th {
+            max-width: 250px;
+        }
+    }
+
     & thead, & tfoot {
         & > tr > * {
             font-weight: bold;

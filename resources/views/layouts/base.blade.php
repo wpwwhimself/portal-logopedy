@@ -26,9 +26,9 @@
             {{ App\Models\Setting::get("app_name", config('app.name')) }}
         </title>
 
-        <link rel="stylesheet" href="{{ asset('css/core.css') }}">
-        <script src="{{ asset('js/earlies.js') }}"></script>
-        <script src="{{ asset('js/core.js') }}" defer></script>
+        <link rel="stylesheet" href="{{ asset('css/core.css') }}?{{ time() }}">
+        <script src="{{ asset('js/earlies.js') }}?{{ time() }}"></script>
+        <script src="{{ asset('js/core.js') }}?{{ time() }}" defer></script>
         @yield("extra_head")
 
         <style>

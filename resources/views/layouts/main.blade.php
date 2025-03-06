@@ -1,7 +1,7 @@
 @extends("layouts.base")
 
 @section("extra_head")
-<link rel="stylesheet" href="{{ asset('css/main.css') }}">
+<link rel="stylesheet" href="{{ asset('css/main.css') }}?{{ time() }}">
 @endsection
 
 @section("header")

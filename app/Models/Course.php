@@ -60,11 +60,13 @@ class Course extends Model
             ],
             "icon" => "tag",
             "label" => "Słowa kluczowe",
+            "hide-for-entmgr" => true,
         ],
         "thumbnail_path" => [
             "type" => "url",
             "label" => "Miniatura",
             "icon" => "image",
+            "hide-for-entmgr" => true,
         ],
         "image_paths" => [
             "type" => "JSON",
@@ -93,6 +95,7 @@ class Course extends Model
             "type" => "text",
             "label" => "Miejsce",
             "icon" => "map-marker",
+            "hide-for-entmgr" => true,
         ],
         "dates" => [
             "type" => "JSON",
@@ -101,11 +104,13 @@ class Course extends Model
             ],
             "label" => "Terminy",
             "icon" => "calendar",
+            "hide-for-entmgr" => true,
         ],
         "cost" => [
             "type" => "text",
             "label" => "Koszt",
             "icon" => "cash-multiple",
+            "hide-for-entmgr" => true,
         ],
         // "final_document" => [
         //     "type" => "text",

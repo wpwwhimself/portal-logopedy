@@ -11,6 +11,7 @@
             <th>Nazwa</th>
             <th><x-icon name="eye" hint="Widoczność" /></th>
             @foreach ($modelName::FIELDS as $field)
+            @isset ($field["hide-for-entmgr"]) @continue @endisset
             <th>{{ $field["label"] }}</th>
             @endforeach
             <th>Akcje</th>
@@ -26,10 +27,17 @@
                 @endisset
             </td>
             @foreach ($modelName::FIELDS as $field_name => $field)
+            @isset ($field["hide-for-entmgr"]) @continue @endisset
             <td>
                 @if ($field["type"] == "JSON")
                 <ul>
-                    {!! $row->{$field_name}?->map(fn ($i) => "<li>{$i}</li>")->join("\n") !!}
+                    {!! $row->{$field_name}
+                        ?->map(fn ($i) => (current($field["column-types"]) == "url")
+                            ? "<li><a href=\"{$i}\" target=\"_blank\">{$i}</a></li>"
+                            : "<li>{$i}</li>"
+                        )
+                        ->join("\n")
+                    !!}
 
                 </ul>
                 @else

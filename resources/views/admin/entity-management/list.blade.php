@@ -1,4 +1,4 @@
-@extends ("layouts.stripped")
+@extends ("layouts.barren")
 
 @section("title", $meta["label"])
 @section("subtitle", "Zarządzanie modelami")
@@ -9,7 +9,6 @@
     <thead>
         <tr>
             <th>Nazwa</th>
-            <th><x-icon name="eye" hint="Widoczność" /></th>
             @foreach ($modelName::FIELDS as $field)
             @isset ($field["hide-for-entmgr"]) @continue @endisset
             <th>{{ $field["label"] }}</th>
@@ -20,10 +19,14 @@
     <tbody>
         @foreach ($data as $row)
         <tr>
-            <td><strong>{{ $row->name }}</strong></td>
             <td>
+                <strong>{{ $row->name }}</strong>
+                <br>
                 @isset ($row->visible)
-                {{ App\Http\Controllers\AdminController::VISIBILITIES[$row->visible] }}
+                <span>
+                    <x-icon name="eye" hint="Widoczność" />
+                    {{ App\Http\Controllers\AdminController::VISIBILITIES[$row->visible] }}
+                </span>
                 @endisset
             </td>
             @foreach ($modelName::FIELDS as $field_name => $field)

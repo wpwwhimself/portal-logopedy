@@ -480,6 +480,7 @@ input[type="radio"] {
 
 main {
     flex-grow: 1;
+    padding-inline: var(--m);
 }
 
 nav {
@@ -527,6 +528,7 @@ table {
     &.tight {
         & td, & th {
             max-width: 250px;
+            overflow: hidden;
         }
     }
 

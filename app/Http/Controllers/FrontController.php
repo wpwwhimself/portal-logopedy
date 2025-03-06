@@ -43,7 +43,7 @@ class FrontController extends Controller
             ->get();
 
         // filtering
-        foreach ($rq->except(["q", "sort"]) as $filter => $value) {
+        foreach ($rq->except(["q", "sort", "page"]) as $filter => $value) {
             $flt_data = $model::FILTERS[$filter];
 
             $data = $data->filter(function ($item) use ($flt_data, $value) {
@@ -68,12 +68,13 @@ class FrontController extends Controller
         );
 
         $data = new LengthAwarePaginator(
-            $data,
+            $data->slice(($rq->get("page", 1) - 1) * 25, 25),
             $data->count(),
             25,
-            $rq->page ?? 1,
-            $rq->all()
+            $rq->get("page", 1)
         );
+        $data->withPath($model_name)
+            ->appends($rq->all());
 
         return view("pages.$model_name.list", compact(
             "data",

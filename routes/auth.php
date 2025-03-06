@@ -25,4 +25,9 @@ Route::controller(AuthController::class)->prefix("auth")->group(function () {
 
         Route::get("/logout", "logout")->name("logout");
     });
+
+    Route::get("/forgot-password", "forgotPassword")->name("forgot-password");
+    Route::post("/forgot-password", "processForgotPassword")->name("process-forgot-password");
+    Route::get("/reset-password/{token}", "resetPassword")->name("password.reset");
+    Route::post("/reset-password", "processResetPassword")->name("process-reset-password");
 });

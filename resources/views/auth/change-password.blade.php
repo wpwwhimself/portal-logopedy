@@ -7,7 +7,7 @@
 <x-full-width>
     <x-side-content-container>
         <x-h icon="account-plus">Zmiana hasła</x-h>
-        <x-auth.login-form mode="change-password" />
+        <x-auth.login-form mode="{{ isset($token) ? 'reset' : 'change' }}-password" />
 
         <x-slot:side-content>
             <x-hint title="Jak silne musi być hasło?">

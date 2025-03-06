@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ResetPassword;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
@@ -87,7 +89,7 @@ class AuthController extends Controller
     }
     #endregion
 
-    #region misc
+    #region password manipulation
     public function changePassword()
     {
         return view("auth.change-password");
@@ -106,6 +108,50 @@ class AuthController extends Controller
         return redirect(route("profile"))->with("success", "Hasło zostało zmienione");
     }
 
+    public function forgotPassword()
+    {
+        return view("auth.forgot-password");
+    }
+
+    public function processForgotPassword(Request $rq)
+    {
+        $status = Password::sendResetLink($rq->only('email'));
+
+        return $status === Password::ResetLinkSent
+            ? back()->with("success", "Link do resetowania hasła został wysłany")
+            : back()->with("error", "Coś poszło nie tak podczas resetowania hasła");
+    }
+
+    public function resetPassword($token)
+    {
+        return view("auth.change-password", compact("token"));
+    }
+
+    public function processResetPassword(Request $rq)
+    {
+        $validator = Validator::make($rq->all(), [
+            'token' => 'required',
+            'email' => 'required|email',
+            'password' => 'required|confirmed',
+        ]);
+        if ($validator->fails()) return back()->with("error", "Coś jest nie tak z hasłem");
+
+        $status = Password::reset(
+            $rq->only('email', 'password', 'password_confirmation', 'token'),
+            function (User $user, string $password) {
+                $user->forceFill([
+                    'password' => Hash::make($password)
+                ]);
+                $user->save();
+            }
+        );
+
+        return $status === Password::PasswordReset
+            ? redirect()->route('login')->with('success', "Hasło zostało zmienione")
+            : back()->with('error', "Coś poszło nie tak podczas resetowania hasła");
+    }
+    #endregion
+
     public function logout(Request $request)
     {
         Auth::logout();
@@ -113,5 +159,4 @@ class AuthController extends Controller
         $request->session()->regenerateToken();
         return redirect("/")->with("success", "Wylogowano");
     }
-    #endregion
 }

@@ -6,6 +6,7 @@ namespace App\Models;
 
 use App\CanBeStringified;
 use App\HasStandardScopes;
+use App\Notifications\ResetPasswordNotification;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -121,6 +122,13 @@ class User extends Authenticatable
         if (empty($role)) return true;
         return Auth::user()->roles->contains(Role::find($role))
             || Auth::user()->roles->contains(Role::find("super"));
+    }
+    #endregion
+
+    #region password reset
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new ResetPasswordNotification($token));
     }
     #endregion
 }

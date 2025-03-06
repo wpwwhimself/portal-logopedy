@@ -8,6 +8,10 @@
 >
     @csrf
 
+    @if ($mode == "reset-password")
+    <input type="hidden" name="token" value="{{ request('token') }}">
+    @endif
+
     @if ($mode == "register")
     <x-input type="select"
         name="role"
@@ -24,7 +28,7 @@
     />
     @endif
 
-    @if (in_array($mode, ["login", "register"]))
+    @if (in_array($mode, ["login", "register", "reset-password"]))
     <x-input type="email"
         name="email"
         label="Adres email"
@@ -51,7 +55,7 @@
         required
     />
 
-    @if ($mode == "register" || $mode == "change-password")
+    @if (in_array($mode, ["register", "change-password", "reset-password"]))
     <x-input type="password"
         name="password_confirmation"
         label="Powtórz hasło"
@@ -83,8 +87,9 @@
         @else
         <x-button action="submit" icon="check">Zaloguj się</x-button>
         <x-button :action="route('register')" icon="account-plus" class="phantom">Utwórz konto</x-button>
+        <x-button :action="route('forgot-password')" icon="key-change" class="phantom">Zapomniałem hasła</x-button>
         @endif
-    @elseif ($mode == "change-password")
+    @elseif (in_array($mode, ["change-password", "reset-password"]))
     <x-button action="submit" icon="check">Zmień hasło</x-button>
     @endif
 </form>

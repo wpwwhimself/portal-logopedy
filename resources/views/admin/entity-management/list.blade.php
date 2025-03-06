@@ -49,7 +49,7 @@
             </td>
             @endforeach
             <td>
-                <x-button icon="pencil" class="small" :action="route('admin-edit-model', ['model' => Str::of($modelName)->afterLast('\\')->kebab()->toString(), 'id' => $row->id])" target="_blank">Edytuj</x-button>
+                <x-button icon="pencil" class="small" :action="route('admin-edit-model', ['model' => Str::of($modelName)->afterLast('\\')->plural()->kebab()->toString(), 'id' => $row->id])" target="_blank">Edytuj</x-button>
             </td>
         </tr>
         @endforeach

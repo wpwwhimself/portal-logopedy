@@ -35,6 +35,7 @@ class User extends Authenticatable
         'email',
         'password',
         'phone',
+        'company_data',
     ];
 
     public const FIELDS = [
@@ -47,6 +48,15 @@ class User extends Authenticatable
             "type" => "tel",
             "label" => "Numer telefonu",
             "icon" => "phone",
+        ],
+        "company_data" => [
+            "type" => "JSON",
+            "column-types" => [
+                "Pole" => "text",
+                "Wartość" => "text",
+            ],
+            "label" => "Dane firmy",
+            "icon" => "domain",
         ],
     ];
 
@@ -82,6 +92,7 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'company_data' => 'collection',
         ];
     }
 

@@ -12,6 +12,7 @@
         "php": "^8.2",
         "andcarpi/laravel-popper": "^0.9.4",
         "blade-ui-kit/blade-icons": "^1.7",
+        "haruncpi/laravel-log-reader": "^1.0",
         "laravel/framework": "^11.31",
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.9",

@@ -7,6 +7,11 @@
     />
 
     @foreach ($elements as $element)
+        @if (is_string($element))
+        <x-icon name="ellipsis" />
+        @endif
+        
+        @if (is_array($element))
         @foreach ($element as $page => $url)
             @if (in_array($page, range($paginator->currentPage() - 4, $paginator->currentPage() + 4)))
             <x-button
@@ -18,6 +23,7 @@
             </x-button>
             @endif
         @endforeach
+        @endif
     @endforeach
 
     <x-button icon="page-last"

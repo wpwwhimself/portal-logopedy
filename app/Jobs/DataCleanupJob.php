@@ -51,12 +51,28 @@ class DataCleanupJob implements ShouldQueue
                     if ($entity->{$field_name}?->count() == 1
                         && Str::of($entity->{$field_name}->first())->contains(",")
                     ) {
-                        self::log("💥 Exploding JSON column $field_name", "info", 2);
-                        $entity->{$field_name} = collect($entity->{$field_name})
-                            ->map(fn ($item) => explode(",", $item))
-                            ->flatten()
-                            ->unique();
-                        $entity->save();
+                        self::log("💥 Exploding JSON column $field_name for #".$entity->id, "info", 2);
+                        $model::withoutTimestamps(fn () => $entity->update([$field_name =>
+                            collect($entity->{$field_name})
+                                ->map(fn ($item) => explode(",", $item))
+                                ->flatten()
+                                ->unique()
+                        ]));
+                    }
+                }
+
+                // nullify actual empty values
+                foreach (collect($model::FIELDS)
+                    ->filter(fn ($field) => $field["type"] == "text")
+                    ->keys()
+                    ->all() as $field_name
+                ) {
+                    self::log("Analyzing text column $field_name", "debug", 2);
+                    if (Str::contains($entity->{$field_name}, ["brak informacji", "nie podano"], true)
+                        || $entity->{$field_name} === ""
+                    ) {
+                        self::log("🧹 Nullifying $field_name for #".$entity->id, "info", 2);
+                        $model::withoutTimestamps(fn () => $entity->update([$field_name => null]));
                     }
                 }
             });

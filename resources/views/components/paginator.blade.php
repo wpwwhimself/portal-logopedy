@@ -8,7 +8,7 @@
 
     @foreach ($elements as $element)
         @if (is_string($element))
-        <x-icon name="ellipsis" />
+        <x-icon name="dots-horizontal" />
         @endif
         
         @if (is_array($element))

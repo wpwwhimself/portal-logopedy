@@ -33,7 +33,7 @@ class Course extends Model
         "thumbnail_path", "image_paths",
         "link",
         "trainer_name", "trainer_organization",
-        "location",
+        "locations",
         "dates",
         "cost",
         // "final_document",
@@ -91,9 +91,12 @@ class Course extends Model
             "label" => "Organizator",
             "icon" => "badge-account",
         ],
-        "location" => [
-            "type" => "text",
-            "label" => "Miejsce",
+        "locations" => [
+            "type" => "JSON",
+            "column-types" => [
+                "Miejsce" => "text",
+            ],
+            "label" => "Miejsca",
             "icon" => "map-marker",
             "hide-for-entmgr" => true,
         ],
@@ -176,9 +179,9 @@ class Course extends Model
             "discr" => "keywords",
             "operator" => "any",
         ],
-        "location" => [
+        "locations" => [
             "compare-using" => "field",
-            "discr" => "location",
+            "discr" => "locations",
             "operator" => "any",
         ],
         // "final_document" => [
@@ -205,6 +208,7 @@ class Course extends Model
     {
         return [
             "categories" => "collection",
+            "locations" => "collection",
             "dates" => "collection",
             "keywords" => "collection",
             "image_paths" => "collection",
@@ -233,10 +237,13 @@ class Course extends Model
         );
     }
 
-    public function locationPretty(): Attribute
+    public function locationsPretty(): Attribute
     {
         return Attribute::make(
-            get: fn () => $this->location ?? "brak informacji",
+            get: fn () => $this->locations?->first() . (($this->locations?->count() > 1)
+                ? " (+".($this->locations->count() - 1).")" . view("components.icon", ['name' => "chevron-down", "hint" => $this->locations->join("<br>")])->render()
+                : ""
+            ),
         );
     }
 

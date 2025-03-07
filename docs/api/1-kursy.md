@@ -18,7 +18,7 @@ Poprawne ciało zapytania posiada następującą strukturę:
     "link": <string?>,
     "trainer_name": <string>,
     "trainer_organization": <string?>,
-    "location": <string?>,
+    "locations": <string[]?>,
     "dates": <datetime[]?>,
     "cost": <string?>,
     // "final_document": <string?>, -- ⚠️ obecnie wyłączone

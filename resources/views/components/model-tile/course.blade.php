@@ -18,7 +18,7 @@
             </span>
 
             <span>
-                {!! $data->location_pretty !!}
+                {!! $data->locations_pretty !!}
             </span>
         </span>
 

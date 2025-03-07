@@ -1,4 +1,4 @@
-<form id="filters" class="flex down">
+<form id="filters" class="flex down nowrap">
     <x-tile
         title="Sortuj"
         title-lvl="3"
@@ -33,7 +33,7 @@
         :title-lvl="3"
         :title-icon="$flt['icon'] ?? $fields[$name]['icon']"
         expandable
-        class="flex down"
+        class="flex down nowrap scrollable"
         :activated="request()->has($name)"
     >
         <x-button icon="filter-off" onclick="resetFilters(this)" class="accent background secondary interactive small">Wyczyść</x-button>

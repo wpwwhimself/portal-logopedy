@@ -30,7 +30,7 @@ class University extends Model
         "keywords",
         "thumbnail_path", "image_paths",
         "link",
-        "location",
+        "locations",
         "cost",
     ];
 
@@ -74,9 +74,12 @@ class University extends Model
             "label" => "Link",
             "icon" => "link",
         ],
-        "location" => [
-            "type" => "text",
-            "label" => "Miejsce",
+        "locations" => [
+            "type" => "JSON",
+            "column-types" => [
+                "Miejsce" => "text",
+            ],
+            "label" => "Miejsca",
             "icon" => "map-marker",
         ],
         "cost" => [
@@ -133,9 +136,9 @@ class University extends Model
             "discr" => "keywords",
             "operator" => "any",
         ],
-        "location" => [
+        "locations" => [
             "compare-using" => "field",
-            "discr" => "location",
+            "discr" => "locations",
             "operator" => "any",
         ],
     ];
@@ -159,6 +162,7 @@ class University extends Model
         return [
             "categories" => "collection",
             "keywords" => "collection",
+            "locations" => "collection",
             "image_paths" => "collection",
         ];
     }
@@ -178,10 +182,13 @@ class University extends Model
         );
     }
 
-    public function locationPretty(): Attribute
+    public function locationsPretty(): Attribute
     {
         return Attribute::make(
-            get: fn () => $this->location ?? "brak informacji",
+            get: fn () => $this->locations?->first() . (($this->locations?->count() > 1)
+                ? " (+".($this->locations->count() - 1).")" . view("components.icon", ['name' => "chevron-down", "hint" => $this->locations->join("<br>")])->render()
+                : ""
+            ),
         );
     }
 

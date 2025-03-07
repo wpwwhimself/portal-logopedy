@@ -61,9 +61,13 @@
         </x-button>
 
         <x-slot:side-content>
-            @if ($data->location)
-            <x-h lvl="3" :icon="$data::FIELDS['location']['icon']">Miejsce</x-h>
-            <span>{{ $data->location }}</span>
+            @if ($data->locations)
+            <x-h lvl="3" :icon="$data::FIELDS['locations']['icon']">Miejsca</x-h>
+            <ul>
+                @foreach ($data->locations as $location)
+                <li>{{ $location }}</li>
+                @endforeach
+            </ul>
             @endif
 
             @if ($data->cost)

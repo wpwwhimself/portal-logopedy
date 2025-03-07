@@ -333,7 +333,12 @@ code, pre {
 }
 
 #filters {
+    max-height: calc(100vh - 2 * var(--l));
+    overflow-y: auto;
+
     & .grid {
+
+
         &:has(input[type='checkbox']),
         &:has(input[type='radio']) {
             grid-template-columns: auto 1fr;
@@ -576,6 +581,13 @@ table {
 
     & .button.expanded {
         rotate: 180deg;
+    }
+
+    & .contents {
+        &.scrollable {
+            overflow-y: auto;
+            max-height: 300px;
+        }
     }
 }
 

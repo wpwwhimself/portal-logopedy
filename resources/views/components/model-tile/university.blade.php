@@ -10,7 +10,7 @@
     <div class="description flex down">
         <span class="flex right middle big-gap">
             <span>
-                {!! $data->location_pretty !!}
+                {!! $data->locations_pretty !!}
             </span>
         </span>
 

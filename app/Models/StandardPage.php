@@ -6,12 +6,13 @@ use App\CanBeStringified;
 use App\HasStandardScopes;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 class StandardPage extends Model
 {
-    use CanBeStringified;
+    use CanBeStringified, SoftDeletes;
 
     public const META = [
         "label" => "Strony standardowe",

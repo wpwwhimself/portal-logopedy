@@ -4,11 +4,12 @@ namespace App\Models;
 
 use App\CanBeStringified;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Wildside\Userstamps\Userstamps;
 
 class Review extends Model
 {
-    use CanBeStringified, Userstamps;
+    use CanBeStringified, Userstamps, SoftDeletes;
 
     public const META = [
         "label" => "Oceny",
@@ -16,6 +17,7 @@ class Review extends Model
     ];
 
     const UPDATED_BY = null;
+    const DELETED_BY = null;
 
     protected $fillable = [
         "title",

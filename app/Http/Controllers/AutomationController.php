@@ -41,7 +41,8 @@ class AutomationController extends Controller
         );
         if ($data["trainer_name"] == $data["trainer_organization"]) $data["trainer_name"] = null;
 
-        $course = Course::where("name", $data["name"])
+        $course = Course::withTrashed()
+            ->where("name", $data["name"])
             ->where("trainer_organization", $data["trainer_organization"])
             ->first();
 

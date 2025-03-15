@@ -11,13 +11,14 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Wildside\Userstamps\Userstamps;
 
 class Course extends Model
 {
-    use Userstamps, CanBeStringified;
+    use Userstamps, CanBeStringified, SoftDeletes;
 
     public const META = [
         "label" => "Kursy i szkolenia",

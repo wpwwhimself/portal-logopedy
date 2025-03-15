@@ -14,7 +14,7 @@ class SpecialModelActionsController extends Model
 
         $university = University::create($insert_data);
 
-        // $course->delete();
+        $course->delete();
 
         return redirect()->route('admin-edit-model', ['model' => 'universities', 'id' => $university->id])->with("success", "Kurs został przekształcony");
     }

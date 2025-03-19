@@ -48,6 +48,7 @@ class Course extends Model
             ],
             "label" => "Kategorie",
             "icon" => "shape",
+            "required" => true,
         ],
         "description" => [
             "type" => "HTML",

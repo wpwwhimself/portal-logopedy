@@ -215,6 +215,7 @@ class AdminController extends Controller
                 case "JSON": $data[$name] = json_decode($data[$name], count($fdata["column-types"]) == 2); break;
             }
             if ($fdata["type"] == "checkbox") $data[$name] ??= false;
+            if (($fdata["required"] ?? false) && !$data[$name]) return back()->with("error", "Pole $fdata[label] jest wymagane");
         }
 
         if ($rq->input("method") == "save") {
@@ -238,8 +239,10 @@ class AdminController extends Controller
         } else if ($rq->input("method") == "delete") {
             $modelName::destroy($rq->id);
             return redirect()->route("admin-list-model", ["model" => $scope])
-                ->with("success", "Usunieto");
+                ->with("success", "Usunięto");
         }
+
+        return back()->with("error", "Nieprawidłowa operacja");
     }
     #endregion
 

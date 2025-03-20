@@ -3,7 +3,7 @@
 
     <div class="flex right center middle">
         @foreach ($categories as $category)
-        <x-button :action="route('front-list', ['model_name' => 'courses', 'categories[]' => $category])" class="phantom accent secondary">
+        <x-button :action="route('front-list', ['model_name' => 'courses', 'categories[]' => $category])" class="phantom accent secondary small">
             {{ $category }}
         </x-button>
         @endforeach

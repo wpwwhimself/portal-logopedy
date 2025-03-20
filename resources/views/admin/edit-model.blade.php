@@ -20,6 +20,7 @@
             </x-h>
 
             @foreach ($fields as $name => $fdata)
+            @if (isset($fdata["role"]) && !auth()->user()->hasRole($fdata["role"])) @continue @endif
             <x-input :type="$fdata['type']"
                 :name="$name"
                 :label="$fdata['label']"

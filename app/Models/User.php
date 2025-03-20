@@ -58,6 +58,7 @@ class User extends Authenticatable
             ],
             "label" => "Dane firmy",
             "icon" => "domain",
+            "role" => "administrator|course-manager",
         ],
     ];
 
@@ -143,8 +144,13 @@ class User extends Authenticatable
     public static function hasRole(?string $role): bool
     {
         if (empty($role)) return true;
-        return Auth::user()->roles->contains(Role::find($role))
-            || Auth::user()->roles->contains(Role::find("super"));
+
+        $ret = false;
+        foreach (explode("|", $role) as $r) {
+            $ret = $ret || Auth::user()->roles->contains(Role::find($role));
+        }
+
+        return $ret || Auth::user()->roles->contains(Role::find("super"));
     }
     #endregion
 

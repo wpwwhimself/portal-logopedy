@@ -29,6 +29,39 @@
         <x-h lvl="3" icon="text">Opis</x-h>
         {!! $data->description !!}
 
+        <div class="grid" style="--col-count: 3;">
+            <div>
+                <x-h lvl="3" :icon="$data::FIELDS['dates']['icon']">Terminy</x-h>
+                <ul>
+                    @if ($data->dates)
+                    @foreach ($data->dates_processed as $date)
+                    <li>{{ $date }}</li>
+                    @endforeach
+                    @else
+                    <p>dostępny</p>
+                    @endif
+                </ul>
+            </div>
+
+            @if ($data->locations)
+            <div>
+                <x-h lvl="3" :icon="$data::FIELDS['locations']['icon']">Miejsca</x-h>
+                <ul>
+                    @foreach ($data->locations as $location)
+                    <li>{{ $location }}</li>
+                    @endforeach
+                </ul>
+                @endif
+            </div>
+
+            @if ($data->cost)
+            <div>
+                <x-h lvl="3" :icon="$data::FIELDS['cost']['icon']">Koszt</x-h>
+                <span>{{ $data->cost_pretty }}</span>
+            </div>
+            @endif
+        </div>
+
         @if ($data->keywords)
         <x-h lvl="3" icon="tag">Słowa kluczowe</x-h>
         <ul>
@@ -63,31 +96,6 @@
         </x-button>
 
         <x-slot:side-content>
-            <x-h lvl="3" :icon="$data::FIELDS['dates']['icon']">Terminy</x-h>
-            <ul>
-                @if ($data->dates)
-                @foreach ($data->dates_processed as $date)
-                <li>{{ $date }}</li>
-                @endforeach
-                @else
-                <p>dostępny</p>
-                @endif
-            </ul>
-
-            @if ($data->locations)
-            <x-h lvl="3" :icon="$data::FIELDS['locations']['icon']">Miejsca</x-h>
-            <ul>
-                @foreach ($data->locations as $location)
-                <li>{{ $location }}</li>
-                @endforeach
-            </ul>
-            @endif
-
-            @if ($data->cost)
-            <x-h lvl="3" :icon="$data::FIELDS['cost']['icon']">Koszt</x-h>
-            <span>{{ $data->cost_pretty }}</span>
-            @endif
-
             <x-button :action="$data->link" target="_blank" icon="link">Strona organizatora</x-button>
 
             <x-button :action="route('error-report-view', ['model_name' => 'courses', 'id' => $data->id])" icon="bug" class="accent background tertiary">Zgłoś błąd</x-button>

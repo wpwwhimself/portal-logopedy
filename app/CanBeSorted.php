@@ -2,8 +2,35 @@
 
 namespace App;
 
+use App\Http\Controllers\AdminController;
+
 trait CanBeSorted
 {
+    public static function getFields(): array
+    {
+        return array_merge(
+            [
+                "name" => [
+                    "type" => "text",
+                    "label" => "Nazwa",
+                    "icon" => "card-text",
+                    "required" => true,
+                ],
+                "visible" => [
+                    "type" => "select", "options" => AdminController::VISIBILITIES,
+                    "label" => "Widoczny dla",
+                    "icon" => "eye",
+                ],
+                "order" => [
+                    "type" => "number",
+                    "label" => "Wymuś kolejność",
+                    "icon" => "order-numeric-ascending",
+                ],
+            ],
+            defined(static::class."::FIELDS") ? self::FIELDS : [],
+        );
+    }
+
     public static function getSorts(): array
     {
         return array_filter(array_merge(
@@ -37,7 +64,7 @@ trait CanBeSorted
 
     public static function queryableFields(): array
     {
-        return array_keys(array_filter(self::FIELDS, fn ($f) =>
+        return array_keys(array_filter(self::getFields(), fn ($f) =>
             in_array($f["type"], ["text", "TEXT", "HTML"])
             || $f["type"] == "JSON" && count($f["column-types"]) == 1 && current($f["column-types"]) == "text"
         ));

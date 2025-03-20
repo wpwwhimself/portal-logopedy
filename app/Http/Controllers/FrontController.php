@@ -37,7 +37,7 @@ class FrontController extends Controller
             ->where(function ($q) use ($model, $rq) {
                 // search query
                 foreach ($model::queryableFields() as $field) {
-                    $q = $q->orWhere($field, "like", "%{$rq->q}%");
+                    $q = $q->orWhereRaw("lower($field) like lower('%{$rq->q}%')");
                 }
                 return $q;
             })

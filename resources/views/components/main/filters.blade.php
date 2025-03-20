@@ -27,6 +27,7 @@
         @endforeach
     </x-tile>
 
+    @auth
     @foreach ($filters as $name => $flt)
     <x-tile
         :title="$flt['label'] ?? $fields[$name]['label']"
@@ -54,6 +55,11 @@
         @endforeach
     </x-tile>
     @endforeach
+    @else
+    <x-tile>
+        <span>Zaloguj się, aby móc dokładniej filtrować wyniki</span>
+    </x-tile>
+    @endauth
 
     <div class="flex right spread and-cover">
         <x-button action="submit" icon="filter">Zmień filtry</x-button>

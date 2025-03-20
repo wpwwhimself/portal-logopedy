@@ -8,6 +8,7 @@
     <x-side-content-container>
         <x-h>{!! auth()->user() !!}</x-h>
 
+        @if (\App\Models\UserSurveyQuestion::count())
         <x-tile :title-icon="\App\Models\UserSurveyQuestion::META['icon']"
             :title="$survey_texts['title']"
         >
@@ -15,6 +16,7 @@
 
             <x-button :action="route('profile-survey')" :icon="\App\Models\UserSurveyQuestion::META['icon']">{{ $survey_texts['button_text'] }}</x-button>
         </x-tile>
+        @endif
 
         <x-tile title="Moje uprawnienia" :title-icon="App\Models\Role::META['icon']">
             <ul>

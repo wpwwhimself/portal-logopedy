@@ -26,12 +26,12 @@
             @endforeach
         </ul>
 
-        <x-h lvl="3" icon="text">Opis</x-h>
+        <x-h lvl="3">Opis</x-h>
         {!! $data->description !!}
 
         <div class="grid" style="--col-count: 3;">
             <div>
-                <x-h lvl="3" :icon="$data::FIELDS['dates']['icon']">Terminy</x-h>
+                <x-h lvl="3">Terminy</x-h>
                 <ul>
                     @if ($data->dates)
                     @foreach ($data->dates_processed as $date)
@@ -43,27 +43,27 @@
                 </ul>
             </div>
 
-            @if ($data->locations)
+            @if ($data->locations->isNotEmpty())
             <div>
-                <x-h lvl="3" :icon="$data::FIELDS['locations']['icon']">Miejsca</x-h>
+                <x-h lvl="3">Miejsca</x-h>
                 <ul>
                     @foreach ($data->locations as $location)
                     <li>{{ $location }}</li>
                     @endforeach
                 </ul>
-                @endif
             </div>
+            @endif
 
-            @if ($data->cost)
+            @if (!empty($data->cost))
             <div>
-                <x-h lvl="3" :icon="$data::FIELDS['cost']['icon']">Koszt</x-h>
+                <x-h lvl="3">Koszt</x-h>
                 <span>{{ $data->cost_pretty }}</span>
             </div>
             @endif
         </div>
 
-        @if ($data->keywords)
-        <x-h lvl="3" icon="tag">Słowa kluczowe</x-h>
+        @if ($data->keywords->isNotEmpty())
+        <x-h lvl="3">Słowa kluczowe</x-h>
         <ul>
             @foreach ($data->keywords as $keyword)
             <li>{{ $keyword }}</li>
@@ -71,8 +71,8 @@
         </ul>
         @endif
 
-        @if ($data->image_paths)
-        <x-h lvl="3" icon="image">Zdjęcia</x-h>
+        @if ($data->image_paths->isNotEmpty())
+        <x-h lvl="3">Zdjęcia</x-h>
         <div class="grid col3 but-halfsize-2">
             @foreach ($data->image_paths as $path)
             <a href="{{ $path }}" target="_blank">

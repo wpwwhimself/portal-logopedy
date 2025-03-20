@@ -74,7 +74,7 @@
 
                 @if ($data)
                 @foreach ($actions as $action)
-                <x-button :action="route($action['route'], ['id' => $data->id])" :icon="$action['icon']" class="phantom {{ $action['dangerous'] ? 'danger' : '' }}">{{ $action['label'] }}</x-button>
+                <x-button :action="route($action['route'], ['id' => $data->id])" :icon="$action['icon']" class="phantom {{ ($action['dangerous'] ?? false) ? 'danger' : '' }}">{{ $action['label'] }}</x-button>
                 @endforeach
                 @endif
 

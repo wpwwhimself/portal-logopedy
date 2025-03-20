@@ -105,7 +105,7 @@ class Course extends Model
         "dates" => [
             "type" => "JSON",
             "column-types" => [
-                "Data i godzina" => "text",
+                "Data i godzina" => "datetime-local",
             ],
             "label" => "Terminy",
             "icon" => "calendar",

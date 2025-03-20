@@ -42,7 +42,7 @@
         <div class="grid col3 but-halfsize-2">
             @foreach ($data->image_paths as $path)
             <a href="{{ $path }}" target="_blank">
-                <img src="{{ $path }}" alt="{{ $data->name }}" class="thumbnail">
+                <img src="{{ Str::startsWith($path, 'https://') ? $path : 'https://wsrv.nl/?url='.$path }}" alt="{{ $data->name }}" class="thumbnail">
             </a>
             @endforeach
         </div>

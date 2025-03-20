@@ -86,7 +86,7 @@ class Course extends Model
         ],
         "trainer_name" => [
             "type" => "text",
-            "label" => "Nazwisko prowadzącego",
+            "label" => "Osoba prowadząca",
             "icon" => "badge-account",
         ],
         "trainer_organization" => [

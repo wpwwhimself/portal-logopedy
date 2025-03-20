@@ -15,7 +15,8 @@
 
         <ul>
             @foreach ([
-                ["trainer_organization", $data->trainer_pretty],
+                ["trainer_name", $data->trainer_name],
+                ["trainer_organization", $data->trainer_organization],
                 ["categories", $data->full_category_pretty],
             ] as [$field_name, $value])
             <li>

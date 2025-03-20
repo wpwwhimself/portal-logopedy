@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -42,6 +43,15 @@ class EntityManagementController extends Controller
             ->get();
 
         return view("admin.entity-management.list", compact("data", "meta", "scope", "modelName"));
+    }
+    #endregion
+
+    #region autofill
+    public function listCategories(string $model_name): JsonResponse
+    {
+        $model = "App\\Models\\" . Str::of($model_name)->studly()->singular();
+        $categories = $model::classes("categories")->values();
+        return response()->json($categories);
     }
     #endregion
 }

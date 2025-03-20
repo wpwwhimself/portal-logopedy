@@ -49,6 +49,7 @@ class Course extends Model
             "label" => "Kategorie",
             "icon" => "shape",
             "required" => true,
+            "autofill-from" => ["entmgr-list-categories", "courses"],
         ],
         "description" => [
             "type" => "HTML",

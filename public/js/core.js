@@ -122,4 +122,28 @@ function JSONInputDeleteRow(input_name, btn) {
     btn.closest("tr").remove()
     JSONInputUpdate(input_name)
 }
+
+function JSONInputAutofill(input_name, ev, filled_value = null) {
+    const input = ev.target.closest("td").querySelector(`input`)
+    const hintBox = ev.target.closest("td").querySelector(`[role="autofill-hint"]`)
+    let hints = ""
+
+    if (filled_value) {
+        input.value = filled_value
+        JSONInputUpdate(input_name)
+    }
+
+    if (ev.target.value && !filled_value) {
+        hints = window.autofill[input_name]
+            .filter(v => v.toLowerCase().startsWith(ev.target.value.toLowerCase()))
+            .map(v => `<span class="interactive"
+                    onclick="JSONInputAutofill('${input_name}', event, '${v}')"
+                >
+                    ${v}?
+                </span>`)
+            .join("")
+    }
+
+    hintBox.innerHTML = hints
+}
 // #endregion

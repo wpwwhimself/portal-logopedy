@@ -105,7 +105,14 @@
                 <tr role="new-row">
                     @foreach ($columnTypes as $t)
                     <td class="rounded">
-                        <input type="{{ $t }}" onchange="JSONInputUpdate('{{ $name }}')" />
+                        <input type="{{ $t }}" onchange="JSONInputUpdate('{{ $name }}')"
+                            @if ($autofillFrom)
+                            onkeyup="JSONInputAutofill('{{ $name }}', event)"
+                            @endif
+                        />
+                        @if ($autofillFrom)
+                        <span role="autofill-hint" class="ghost flex right"></span>
+                        @endif
                     </td>
                     @endforeach
 
@@ -142,3 +149,12 @@
 @endif
 
 </div>
+
+@if ($autofillFrom)
+<script>
+window.autofill = window.autofill ?? {}
+fetch("{{ $autofillRoute }}").then(res => res.json()).then(data => {
+    window.autofill['{{ $name }}'] = data
+})
+</script>
+@endif

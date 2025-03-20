@@ -10,6 +10,7 @@ class Input extends Component
 {
     public bool $storageFile = false;
     public bool $extraButtons = false;
+    public string $autofillRoute = "";
 
     /**
      * Create a new component instance.
@@ -24,6 +25,7 @@ class Input extends Component
         public ?array $options = null,
         public ?bool $emptyOption = false,
         public ?array $columnTypes = null,
+        public ?array $autofillFrom = null,
     ) {
         $this->type = $type ?? "text";
         $this->name = $name;
@@ -38,6 +40,10 @@ class Input extends Component
         if ($this->type == "storage_url") {
             $this->type = "url";
             $this->storageFile = true;
+        }
+
+        if ($autofillFrom) {
+            $this->autofillRoute = route($autofillFrom[0], ['model_name' => $autofillFrom[1]]);
         }
 
         $this->extraButtons = ($this->type == "url" && $this->value) || $this->storageFile;

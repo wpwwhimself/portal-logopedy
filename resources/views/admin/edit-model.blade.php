@@ -32,6 +32,7 @@
                 :placeholder="$fdata['placeholder'] ?? null"
                 :hint="$fdata['hint'] ?? null"
                 :column-types="$fdata['column-types'] ?? null"
+                :autofill-from="$fdata['autofill-from'] ?? null"
             />
             @endforeach
 

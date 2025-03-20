@@ -43,6 +43,8 @@ class University extends Model
             ],
             "label" => "Kategorie",
             "icon" => "shape",
+            "required" => true,
+            "autofillFrom" => ["entmgr-list-categories", "universities"],
         ],
         "description" => [
             "type" => "HTML",

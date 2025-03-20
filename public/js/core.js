@@ -108,11 +108,14 @@ function JSONInputAddRow(input_name, btn) {
     const table = document.querySelector(`table[data-name="${input_name}"]`)
     const newRow = table.querySelector(`tr[role="new-row"]`)
 
-    const clonedRow = newRow.cloneNode(true)
-    clonedRow.removeAttribute("role")
-    clonedRow.querySelector("td:last-child .button:first-child").remove()
-    clonedRow.querySelector("td:last-child .button:last-child").classList.remove("hidden")
-    table.querySelector("tbody").appendChild(clonedRow)
+    newRow.querySelector("input").value.split(/,\s*/).forEach((v, i) => {
+        let clonedRow = newRow.cloneNode(true)
+        clonedRow.removeAttribute("role")
+        clonedRow.querySelector("td:last-child .button:first-child").remove()
+        clonedRow.querySelector("td:last-child .button:last-child").classList.remove("hidden")
+        clonedRow.querySelector("input").value = v
+        table.querySelector("tbody").appendChild(clonedRow)
+    })
 
     newRow.querySelectorAll("input").forEach(input => input.value = "")
     JSONInputUpdate(input_name)
@@ -145,5 +148,15 @@ function JSONInputAutofill(input_name, ev, filled_value = null) {
     }
 
     hintBox.innerHTML = hints
+}
+// test,test2, test3
+
+function JSONInputWatchForConfirm(input_name, ev) {
+    if (ev.key == "Enter" || ev.key == ",") {
+        ev.stopPropagation()
+        ev.preventDefault()
+        JSONInputAutofill(input_name, ev, ev.target.value)
+        JSONInputAddRow(input_name, ev.target.closest("tr").querySelector(".button"))
+    }
 }
 // #endregion

@@ -106,8 +106,9 @@
                     @foreach ($columnTypes as $t)
                     <td class="rounded">
                         <input type="{{ $t }}" onchange="JSONInputUpdate('{{ $name }}')"
+                            onkeydown="JSONInputWatchForConfirm('{{ $name }}', event);"
                             @if ($autofillFrom)
-                            onkeyup="JSONInputAutofill('{{ $name }}', event)"
+                            onkeyup="JSONInputAutofill('{{ $name }}', event);"
                             @endif
                         />
                         @if ($autofillFrom)

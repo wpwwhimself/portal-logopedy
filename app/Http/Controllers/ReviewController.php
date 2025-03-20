@@ -29,7 +29,7 @@ class ReviewController extends Controller
 
     public function addReview(string $model, int $id): View
     {
-        $entity_name = "App\\Models\\$model";
+        $entity_name = "App\\Models\\" . Str::of($model)->studly()->singular();
         $entity = $entity_name::find($id);
 
         $criteria = ReviewCriterion::visible()

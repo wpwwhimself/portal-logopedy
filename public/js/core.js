@@ -135,6 +135,7 @@ function JSONInputAutofill(input_name, ev, filled_value = null) {
         input.value = filled_value
         JSONInputUpdate(input_name)
     }
+    if (!hintBox) return
 
     if (ev.target.value && !filled_value) {
         hints = window.autofill[input_name]

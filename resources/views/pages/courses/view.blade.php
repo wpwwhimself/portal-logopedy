@@ -64,11 +64,11 @@
 
         @if ($data->keywords->isNotEmpty())
         <x-h lvl="3">Słowa kluczowe</x-h>
-        <ul>
+        <div class="flex right">
             @foreach ($data->keywords as $keyword)
-            <li>{{ $keyword }}</li>
+            <span>{{ $keyword }}</span>
             @endforeach
-        </ul>
+        </div>
         @endif
 
         @if ($data->image_paths->isNotEmpty())

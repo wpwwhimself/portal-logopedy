@@ -46,7 +46,7 @@ Route::middleware("auth")->group(function () {
         Route::post("add", "processReview")->name("review-process");
     });
 
-    Route::controller(NewsletterController::class)->prefix("newsletter")->group(function () {
+    Route::controller(NewsletterController::class)->withoutMiddleware("auth")->prefix("newsletter")->group(function () {
         Route::get("{mode?}", "form")->name("newsletter-form");
         Route::post("subscribe", "subscribe")->name("newsletter-subscribe");
         Route::post("unsubscribe", "unsubscribe")->name("newsletter-unsubscribe");

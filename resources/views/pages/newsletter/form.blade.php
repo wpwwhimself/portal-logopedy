@@ -17,6 +17,8 @@
                 required
             />
 
+            <span class="ghost">Zapisując się, akceptujesz <a href="{{ route('standard-page', ['slug' => 'regulamin']) }}">regulamin newslettera</a>.</span>
+
             <x-button action="submit" icon="check">Zapisz</x-button>
 
             <x-slot:side-content>

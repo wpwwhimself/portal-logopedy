@@ -59,10 +59,10 @@ h1, h2, h3, h4, h5, h6, p {
 
 * {
     font-family: 'Source Sans 3', sans-serif;
-    font-weight: 300;
+    font-weight: 400;
 
     & b, & strong, & h1, & h2, & h3 {
-        font-weight: 600;
+        font-weight: 700;
     }
     & h1, & h2, & h3, & h4, & h5, & h6 {
         font-family: 'Open Sans', sans-serif;

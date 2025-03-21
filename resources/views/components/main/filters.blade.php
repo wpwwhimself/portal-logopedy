@@ -4,7 +4,7 @@
         title-lvl="3"
         {{-- title-icon="sort" --}}
         expandable
-        class="flex down" no-border
+        class="flex down" :no-border="!request()->has('sort')"
         :activated="request()->has('sort')"
     >
         @foreach ($sorts as $name => $srt)
@@ -34,7 +34,7 @@
         :title-lvl="3"
         {{-- :title-icon="$flt['icon'] ?? $fields[$name]['icon']" --}}
         expandable
-        class="flex down nowrap scrollable" no-border
+        class="flex down nowrap scrollable" :no-border="!request()->has($name)"
         :activated="request()->has($name)"
     >
         <x-button icon="filter-off" onclick="resetFilters(this)" class="accent background secondary interactive small">Wyczyść</x-button>

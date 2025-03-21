@@ -43,7 +43,7 @@
                 </ul>
             </div>
 
-            @if ($data->locations->isNotEmpty())
+            @if ($data->locations?->isNotEmpty())
             <div>
                 <x-h lvl="3">Miejsca</x-h>
                 <ul>
@@ -62,7 +62,7 @@
             @endif
         </div>
 
-        @if ($data->keywords->isNotEmpty())
+        @if ($data->keywords?->isNotEmpty())
         <x-h lvl="3">Słowa kluczowe</x-h>
         <div class="flex right">
             @foreach ($data->keywords as $keyword)
@@ -71,7 +71,7 @@
         </div>
         @endif
 
-        @if ($data->image_paths->isNotEmpty())
+        @if ($data->image_paths?->isNotEmpty())
         <x-h lvl="3">Zdjęcia</x-h>
         <div class="grid col3 but-halfsize-2">
             @foreach ($data->image_paths as $path)

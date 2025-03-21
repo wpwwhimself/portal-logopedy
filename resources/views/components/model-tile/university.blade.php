@@ -16,6 +16,8 @@
 
         <x-h lvl="3">{{ $data->name }}</x-h>
 
+        <p>{{ Str::of($data->description)->stripTags()->words(10) }}</p>
+
         <x-reviews.score :reviewable="$data" />
     </div>
 

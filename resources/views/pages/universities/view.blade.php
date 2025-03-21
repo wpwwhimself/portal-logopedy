@@ -85,7 +85,7 @@
 
             {{--  --}}
 
-            <x-button :action="route('front-list', ['model_name' => 'courses'])" class="phantom" icon="arrow-left">Wróć</x-button>
+            <x-button :action="route('front-list', ['model_name' => 'universities'])" class="phantom" icon="arrow-left">Wróć</x-button>
 
             @if (
                 auth()->user()?->hasRole("university-master")

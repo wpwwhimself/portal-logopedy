@@ -11,14 +11,21 @@
 
         @forelse ($data as $item)
         <x-tile :action="route('admin-edit-model', ['model' => $scope, 'id' => $item->id])"
-            class="flex right spread middle"
+            class="flex right spread middle" no-border
         >
             <x-h lvl="2">{!! $item !!}</x-h>
 
-            <div class="flex down">
+            <div class="flex right middle">
+                @foreach ($item->badges ?? [] as $badge)
+                @unless ($badge['show']) @continue @endunless
+                <small>
+                    <x-icon :name="$badge['icon']" hint="{{ $badge['label'] }}" />
+                </small>
+                @endforeach
+
                 @isset ($item->visible)
                 <small>
-                    @svg("mdi-eye")
+                    <x-icon name="eye" hint="Widoczność" />
                     {{ App\Http\Controllers\AdminController::VISIBILITIES[$item->visible] }}
                 </small>
                 @endisset

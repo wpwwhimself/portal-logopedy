@@ -120,6 +120,30 @@ class User extends Authenticatable
             get: fn () => $this->surveyQuestions()->count() >= UserSurveyQuestion::visible()->count(),
         );
     }
+
+    public function badges(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => [
+                [
+                    "label" => "Wystawił ocen: " . $this->reviews()->count(),
+                    "icon" => "star",
+                    "show" => $this->reviews()->count() > 0,
+                ],
+                [
+                    "label" => "Konto organizatora",
+                    "icon" => "domain",
+                    "show" => $this->roles->contains(Role::find("course-manager"))
+                        && !$this->roles->contains(Role::find("administrator")),
+                ],
+                [
+                    "label" => "Administrator",
+                    "icon" => "wizard-hat",
+                    "show" => $this->roles->contains(Role::find("administrator")),
+                ],
+            ],
+        );
+    }
     #endregion
 
     #region relations
@@ -137,6 +161,11 @@ class User extends Authenticatable
     public function industries()
     {
         return $this->morphToMany(Industry::class, "industriable");
+    }
+
+    public function reviews()
+    {
+        return $this->hasMany(Review::class, "created_by");
     }
     #endregion
 

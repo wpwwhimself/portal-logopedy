@@ -132,9 +132,6 @@ body {
     }
     &.secondary {
         --accent-color: var(--secondary);
-        &.background {
-            color: black;
-        }
     }
     &.tertiary {
         --accent-color: var(--tertiary);
@@ -470,6 +467,10 @@ input[type="radio"] {
 .input, search form {
     &.rounded {
         border-radius: var(--xxl);
+    }
+
+    & input {
+        color: var(--fg);
     }
 }
 

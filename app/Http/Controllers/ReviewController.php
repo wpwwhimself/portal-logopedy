@@ -54,6 +54,6 @@ class ReviewController extends Controller
             ->mapWithKeys(fn ($v, $k) => [Str::after($k, "criterion_") => ["answer" => $v]]);
         $review->criteria()->sync($criteria);
 
-        return redirect()->route("front-view-$rq->model", ["course" => $rq->reviewable_type::find($rq->reviewable_id)])->with("success", "Ocena dodana, dziękujemy!");
+        return redirect()->route("front-view", ["model_name" => $rq->model, "id" => $rq->reviewable_id])->with("success", "Ocena dodana, dziękujemy!");
     }
 }

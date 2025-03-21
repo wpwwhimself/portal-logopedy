@@ -18,7 +18,7 @@
         {{ $reviews->links() }}
 
         <x-slot:side-content>
-            <x-button :action="route('front-view-'.Str::lower($model), [Str::lower($model) => $entity])" icon="arrow-left" class="phantom">Wróć</x-button>
+            <x-button :action="route('front-view', ['model_name' => Str::lower($model), 'id' => $entity->id])" icon="arrow-left" class="phantom">Wróć</x-button>
         </x-slot:side-content>
     </x-side-content-container>
 </x-full-width>

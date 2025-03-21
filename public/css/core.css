@@ -283,8 +283,10 @@ a.button, a:has(> .tile), a:has(> .full-width) {
         max-width: 100vw;
         display: block;
         margin: 0 auto;
+        mask-image: linear-gradient(to right, transparent, black 5em, black calc(100% - 5em), transparent);
     }
 
+    /*
     & .background {
         position: absolute;
         top: 0; left: 0; right: 0; bottom: 0;
@@ -296,6 +298,7 @@ a.button, a:has(> .tile), a:has(> .full-width) {
         background-repeat: no-repeat;
         filter: blur(var(--s));
     }
+    */
 }
 
 body {

@@ -24,20 +24,40 @@
             @endforeach
         </ul>
 
-        <x-h lvl="3" icon="text">Opis</x-h>
+        <x-h lvl="3">Opis</x-h>
         {!! $data->description !!}
 
-        @if ($data->keywords)
-        <x-h lvl="3" icon="tag">Słowa kluczowe</x-h>
-        <ul>
+        <div class="grid" style="--col-count: 2;">
+            <div>
+                @if ($data->locations?->isNotEmpty())
+                <x-h lvl="3" :icon="$data::FIELDS['locations']['icon']">Miejsca</x-h>
+                <ul>
+                    @foreach ($data->locations as $location)
+                    <li>{{ $location }}</li>
+                    @endforeach
+                </ul>
+                @endif
+            </div>
+
+            <div>
+                @if (!empty($data->cost))
+                <x-h lvl="3" :icon="$data::FIELDS['cost']['icon']">Koszt</x-h>
+                <span>{{ $data->cost_pretty }}</span>
+                @endif
+            </div>
+        </div>
+
+        @if ($data->keywords?->isNotEmpty())
+        <x-h lvl="3">Słowa kluczowe</x-h>
+        <div class="flex right">
             @foreach ($data->keywords as $keyword)
-            <li>{{ $keyword }}</li>
+            <span>{{ $keyword }}</span>
             @endforeach
-        </ul>
+        </div>
         @endif
 
-        @if ($data->image_paths)
-        <x-h lvl="3" icon="image">Zdjęcia</x-h>
+        @if ($data->image_paths?->isNotEmpty())
+        <x-h lvl="3">Zdjęcia</x-h>
         <div class="grid col3 but-halfsize-2">
             @foreach ($data->image_paths as $path)
             <a href="{{ $path }}" target="_blank">
@@ -61,20 +81,6 @@
         </x-button>
 
         <x-slot:side-content>
-            @if ($data->locations)
-            <x-h lvl="3" :icon="$data::FIELDS['locations']['icon']">Miejsca</x-h>
-            <ul>
-                @foreach ($data->locations as $location)
-                <li>{{ $location }}</li>
-                @endforeach
-            </ul>
-            @endif
-
-            @if ($data->cost)
-            <x-h lvl="3" :icon="$data::FIELDS['cost']['icon']">Koszt</x-h>
-            <span>{{ $data->cost_pretty }}</span>
-            @endif
-
             <x-button :action="$data->link" target="_blank" icon="link">Strona organizatora</x-button>
 
             {{--  --}}

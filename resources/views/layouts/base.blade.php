@@ -33,9 +33,12 @@
 
         <style>
         :root {
-            --primary: {{ App\Models\Setting::get("color_primary") }};
-            --secondary: {{ App\Models\Setting::get("color_secondary") }};
-            --tertiary: {{ App\Models\Setting::get("color_tertiary") }};
+            --primary-light: {{ App\Models\Setting::get("color_primary") }};
+            --secondary-light: {{ App\Models\Setting::get("color_secondary") }};
+            --tertiary-light: {{ App\Models\Setting::get("color_tertiary") }};
+            --primary-dark: {{ App\Models\Setting::get("color_primary_dark") }};
+            --secondary-dark: {{ App\Models\Setting::get("color_secondary_dark") }};
+            --tertiary-dark: {{ App\Models\Setting::get("color_tertiary_dark") }};
         }
         </style>
 

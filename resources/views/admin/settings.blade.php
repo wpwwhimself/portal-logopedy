@@ -77,38 +77,61 @@
                 />
             </x-tile>
 
-            <x-tile title="Kolory" title-icon="palette" class="flex down">
-                <x-input type="color"
-                    name="color_primary"
-                    label="Podstawowy"
-                    icon="numeric-1"
-                    :value="$setting::get('color_primary')"
-                />
-                <x-input type="color"
-                    name="color_secondary"
-                    label="Drugorzędny"
-                    icon="numeric-2"
-                    :value="$setting::get('color_secondary')"
-                />
-                <x-input type="color"
-                    name="color_tertiary"
-                    label="Trzeciorzędny"
-                    icon="numeric-3"
-                    :value="$setting::get('color_tertiary')"
-                />
+            <x-tile title="Kolory" title-icon="palette" class="grid" style="--col-count: 2;">
+                <x-tile title="Tryb jasny" title-icon="weather-sunny" title-lvl="3" class="flex down" no-border>
+                    <x-input type="color"
+                        name="color_primary"
+                        label="Podstawowy"
+                        icon="numeric-1"
+                        :value="$setting::get('color_primary')"
+                    />
+                    <x-input type="color"
+                        name="color_secondary"
+                        label="Drugorzędny"
+                        icon="numeric-2"
+                        :value="$setting::get('color_secondary')"
+                    />
+                    <x-input type="color"
+                        name="color_tertiary"
+                        label="Trzeciorzędny"
+                        icon="numeric-3"
+                        :value="$setting::get('color_tertiary')"
+                    />
+                </x-tile>
+
+                <x-tile title="Tryb ciemny" title-icon="weather-night" title-lvl="3" class="flex down" no-border>
+                    <x-input type="color"
+                        name="color_primary_dark"
+                        label="Podstawowy"
+                        icon="numeric-1"
+                        :value="$setting::get('color_primary_dark')"
+                    />
+                    <x-input type="color"
+                        name="color_secondary_dark"
+                        label="Drugorzędny"
+                        icon="numeric-2"
+                        :value="$setting::get('color_secondary_dark')"
+                    />
+                    <x-input type="color"
+                        name="color_tertiary_dark"
+                        label="Trzeciorzędny"
+                        icon="numeric-3"
+                        :value="$setting::get('color_tertiary_dark')"
+                    />
+                </x-tile>
             </x-tile>
 
             <x-tile title="Strona główna" title-icon="billboard" class="flex down">
-                <x-h lvl="3" icon="image">Sekcja środkowa</x-h>
-
-                @for ($i = 1; $i <= 6; $i++)
-                <x-input type="storage_url"
-                    name="main_tile_{{ $i }}_icon_path"
-                    label="Ikona kafelka {{ $i }}"
-                    icon="image"
-                    :value="$setting::get('main_tile_'.$i.'_icon_path')"
-                />
-                @endfor
+                <x-tile title="Sekcja środkowa" title-icon="image" title-lvl="3" class="flex down" no-border>
+                    @for ($i = 1; $i <= 6; $i++)
+                    <x-input type="storage_url"
+                        name="main_tile_{{ $i }}_icon_path"
+                        label="Ikona kafelka {{ $i }}"
+                        icon="image"
+                        :value="$setting::get('main_tile_'.$i.'_icon_path')"
+                    />
+                    @endfor
+                </x-tile>
             </x-tile>
 
             <x-tile title="Kursy" :title-icon="App\Models\Course::META['icon']" class="flex down">

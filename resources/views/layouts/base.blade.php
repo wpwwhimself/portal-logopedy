@@ -69,6 +69,10 @@
         <script type="module" src="{{ asset("js/ckeditor.js") }}?{{ time() }}"></script>
     </head>
     <body class="flex down {{ Route::currentRouteNamed("main") ? "no-gap" : "" }}">
+        <script>
+        if (localStorage.getItem("theme") == "dark") toggleTheme()
+        </script>
+
         <!-- Page Heading -->
         @yield("header")
 

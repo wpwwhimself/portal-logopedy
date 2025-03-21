@@ -68,15 +68,7 @@ function expandTile(expandable_uuid) {
 }
 // #endregion
 
-// #region theme management
-if (localStorage.getItem("theme") == "dark") toggleTheme()
 
-function toggleTheme() {
-    const bodyClass = document.body.classList
-    bodyClass.toggle("dark")
-    localStorage.setItem("theme", bodyClass.contains("dark") ? "dark" : "light")
-}
-// #endregion
 
 // #region JSON inputs
 function JSONInputUpdate(input_name) {

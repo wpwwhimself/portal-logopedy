@@ -12,7 +12,7 @@
         <x-slot:side-content>
             <x-hint>
                 <p>
-                    Na swoim koncie możesz zapisać się do naszego newslettera,
+                    Możesz zapisać się do naszego newslettera,
                     dzięki czemu nie przegapisz żadnego ważnego wydarzenia.
                 </p>
             </x-hint>

@@ -47,7 +47,7 @@ class University extends Model
             "autofillFrom" => ["entmgr-list-categories", "universities"],
         ],
         "description" => [
-            "type" => "HTML",
+            "type" => "TEXT",
             "label" => "Opis",
             "icon" => "pencil",
         ],

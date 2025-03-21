@@ -52,7 +52,7 @@ class Course extends Model
             "autofill-from" => ["entmgr-list-categories", "courses"],
         ],
         "description" => [
-            "type" => "HTML",
+            "type" => "TEXT",
             "label" => "Opis",
             "icon" => "pencil",
         ],

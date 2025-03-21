@@ -442,6 +442,7 @@ hr {
 
     & textarea {
         font-family: monospace;
+        min-height: 3.5em;
     }
 
     & select {

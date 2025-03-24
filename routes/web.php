@@ -22,6 +22,9 @@ Route::controller(FrontController::class)->group(function () {
         Route::get("/{model_name}/{id}/error-report", "viewErrorReport")->name("error-report-view");
         Route::post("error-report/process", "processErrorReport")->name("error-report-process");
     });
+
+    Route::get("contact", "contactForm")->name("contact-form");
+    Route::post("contact", "processContactForm")->name("contact-form-process");
 });
 
 Route::controller(BlogController::class)->prefix("blog")->group(function () {

@@ -7,6 +7,8 @@
                 @foreach (App\Models\StandardPage::visible()->get() as $page)
                 <x-button :action="route('standard-page', ['slug' => $page->slug])" class="phantom accent primary">{{ $page->name }}</x-button>
                 @endforeach
+
+                <x-button :action="route('contact-form')" class="phantom accent primary">Kontakt</x-button>
             </div>
 
             <div class="flex right middle">

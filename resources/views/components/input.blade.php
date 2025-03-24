@@ -107,6 +107,7 @@
                     <td class="rounded">
                         <input type="{{ $t }}" onchange="JSONInputUpdate('{{ $name }}')"
                             onkeydown="JSONInputWatchForConfirm('{{ $name }}', event);"
+                            onblur="JSONInputAddRow('{{ $name }}', )"
                             @if ($autofillFrom)
                             onkeyup="JSONInputAutofill('{{ $name }}', event);"
                             @endif
@@ -118,7 +119,7 @@
                     @endforeach
 
                     <td>
-                        <x-button icon="plus" class="accent background secondary interactive" onclick="JSONInputAddRow('{{ $name }}', this)" />
+                        <x-button icon="plus" class="accent background secondary interactive" onclick="JSONInputAddRow('{{ $name }}')" />
                         <x-button icon="delete" class="phantom interactive hidden" onclick="JSONInputDeleteRow('{{ $name }}', this)" />
                     </td>
                 </tr>

@@ -176,7 +176,7 @@ class User extends Authenticatable
 
         $ret = false;
         foreach (explode("|", $role) as $r) {
-            $ret = $ret || Auth::user()->roles->contains(Role::find($role));
+            $ret = $ret || Auth::user()->roles->contains(Role::find($r));
         }
 
         return $ret || Auth::user()->roles->contains(Role::find("super"));

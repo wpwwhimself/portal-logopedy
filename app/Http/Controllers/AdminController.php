@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\AdvertSetting;
+use App\Models\Role;
 use App\Models\Setting;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
@@ -38,7 +39,7 @@ class AdminController extends Controller
         ],
         "courses" => [
             "model" => \App\Models\Course::class,
-            "role" => "course-master",
+            "role" => "course-master|course-manager",
         ],
         "industries" => [
             "model" => \App\Models\Industry::class,
@@ -88,6 +89,7 @@ class AdminController extends Controller
             "name" => in_array($scope, ["newsletter-subscribers"]) ? null : [
                 "type" => "text",
                 "label" => "Nazwa",
+                "hint" => "Tytuł wpisu, wyświetlany jako pierwszy.",
                 "icon" => "card-text",
                 "required" => true,
             ],
@@ -95,11 +97,13 @@ class AdminController extends Controller
                 "type" => "select", "options" => self::VISIBILITIES,
                 "label" => "Widoczny dla",
                 "icon" => "eye",
+                "role" => "course-master",
             ],
             "order" => in_array($scope, ["users", "industries", "newsletter-subscribers"]) ? null : [
                 "type" => "number",
                 "label" => "Wymuś kolejność",
                 "icon" => "order-numeric-ascending",
+                "role" => "course-master",
             ],
         ]), $modelName::FIELDS);
     }
@@ -196,6 +200,13 @@ class AdminController extends Controller
         $connections = $this->getConnections($scope);
         $actions = $this->getActions($scope, "edit");
 
+        if (
+            $data
+            && $scope == "courses"
+            && User::hasRole("course-manager")
+            && $data->created_by != Auth::id()
+        ) abort(403);
+
         return view("admin.edit-model", compact("data", "meta", "scope", "fields", "connections", "actions"));
     }
 
@@ -218,6 +229,11 @@ class AdminController extends Controller
             if (($fdata["required"] ?? false) && !$data[$name]) return back()->with("error", "Pole $fdata[label] jest wymagane");
         }
 
+        if (User::hasRole("course-manager")) {
+            $data["trainer_organization"] ??= Auth::user()->company_data["Nazwa firmy"];
+            $data["visibility"] ??= 2;
+        }
+
         if ($rq->input("method") == "save") {
             $model = $modelName::updateOrCreate(
                 ["id" => $rq->id],
@@ -233,6 +249,21 @@ class AdminController extends Controller
                     }
                 }
             }
+
+            collect(Role::MANAGER_NOTIFICATIONS)
+                ->filter(fn ($an) =>
+                    User::hasRole($an["role"])
+                    && in_array($scope, explode("|", $an["scope"]))
+                )
+                ->each(fn ($an) =>
+                    User::mailableAdmins($an["message"]["admins-with-role"] ?? null)
+                        ->each(fn ($u) => $u->notify(
+                            new ("App\\Notifications\\" . $an["message"]["notification"])([
+                                "model_name" => $scope,
+                                "id" => $model->id,
+                            ])
+                        ))
+                );
 
             return redirect()->route("admin-edit-model", ["model" => $scope, "id" => $model->id])
                 ->with("success", "Zapisano");

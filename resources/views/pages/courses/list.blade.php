@@ -27,7 +27,21 @@
     <x-side-content-container flipped>
         <div class="grid col2 middle">
             <x-search-bar placeholder="Wyszukaj" model="courses" />
-            <strong style="text-align: right;">Wyników: {{ $data->total() }}</strong>
+
+            <div class="flex right middle">
+                <div class="pin-right">
+                    <strong style="text-align: right;">Wyników: {{ $data->total() }}</strong>
+
+                    @if (Auth::user()?->hasRole("course-manager"))
+                    <x-button :action="route('admin-edit-model', ['model' => 'courses'])"
+                        icon="plus"
+                        class="accent background tertiary"
+                    >
+                        Dodaj kurs
+                    </x-button>
+                    @endif
+                </div>
+            </div>
         </div>
 
         @forelse ($data as $item)

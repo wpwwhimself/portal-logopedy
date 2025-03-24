@@ -24,6 +24,17 @@ class Role extends Model
         "description",
     ];
 
+    public const MANAGER_NOTIFICATIONS = [
+        [
+            "role" => "course-manager",
+            "scope" => "courses",
+            "message" => [
+                "admins-with-role" => "course-master",
+                "notification" => "CourseManagerMadeChangesNotification",
+            ],
+        ],
+    ];
+
     #region relations
     public function users()
     {

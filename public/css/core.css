@@ -379,6 +379,7 @@ code, pre {
 
     & > .pin-right {
         margin-left: auto;
+        text-align: right;
     }
 }
 

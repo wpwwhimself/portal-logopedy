@@ -47,6 +47,10 @@ class Course extends Model
                 "Nazwa" => "text",
             ],
             "label" => "Kategorie",
+            "hint" =>
+                "Kurs musi należeć do co najmniej jednej kategorii.
+                Pomaga to grupować wpisy w naszej bazie i ułatwia wyszukiwanie ich przez użytkowników.
+                Jeśli istniejące kategorie nie odpowiadają Twojemu wpisowi, możesz podać swoją własną.",
             "icon" => "shape",
             "required" => true,
             "autofill-from" => ["entmgr-list-categories", "courses"],
@@ -54,6 +58,10 @@ class Course extends Model
         "description" => [
             "type" => "TEXT",
             "label" => "Opis",
+            "hint" =>
+                "Prosty opis kursu, wyświetlany w szczegółowym podglądzie.
+                Powinien skrótowo opisywać szkolenie i zachęcać do przejścia na stronę organizatora.
+                Nie powinien być dłuższy niż 500 znaków.",
             "icon" => "pencil",
         ],
         "keywords" => [
@@ -63,14 +71,18 @@ class Course extends Model
             ],
             "icon" => "tag",
             "label" => "Słowa kluczowe",
+            "hint" =>
+                "Pozwalają na dodawanie dodatkowych fraz i zwrotów, po których użytkownik może łatwiej znaleźć kurs.
+                Zalecamy dodać tu wszystkie słowa/zwroty, jakie nie występują w tytule/opisie, a mogą być użyte przez zainteresowanego do znalezienia wpisu.
+                Nie wpisuj tutaj nazwy organizatora, miejsc, dat czy kosztu – jedynie informacje bezpośrednio opisujące szkolenie.",
             "hide-for-entmgr" => true,
         ],
-        "thumbnail_path" => [
-            "type" => "url",
-            "label" => "Miniatura",
-            "icon" => "image",
-            "hide-for-entmgr" => true,
-        ],
+        // "thumbnail_path" => [
+        //     "type" => "url",
+        //     "label" => "Miniatura",
+        //     "icon" => "image",
+        //     "hide-for-entmgr" => true,
+        // ],
         "image_paths" => [
             "type" => "JSON",
             "column-types" => [
@@ -78,21 +90,26 @@ class Course extends Model
             ],
             "icon" => "image",
             "label" => "Zdjęcia",
+            "hint" =>
+                "Adresy URL zdjęć, jakie mają się wyświetlać na stronie szczegółów kursu.
+                Mają zachęcać użytkownika do przejścia na stronę organizatora.",
         ],
         "link" => [
             "type" => "url",
-            "label" => "Link",
+            "label" => "Link do strony organizatora",
             "icon" => "link",
         ],
         "trainer_name" => [
             "type" => "text",
             "label" => "Osoba prowadząca",
+            "hint" => "Imię i nazwisko (jedno lub więcej) prowadzącego kurs.",
             "icon" => "badge-account",
         ],
         "trainer_organization" => [
             "type" => "text",
             "label" => "Organizator",
             "icon" => "badge-account",
+            "role" => "course-master",
         ],
         "locations" => [
             "type" => "JSON",
@@ -100,6 +117,9 @@ class Course extends Model
                 "Miejsce" => "text",
             ],
             "label" => "Miejsca",
+            "hint" =>
+                "Miejsca, w których odbywa się kurs lub szkolenie.
+                Jeśli kurs odbywa się online, dopisz miejsce o nazwie 'online'.",
             "icon" => "map-marker",
         ],
         "dates" => [
@@ -108,11 +128,20 @@ class Course extends Model
                 "Data i godzina" => "datetime-local",
             ],
             "label" => "Terminy",
+            "hint" =>
+                "Daty i godziny rozpoczęcia kursu lub szkolenia.
+                Jeśli szkolenie trwa kilka dni, wpisz wszystkie daty, które szkolenie obejmuje.
+                Jeśli kurs nie posiada godziny rozpoczęcia, jako godzinę wpisz '00:00'.
+                Jeśli kurs nie posiada daty rozpoczęcia, pozostaw puste.",
             "icon" => "calendar",
         ],
         "cost" => [
             "type" => "text",
             "label" => "Koszt",
+            "hint" =>
+                "Cena wykupienia kursu lub szkolenia.
+                Podaj jako jedną liczbę.
+                Jeśli kurs jest darmowy, wpisz 'bezpłatnie' lub 'darmowy'",
             "icon" => "cash-multiple",
             "hide-for-entmgr" => true,
         ],
@@ -129,6 +158,7 @@ class Course extends Model
             "label" => "Przekształć na Uczelnię",
             "show-on" => "edit",
             "route" => "morph-course-to-university",
+            "role" => "course-master",
             "dangerous" => true,
         ],
     ];

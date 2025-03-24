@@ -96,9 +96,11 @@ function JSONInputUpdate(input_name) {
     input.value = JSON.stringify(newValue)
 }
 
-function JSONInputAddRow(input_name, btn) {
+function JSONInputAddRow(input_name) {
     const table = document.querySelector(`table[data-name="${input_name}"]`)
     const newRow = table.querySelector(`tr[role="new-row"]`)
+
+    if (!newRow.querySelector("input").value) return
 
     newRow.querySelector("input").value.split(/,\s*/).forEach((v, i) => {
         let clonedRow = newRow.cloneNode(true)

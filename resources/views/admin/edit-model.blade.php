@@ -75,6 +75,7 @@
 
                 @if ($data)
                 @foreach ($actions as $action)
+                @if (isset($action["role"]) && !auth()->user()->hasRole($action["role"])) @continue @endif
                 <x-button :action="route($action['route'], ['id' => $data->id])" :icon="$action['icon']" class="phantom {{ ($action['dangerous'] ?? false) ? 'danger' : '' }}">{{ $action['label'] }}</x-button>
                 @endforeach
                 @endif

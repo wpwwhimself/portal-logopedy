@@ -1,4 +1,6 @@
 <form id="filters" class="flex down nowrap">
+    <input type="hidden" name="q" value="{{ request("q") }}">
+
     <x-tile
         title="Sortuj"
         title-lvl="3"

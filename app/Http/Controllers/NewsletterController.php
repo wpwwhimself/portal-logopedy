@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\NewsletterSubscriber;
+use App\Notifications\NewsletterSubscribedNotification;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Notification;
 
 class NewsletterController extends Controller
 {
@@ -27,6 +29,9 @@ class NewsletterController extends Controller
             "email" => $rq->email,
             "user_id" => Auth::id(),
         ]);
+
+        Notification::route("mail", $rq->email)
+            ->notify(new NewsletterSubscribedNotification());
 
         return redirect()->route("main")->with("success", "Pomyślnie zapisano do newslettera");
     }

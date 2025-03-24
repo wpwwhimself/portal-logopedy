@@ -122,6 +122,25 @@
             </x-tile>
 
             <x-tile title="Strona główna" title-icon="billboard" class="flex down">
+                <x-tile title="Nawigacja" title-icon="routes" title-lvl="3" class="flex down" no-border>
+                    <x-input type="JSON" :column-types="[
+                        'Model' => 'text',
+                        'Etykieta' => 'text',
+                    ]"
+                        name="nav_labels"
+                        label="Etykiety nawigacji"
+                        icon="routes"
+                        :value="json_decode($setting::get('nav_labels'), true)"
+                    />
+
+                    <x-input
+                        name="newsletter_button_text"
+                        label="Treść na przycisku do newslettera"
+                        icon="email"
+                        :value="$setting::get('newsletter_button_text')"
+                    />
+                </x-tile>
+
                 <x-tile title="Sekcja środkowa" title-icon="image" title-lvl="3" class="flex down" no-border>
                     @for ($i = 1; $i <= 6; $i++)
                     <x-input type="storage_url"

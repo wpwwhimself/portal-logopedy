@@ -2,6 +2,7 @@
 
 namespace App\View\Components;
 
+use App\Models\Setting;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
@@ -29,11 +30,10 @@ class Nav extends Component
     #region helpers
     public static function navLinks(): array
     {
-        return [
-            ["Baza kursów, szkoleń...", route('front-list', ["model_name" => "courses"])],
-            ["Baza uczelni", route('front-list', ["model_name" => "universities"])],
-            ["Filmy, wideopodcasty", route('front-list', ["model_name" => "films"])],
-        ];
+        return collect(json_decode(Setting::get("nav_labels"), true))
+            ->map(fn ($label, $model) => [$label, route('front-list', ['model_name' => $model])])
+            ->values()
+            ->toArray();
     }
     #endregion
 }

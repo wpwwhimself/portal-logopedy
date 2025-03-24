@@ -32,7 +32,7 @@ class Nav extends Component
         return [
             ["Baza kursów, szkoleń...", route('front-list', ["model_name" => "courses"])],
             ["Baza uczelni", route('front-list', ["model_name" => "universities"])],
-            ["Filmy, podcasty", route('front-list', ["model_name" => "films"])],
+            ["Filmy, wideopodcasty", route('front-list', ["model_name" => "films"])],
         ];
     }
     #endregion

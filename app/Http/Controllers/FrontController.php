@@ -55,8 +55,6 @@ class FrontController extends Controller
     #region list & search
     public function list(string $model_name, Request $rq): View
     {
-        if (in_array($model_name, ["specialists", "films"])) return view("errors.under-construction");
-
         $model = "App\\Models\\" . Str::of($model_name)->studly()->singular();
         $data = $model::visible(false)
             ->where(function ($q) use ($model, $rq) {

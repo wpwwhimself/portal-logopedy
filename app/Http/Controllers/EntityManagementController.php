@@ -24,6 +24,10 @@ class EntityManagementController extends Controller
             "model" => \App\Models\University::class,
             "role" => "university-master",
         ],
+        "films" => [
+            "model" => \App\Models\Film::class,
+            "role" => "film-master",
+        ],
     ];
 
     private function getModelName(string $scope): string

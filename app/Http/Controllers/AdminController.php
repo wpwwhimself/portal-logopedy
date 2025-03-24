@@ -58,6 +58,10 @@ class AdminController extends Controller
             "model" => \App\Models\University::class,
             "role" => "university-master",
         ],
+        "films" => [
+            "model" => \App\Models\Film::class,
+            "role" => "film-master",
+        ],
     ];
 
     public const SCOPE_GROUPS = [
@@ -67,7 +71,7 @@ class AdminController extends Controller
         ],
         "Treści" => [
             "icon" => "text",
-            "scopes" => ["standard-pages", "courses", "universities", "blog-articles", "social-media",],
+            "scopes" => ["standard-pages", "courses", "universities", "films", "blog-articles", "social-media",],
         ],
     ];
 
@@ -229,7 +233,7 @@ class AdminController extends Controller
             if (($fdata["required"] ?? false) && !$data[$name]) return back()->with("error", "Pole $fdata[label] jest wymagane");
         }
 
-        if (User::hasRole("course-manager")) {
+        if ($scope == "courses" && User::hasRole("course-manager")) {
             $data["trainer_organization"] ??= Auth::user()->company_data["Nazwa firmy"];
             $data["visibility"] ??= 2;
         }

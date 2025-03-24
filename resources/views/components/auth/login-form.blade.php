@@ -94,7 +94,7 @@
     @if ($mode == "register")
     <x-input type="checkbox"
         name="confirmed"
-        label="Potwierdzam, że przeczytałam/em akceptuję <a href='/pages/regulamin'>regulamin</a>"
+        label="Potwierdzam, że przeczytałam/em i akceptuję <a href='/pages/regulamin'>regulamin</a>"
         icon="check"
         required
     />

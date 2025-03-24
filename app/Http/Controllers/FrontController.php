@@ -80,6 +80,10 @@ class FrontController extends Controller
                 }
             });
         }
+        if ($model_name == "courses") {
+            // hide past courses
+            $data = $data->filter(fn ($c) => !$c->isExpired());
+        }
 
         // sorting
         $default_sort = "-updated_at";

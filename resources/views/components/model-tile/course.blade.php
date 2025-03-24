@@ -10,8 +10,8 @@
     <div class="description flex down">
         <span class="flex right middle big-gap">
             <span>
-            @if ($data->dates)
-                {{ $data->dates_processed->first() }}
+            @if ($data->dates?->isNotEmpty())
+                {{ $data->dates_available->first()?->format("Y-m-d H:i") }}
             @else
                 dostępny
             @endif

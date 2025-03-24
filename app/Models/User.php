@@ -170,7 +170,7 @@ class User extends Authenticatable
     #endregion
 
     #region helpers
-    public static function hasRole(?string $role): bool
+    public static function hasRole(?string $role, bool $and_is_not_super = false): bool
     {
         if (empty($role)) return true;
 
@@ -179,7 +179,7 @@ class User extends Authenticatable
             $ret = $ret || Auth::user()->roles->contains(Role::find($r));
         }
 
-        return $ret || Auth::user()->roles->contains(Role::find("super"));
+        return $ret || (!$and_is_not_super && Auth::user()->roles->contains(Role::find("super")));
     }
     #endregion
 

@@ -207,7 +207,7 @@ class AdminController extends Controller
         if (
             $data
             && $scope == "courses"
-            && User::hasRole("course-manager")
+            && User::hasRole("course-manager", true)
             && $data->created_by != Auth::id()
         ) abort(403);
 

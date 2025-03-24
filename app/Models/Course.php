@@ -281,8 +281,27 @@ class Course extends Model
     public function datesProcessed(): Attribute
     {
         return Attribute::make(
-            get: fn () => $this->dates?->map(fn ($d) => Str::of($d)->test('/^\d{4}-\d{2}-\d{2}/') ? Carbon::parse($d)->format("d.m.Y H:i") : $d),
+            get: fn () => $this->dates?->map(fn ($d) => Str::of($d)->test('/^\d{4}-\d{2}-\d{2}/') ? Carbon::parse($d) : null)->filter(),
         );
+    }
+
+    public function datesPretty(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->dates?->map(fn ($d) => Str::of($d)->test('/^\d{4}-\d{2}-\d{2}/') ? Carbon::parse($d)->format("Y-m-d H:i") : $d),
+        );
+    }
+
+    public function datesAvailable(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->dates_processed?->filter(fn ($d) => $d?->gte(now()))->sort(),
+        );
+    }
+
+    public function isExpired(): bool
+    {
+        return $this->dates_available?->isEmpty() && $this->dates_processed?->isNotEmpty();
     }
 
     public function costPretty(): Attribute

@@ -33,8 +33,8 @@
             <div>
                 <x-h lvl="3">Terminy</x-h>
                 <ul>
-                    @if ($data->dates)
-                    @foreach ($data->dates_processed as $date)
+                    @if ($data->dates?->isNotEmpty())
+                    @foreach ($data->dates_pretty as $date)
                     <li>{{ $date }}</li>
                     @endforeach
                     @else

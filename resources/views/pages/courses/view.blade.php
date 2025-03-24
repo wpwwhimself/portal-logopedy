@@ -82,6 +82,7 @@
         </div>
         @endif
 
+        {{--
         <x-h icon="message-star">Oceny</x-h>
         <x-reviews.list :reviewable="$data" />
 
@@ -94,6 +95,7 @@
             Dodaj ocenę
             @endif
         </x-button>
+        --}}
 
         <x-slot:side-content>
             <x-button :action="$data->link" target="_blank" icon="link">Strona organizatora</x-button>

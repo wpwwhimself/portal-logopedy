@@ -28,7 +28,7 @@
             {!! $data->trainer_pretty !!}
         </span>
 
-        <x-reviews.score :reviewable="$data" />
+        {{-- <x-reviews.score :reviewable="$data" /> --}}
     </div>
 
     <div>

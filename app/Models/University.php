@@ -94,11 +94,11 @@ class University extends Model
 
     use CanBeSorted;
     public const SORTS = [
-        "rating" => [
-            "label" => "Po ocenie",
-            "compare-using" => "function",
-            "discr" => "averageRating",
-        ],
+        // "rating" => [
+        //     "label" => "Po ocenie",
+        //     "compare-using" => "function",
+        //     "discr" => "averageRating",
+        // ],
     ];
 
     public const FILTERS = [
@@ -107,33 +107,33 @@ class University extends Model
             "discr" => "categories",
             "operator" => "any",
         ],
-        "rating" => [
-            "label" => "Ranking",
-            "icon" => "star",
-            "compare-using" => "function",
-            "discr" => "averageRating",
-            "mode" => "one",
-            "operator" => ">=",
-            "options" => [
-                "4,5 i wyższa" => 4.5,
-                "4,0 i wyższa" => 4,
-                "3.5 i wyższa" => 3.5,
-                "3,0 i wyższa" => 3,
-                "2,0 i wyższa" => 2,
-                "ocenione" => 1,
-            ],
-        ],
-        "cost" => [
-            "label" => "Cena",
-            "icon" => self::FIELDS["cost"]["icon"],
-            "compare-using" => "function",
-            "discr" => "isFree",
-            "mode" => "one",
-            "options" => [
-                "Płatny" => 0,
-                "Bezpłatny" => 1,
-            ],
-        ],
+        // "rating" => [
+        //     "label" => "Ranking",
+        //     "icon" => "star",
+        //     "compare-using" => "function",
+        //     "discr" => "averageRating",
+        //     "mode" => "one",
+        //     "operator" => ">=",
+        //     "options" => [
+        //         "4,5 i wyższa" => 4.5,
+        //         "4,0 i wyższa" => 4,
+        //         "3.5 i wyższa" => 3.5,
+        //         "3,0 i wyższa" => 3,
+        //         "2,0 i wyższa" => 2,
+        //         "ocenione" => 1,
+        //     ],
+        // ],
+        // "cost" => [
+        //     "label" => "Cena",
+        //     "icon" => self::FIELDS["cost"]["icon"],
+        //     "compare-using" => "function",
+        //     "discr" => "isFree",
+        //     "mode" => "one",
+        //     "options" => [
+        //         "Płatny" => 0,
+        //         "Bezpłatny" => 1,
+        //     ],
+        // ],
         "keywords" => [
             "compare-using" => "field",
             "discr" => "keywords",

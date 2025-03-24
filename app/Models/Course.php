@@ -101,7 +101,6 @@ class Course extends Model
             ],
             "label" => "Miejsca",
             "icon" => "map-marker",
-            "hide-for-entmgr" => true,
         ],
         "dates" => [
             "type" => "JSON",
@@ -110,7 +109,6 @@ class Course extends Model
             ],
             "label" => "Terminy",
             "icon" => "calendar",
-            "hide-for-entmgr" => true,
         ],
         "cost" => [
             "type" => "text",

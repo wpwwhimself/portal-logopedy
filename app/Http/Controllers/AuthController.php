@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Mail\ResetPassword;
+use App\Models\NewsletterSubscriber;
 use App\Models\User;
+use App\Notifications\NewsletterSubscribedNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -62,6 +64,15 @@ class AuthController extends Controller
         $user->roles()->attach($rq->role);
 
         Auth::login($user);
+
+        if ($rq->has("add_to_newsletter")) {
+            NewsletterSubscriber::updateOrCreate([
+                "email" => $rq->email,
+            ], [
+                "user_id" => $user->id,
+            ]);
+            $user->notify(new NewsletterSubscribedNotification());
+        }
 
         return redirect(route("profile"))->with("success", "Konto zostało utworzone");
     }

@@ -98,6 +98,11 @@
         icon="check"
         required
     />
+    <x-input type="checkbox"
+        name="add_to_newsletter"
+        label="Chcę zapisać się do newslettera i otrzymywać aktualne informacje o kursach i szkoleniach"
+        icon="email"
+    />
     <x-input type="number"
         name="proof"
         label="Jesteś robotem? Ile jest sylab w słowie 'logopeda'?"

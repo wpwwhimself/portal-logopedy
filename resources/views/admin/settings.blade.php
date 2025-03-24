@@ -135,6 +135,13 @@
             </x-tile>
 
             <x-tile title="Kursy" :title-icon="App\Models\Course::META['icon']" class="flex down">
+                <x-input
+                    name="course_heading"
+                    label="Nagłówek"
+                    hint="Nagłówek na górze listingu kursów"
+                    icon="text-short"
+                    :value="$setting::get('course_heading')"
+                />
                 <x-input type="JSON"
                     :column-types="[
                         'Kolejność' => 'number',

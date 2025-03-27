@@ -301,7 +301,9 @@ class Course extends Model
 
     public function isExpired(): bool
     {
-        return $this->dates_available?->isEmpty() && $this->dates_processed?->isNotEmpty();
+        return $this->dates_available?->isEmpty()
+            && $this->dates_processed?->isNotEmpty()
+            && !$this->places?->contains("online");
     }
 
     public function costPretty(): Attribute

@@ -256,7 +256,7 @@ class AdminController extends Controller
 
             collect(Role::MANAGER_NOTIFICATIONS)
                 ->filter(fn ($an) =>
-                    User::hasRole($an["role"])
+                    User::hasRole($an["role"], true)
                     && in_array($scope, explode("|", $an["scope"]))
                 )
                 ->each(fn ($an) =>

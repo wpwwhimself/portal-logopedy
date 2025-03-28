@@ -204,12 +204,11 @@ class AdminController extends Controller
         $connections = $this->getConnections($scope);
         $actions = $this->getActions($scope, "edit");
 
-        if (
-            $data
-            && $scope == "courses"
-            && User::hasRole("course-manager", true)
-            && $data->created_by != Auth::id()
-        ) abort(403);
+        if ($data && $scope == "courses") {
+            if (User::hasRole("course-manager", true) && $data->created_by != Auth::id()) {
+                abort(403);
+            }
+        }
 
         return view("admin.edit-model", compact("data", "meta", "scope", "fields", "connections", "actions"));
     }

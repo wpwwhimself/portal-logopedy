@@ -150,6 +150,24 @@
 </div>
 @endif
 
+@if ($characterLimit)
+<span class="ghost" role="character-count"></span>
+<script defer>
+const input = document.querySelector(`#{{ $name }}`)
+const counter = input.parentElement.parentElement.querySelector("[role='character-count']")
+const counter_content_template = `current / {{ $characterLimit }}`
+
+counter.textContent = counter_content_template.replace("current", input.textContent.length)
+
+input.addEventListener("input", (ev) => {
+    if (ev.target.value.length > {{ $characterLimit }}) {
+        ev.target.value = ev.target.value.slice(0, {{ $characterLimit }})
+    }
+    counter.textContent = counter_content_template.replace("current", ev.target.value.length)
+})
+</script>
+@endif
+
 </div>
 
 @if ($autofillFrom)

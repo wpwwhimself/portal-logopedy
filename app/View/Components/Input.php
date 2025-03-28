@@ -26,6 +26,7 @@ class Input extends Component
         public ?bool $emptyOption = false,
         public ?array $columnTypes = null,
         public ?array $autofillFrom = null,
+        public ?int $characterLimit = null,
     ) {
         $this->type = $type ?? "text";
         $this->name = $name;
@@ -36,6 +37,7 @@ class Input extends Component
         $this->options = $options;
         $this->emptyOption = $emptyOption;
         $this->columnTypes = $columnTypes;
+        $this->characterLimit = $characterLimit;
 
         if ($this->type == "storage_url") {
             $this->type = "url";

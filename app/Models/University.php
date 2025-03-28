@@ -50,6 +50,7 @@ class University extends Model
             "type" => "TEXT",
             "label" => "Opis",
             "icon" => "pencil",
+            "character-limit" => 500,
         ],
         "keywords" => [
             "type" => "JSON",

@@ -68,8 +68,6 @@ function expandTile(expandable_uuid) {
 }
 // #endregion
 
-
-
 // #region JSON inputs
 function JSONInputUpdate(input_name) {
     const input = document.querySelector(`input[name="${input_name}"]`)

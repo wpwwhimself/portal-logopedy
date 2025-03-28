@@ -33,6 +33,7 @@
                 :hint="$fdata['hint'] ?? null"
                 :column-types="$fdata['column-types'] ?? null"
                 :autofill-from="$fdata['autofill-from'] ?? null"
+                :character-limit="$fdata['character-limit'] ?? null"
             />
             @endforeach
 

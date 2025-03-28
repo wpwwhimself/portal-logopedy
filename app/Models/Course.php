@@ -60,9 +60,9 @@ class Course extends Model
             "label" => "Opis",
             "hint" =>
                 "Prosty opis kursu, wyświetlany w szczegółowym podglądzie.
-                Powinien skrótowo opisywać szkolenie i zachęcać do przejścia na stronę organizatora.
-                Nie powinien być dłuższy niż 500 znaków.",
+                Powinien skrótowo opisywać szkolenie i zachęcać do przejścia na stronę organizatora.",
             "icon" => "pencil",
+            "character-limit" => 500,
         ],
         "keywords" => [
             "type" => "JSON",

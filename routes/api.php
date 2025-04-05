@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AutomationController;
 use App\Http\Controllers\EntityManagementController;
@@ -17,6 +18,13 @@ Route::middleware("auth:sanctum")->group(function () {
 
     Route::controller(AutomationController::class)->group(function () {
         Route::middleware("role:course-master")->post("course", "processCourse")->name("automation-course");
+    });
+
+    Route::controller(AdminController::class)->prefix("admin")->group(function () {
+        Route::get("{scope}/{id?}", "apiGetModel");
+        Route::post("{scope}", "apiProcessModel");
+        Route::patch("{scope}/{id}", "apiPatchModel");
+        Route::delete("{scope}/{id}", "apiDeleteModel");
     });
 });
 

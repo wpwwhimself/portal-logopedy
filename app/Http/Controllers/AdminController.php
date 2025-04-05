@@ -335,4 +335,24 @@ class AdminController extends Controller
         return redirect()->route("files-list", ["path" => Str::contains($path, '/') ? Str::beforeLast($path, '/') : null])->with("success", "Folder usunięty");
     }
     #endregion
+
+    #region api
+    private static function apiResponse(int $code, string $status, array $data = []) {
+        return response()->json(["status" => $status, ...$data], $code);
+    }
+
+    public function apiGetModel(string $scope, ?int $id = null)
+    {
+        if (!User::hasRole(self::SCOPES[$scope]["role"])) abort(403);
+
+        $modelName = $this->getModelName($scope);
+        $data = ($id)
+            ? $modelName::find($id)
+            : $modelName::all();
+
+        if (!$data) return self::apiResponse(404, Str::of($scope)->singular() . " not found");
+
+        return self::apiResponse(200, "listing $scope", ["count" => count($data), "data" => $data]);
+    }
+    #endregion
 }

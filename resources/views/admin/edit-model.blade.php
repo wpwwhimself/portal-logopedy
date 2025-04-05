@@ -19,6 +19,22 @@
                 @endif
             </x-h>
 
+            @if ($data && isset($data->created_by))
+            <div class="flex right ghost">
+                <span>
+                    <x-icon name="account-arrow-right" hint="Twórca" />
+                    {{ $data->creator->name }}
+                    {{ $data->created_at->diffForHumans() }}
+                </span>
+
+                <span>
+                    <x-icon name="account-edit" hint="Ostatnia edycja" />
+                    {{ $data->editor->name }}
+                    {{ $data->updated_at->diffForHumans() }}
+                </span>
+            </div>
+            @endif
+
             @foreach ($fields as $name => $fdata)
             @if (isset($fdata["role"]) && !auth()->user()->hasRole($fdata["role"])) @continue @endif
             <x-input :type="$fdata['type']"

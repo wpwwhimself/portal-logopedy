@@ -23,15 +23,17 @@
             <div class="flex right ghost">
                 <span>
                     <x-icon name="account-arrow-right" hint="Twórca" />
-                    {{ $data->creator->name }}
-                    {{ $data->created_at->diffForHumans() }}
+                    {{ $data->creator->name }},
+                    <span {{ Popper::pop($data->created_at) }}>{{ $data->created_at->diffForHumans() }}</span>
                 </span>
 
+                @if ($data->created_at != $data->updated_at)
                 <span>
                     <x-icon name="account-edit" hint="Ostatnia edycja" />
-                    {{ $data->editor->name }}
-                    {{ $data->updated_at->diffForHumans() }}
+                    {{ $data->editor->name }},
+                    <span {{ Popper::pop($data->updated_at) }}>{{ $data->updated_at->diffForHumans() }}</span>
                 </span>
+                @endif
             </div>
             @endif
 

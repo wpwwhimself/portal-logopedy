@@ -21,12 +21,26 @@
         <tr>
             <td>
                 <strong>{{ $row->name }}</strong>
-                <br>
                 @isset ($row->visible)
-                <span>
+                <p>
                     <x-icon name="eye" hint="Widoczność" />
                     {{ App\Http\Controllers\AdminController::VISIBILITIES[$row->visible] }}
-                </span>
+                </p>
+                @endisset
+                @isset ($row->created_by)
+                <p class="ghost">
+                    <x-icon name="account-arrow-right" hint="Twórca" />
+                    {{ $row->creator->name }},
+                    <span {{ Popper::pop($row->created_at) }}>{{ $row->created_at->diffForHumans() }}</span>
+                </p>
+
+                @if ($row->created_at != $row->updated_at)
+                <p class="ghost">
+                    <x-icon name="account-edit" hint="Ostatnia edycja" />
+                    {{ $row->editor->name }},
+                    <span {{ Popper::pop($row->updated_at) }}>{{ $row->updated_at->diffForHumans() }}</span>
+                </p>
+                @endif
                 @endisset
             </td>
             @foreach ($modelName::FIELDS as $field_name => $field)

@@ -83,7 +83,7 @@
         --}}
 
         <x-slot:side-content>
-            <x-button :action="$data->link" target="_blank" icon="link">Strona organizatora</x-button>
+            <x-button :action="$data->link" :disabled="!$data->link" target="_blank" icon="link">Strona organizatora</x-button>
 
             {{--  --}}
 

@@ -142,7 +142,6 @@ function JSONInputAutofill(input_name, ev, filled_value = null) {
 
     hintBox.innerHTML = hints
 }
-// test,test2, test3
 
 function JSONInputWatchForConfirm(input_name, ev) {
     if (ev.key == "Enter" || ev.key == ",") {

@@ -23,9 +23,9 @@
 
 @section("content_after")
 
-<x-full-width class="padded large">
+{{-- <x-full-width class="padded large">
     <x-main.course-categories-cloud />
-</x-full-width>
+</x-full-width> --}}
 
 @if (App\Models\AdvertSetting::canBeSeen("big"))
 <x-main.banner :src="App\Models\AdvertSetting::get('big', 'image_path')" alt="Reklama" :action="App\Models\AdvertSetting::get('big', 'link')" />
